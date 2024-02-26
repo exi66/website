@@ -381,55 +381,54 @@ export default {
       </div>
       <small class="my-auto mx-auto">made with Vue.js</small>
     </footer>
-    <transition name="fade">
-      <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
-        <a title="To top" href="#home"
-          class="py-2 px-4 ml-auto transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
-          <i class="bi bi-chevron-up"></i>
-        </a>
-        <button type="button" @click="toggleTheme()" :title="theme == 'light' ? 'Dark' : 'Light'"
-          aria-label="Switch theme"
-          class="py-2 px-4 ml-auto transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900 text-yellow-500 dark:text-sky-100">
-          <i class="bi bi-moon-fill hidden dark:inline-block"></i>
-          <i class="bi bi-brightness-high-fill inline-block dark:hidden"></i>
-        </button>
-      </div>
-    </transition>
-    <SideBar v-model:open="openSlider">
-      <div
-        class="text-2xl font-semibold border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5">
-        Projects
-      </div>
-      <div class="flex flex-col">
-        <div v-for="p in projects" :key="p.name" :ref="'project_' + p.name" :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3 last:border-none
-          aria-selected:bg-mojo-600 aria-selected:bg-opacity-10">
-          <span class="text-2xl mb-1 block">
-            {{ p.name }}
-          </span>
-          <viewer :images="p.images" :options="{ toolbar: false, title: false }" class="flex flex-wrap gap-2">
-            <img v-for="src in p.images" :key="src" :src="src"
-              class="h-16 w-16 object-cover rounded bg-black cursor-zoom-in hover:scale-110 transition duration-150">
-          </viewer>
-          <span class="mb-1 mt-3 block uppercase font-semibold">Categories:</span>
-          <div class="flex flex-row flex-wrap gap-2">
-            <span v-for="c in p.category" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
-              {{ c }}
-            </span>
-          </div>
-          <span class="mb-1 mt-3 block uppercase font-semibold">Stack:</span>
-          <div class="flex flex-row flex-wrap gap-2">
-            <span v-for="c in p.tech" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
-              {{ c }}
-            </span>
-          </div>
-          <span class="mb-1 mt-3 block uppercase font-semibold">Details:</span>
-          <p class="opacity-70">
-            {{ p.description }}. {{ p.details }}
-          </p>
-        </div>
-      </div>
-    </SideBar>
   </main>
+  <transition name="fade">
+    <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
+      <a title="To top" href="#home"
+        class="py-2 px-4 ml-auto transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
+        <i class="bi bi-chevron-up"></i>
+      </a>
+      <button type="button" @click="toggleTheme()" :title="theme == 'light' ? 'Dark' : 'Light'" aria-label="Switch theme"
+        class="py-2 px-4 ml-auto transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900 text-yellow-500 dark:text-sky-100">
+        <i class="bi bi-moon-fill hidden dark:inline-block"></i>
+        <i class="bi bi-brightness-high-fill inline-block dark:hidden"></i>
+      </button>
+    </div>
+  </transition>
+  <SideBar v-model:open="openSlider">
+    <div
+      class="text-2xl font-semibold border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5">
+      Projects
+    </div>
+    <div class="flex flex-col">
+      <div v-for="p in projects" :key="p.name" :ref="'project_' + p.name" :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3 last:border-none
+          aria-selected:bg-mojo-600 aria-selected:bg-opacity-10">
+        <span class="text-2xl mb-1 block">
+          {{ p.name }}
+        </span>
+        <viewer :images="p.images" :options="{ toolbar: false, title: false }" class="flex flex-wrap gap-2">
+          <img v-for="src in p.images" :key="src" :src="src"
+            class="h-16 w-16 object-cover rounded bg-black cursor-zoom-in hover:scale-110 transition duration-150">
+        </viewer>
+        <span class="mb-1 mt-3 block uppercase font-semibold">Categories:</span>
+        <div class="flex flex-row flex-wrap gap-2">
+          <span v-for="c in p.category" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
+            {{ c }}
+          </span>
+        </div>
+        <span class="mb-1 mt-3 block uppercase font-semibold">Stack:</span>
+        <div class="flex flex-row flex-wrap gap-2">
+          <span v-for="c in p.tech" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
+            {{ c }}
+          </span>
+        </div>
+        <span class="mb-1 mt-3 block uppercase font-semibold">Details:</span>
+        <p class="opacity-70">
+          {{ p.description }}. {{ p.details }}
+        </p>
+      </div>
+    </div>
+  </SideBar>
 </template>
 
 <style scoped></style>
