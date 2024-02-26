@@ -5,7 +5,13 @@ import { nextTick } from 'vue';
 
 <script>
 import IconExiLine from '@/components/icons/IconExiLine.vue';
-import IconOrbit from '@/components/icons/IconOrbit.vue';
+// import IconOrbit from '@/components/icons/IconOrbit.vue';
+import IconLaravel from '@/components/icons/IconLaravel.vue';
+import IconVue from '@/components/icons/IconVue.vue';
+import IconMySQL from '@/components/icons/IconMySQL.vue';
+import IconDocker from '@/components/icons/IconDocker.vue';
+import IconUbuntu from '@/components/icons/IconUbuntu.vue';
+import IconTailwind from '@/components/icons/IconTailwind.vue';
 import SideBar from '@/components/SideBar.vue';
 
 axios.defaults.headers.post = {
@@ -15,8 +21,13 @@ axios.defaults.headers.post = {
 export default {
   components: {
     IconExiLine,
-    IconOrbit,
-    SideBar
+    SideBar,
+    IconVue,
+    IconLaravel,
+    IconMySQL,
+    IconDocker,
+    IconUbuntu,
+    IconTailwind
   },
   data() {
     return {
@@ -198,6 +209,28 @@ export default {
   </header>
   <main class="mt-4 p-2 container container-md mx-auto flex flex-col gap-6">
     <section id="home" class="flex flex-row">
+      <div class="w-auto hidden sm:flex my-auto mr-8 ml-8">
+        <div class="box3d text-white">
+          <div class="p1 flex bg-[#42b883]">
+            <IconVue class="m-auto h-16 w-auto" />
+          </div>
+          <div class="p2 flex bg-[#ff2d20]">
+            <IconLaravel class="m-auto h-16 w-auto" />
+          </div>
+          <div class="p3 flex bg-[#00678c]">
+            <IconMySQL class="m-auto h-16 w-auto" />
+          </div>
+          <div class="p4 flex bg-[#066da5]">
+            <IconDocker class="m-auto h-16 w-auto" />
+          </div>
+          <div class="p5 flex bg-[#38bdf8]">
+            <IconTailwind class="m-auto w-16 h-auto" />
+          </div>
+          <div class="p6 flex bg-[#f47421]">
+            <IconUbuntu class="m-auto h-16 w-auto" />
+          </div>
+        </div>
+      </div>
       <div class="flex flex-col gap-2">
         <h1 class="mx-auto text-3xl">
           {{ $t('hero.title') }}
@@ -217,7 +250,7 @@ export default {
           </a>
         </div>
       </div>
-      <IconOrbit class="ml-auto h-24 w-auto hidden sm:block" />
+      <!-- <IconOrbit class="ml-auto h-24 w-auto hidden sm:block" /> -->
     </section>
     <section id="about" class="flex flex-col md:flex-row gap-4">
       <div class="flex flex-col gap-2 flex-1">
@@ -526,4 +559,103 @@ export default {
   </SideBar>
 </template>
 
-<style scoped></style>
+<style scoped>
+.box3d {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.box3d div {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 5rem;
+  height: 5rem;
+  opacity: 0.8;
+  transform-origin: 50% 50% -2.5rem;
+}
+
+.p1 {
+  transform: perspective(600px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+  animation: spin1 10s infinite linear;
+}
+
+.p2 {
+  animation: spin2 10s infinite linear;
+}
+
+.p3 {
+  animation: spin3 10s infinite linear;
+}
+
+.p4 {
+  animation: spin4 10s infinite linear;
+}
+
+.p5 {
+  animation: spin5 10s infinite linear;
+}
+
+.p6 {
+  animation: spin6 10s infinite linear;
+}
+
+@keyframes spin1 {
+  to {
+    transform: perspective(600px) rotateX(360deg) rotateY(450deg) rotateZ(0deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: perspective(600px) rotateX(0deg) rotateY(270deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(360deg) rotateY(630deg) rotateZ(0deg);
+  }
+}
+
+@keyframes spin3 {
+  0% {
+    transform: perspective(600px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(450deg) rotateY(0deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes spin4 {
+  0% {
+    transform: perspective(600px) rotateX(-90deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(270deg) rotateY(0deg) rotateZ(360deg);
+  }
+}
+
+@keyframes spin5 {
+  0% {
+    transform: perspective(600px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(360deg) rotateY(360deg) rotateZ(0deg);
+  }
+}
+
+@keyframes spin6 {
+  0% {
+    transform: perspective(600px) rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(360deg) rotateY(540deg) rotateZ(0deg);
+  }
+}
+</style>
