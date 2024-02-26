@@ -24,9 +24,9 @@ export default {
 
 <template>
   <div class="sidebar">
-    <div class="sidebar-backdrop z-20 bg-black bg-opacity-50" @click="$emit('update:open', false)" v-if="open"></div>
+    <div class="sidebar-backdrop z-10 bg-black bg-opacity-50" @click="$emit('update:open', false)" v-if="open"></div>
     <transition name="slide">
-      <div class="sidebar-panel rounded-md shadow bg-white dark:bg-shark-950 z-30 min-h-screen w-4/5 md:w-3/5 lg:w-1/3"
+      <div class="sidebar-panel rounded-md shadow bg-white dark:bg-shark-950 z-20 min-h-screen w-4/5 md:w-3/5 lg:w-1/3"
         v-if="open">
         <div class="flex justify-start close-label bg-mojo-600">
           <button type="button" class="pe-2 my-auto w-full hover:opacity-50 transition-all"

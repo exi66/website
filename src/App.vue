@@ -9,7 +9,7 @@ import IconOrbit from '@/components/icons/IconOrbit.vue';
 import SideBar from '@/components/SideBar.vue';
 
 axios.defaults.headers.post = {
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content || ''
+  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
 }
 
 export default {
@@ -20,6 +20,7 @@ export default {
   },
   data() {
     return {
+      lang: 'en',
       theme: 'dark',
       experience: [],
       stack: [],
@@ -46,14 +47,9 @@ export default {
     this.theme = localStorage.getItem('theme') || 'dark';
     this.changeTheme();
 
-    let res = await axios.get('/experience.json');
-    this.experience = res.data;
-
-    res = await axios.get('/stack.json');
-    this.stack = res.data;
-
-    res = await axios.get('/projects.json');
-    this.projects = res.data;
+    let n = navigator?.language == 'ru' ? 'ru' : 'en';
+    this.lang = localStorage.getItem('lang') || n || 'en';
+    await this.changeLang();
   },
   computed: {
     getLastProjects() {
@@ -105,18 +101,84 @@ export default {
       }
       this.changeTheme();
     },
+    toggleLang() {
+      if (this.lang == 'en') {
+        this.lang = 'ru';
+        localStorage.setItem('lang', 'ru')
+      } else {
+        this.lang = 'en';
+        localStorage.setItem('lang', 'en')
+      }
+      this.changeLang();
+    },
+    async changeLang() {
+      this.$i18n.locale = this.lang;
+      document.getElementsByTagName('html')[0].setAttribute('lang', this.lang);
+      document.title = this.$t('title')
+
+      await this.getExperience();
+      await this.getStack();
+      await this.getProjects();
+    },
+    async getExperience() {
+      if (this.lang === 'en') {
+        let res = await axios.get('/experience.json');
+        this.experience = res.data;
+      } else {
+        try {
+          let res = await axios.get(`/experience.${this.lang}.json`);
+          this.experience = res.data;
+        } catch (e) {
+          let res = await axios.get('/experience.json');
+          this.experience = res.data;
+        }
+      }
+    },
+    async getStack() {
+      if (this.lang === 'en') {
+        let res = await axios.get('/stack.json');
+        this.stack = res.data;
+      } else {
+        try {
+          let res = await axios.get(`/stack.${this.lang}.json`);
+          this.stack = res.data;
+        } catch (e) {
+          let res = await axios.get('/stack.json');
+          this.stack = res.data;
+        }
+      }
+    },
+    async getProjects() {
+      if (this.lang === 'en') {
+        let res = await axios.get('/projects.json');
+        this.projects = res.data;
+      } else {
+        try {
+          let res = await axios.get(`/projects.${this.lang}.json`);
+          this.projects = res.data;
+        } catch (e) {
+          let res = await axios.get('/projects.json');
+          this.projects = res.data;
+        }
+      }
+    }
   }
 }
 </script>
 
 <template>
   <header class="container container-md mx-auto" ref="header">
-    <nav class="p-2 flex flex-row">
+    <nav class="p-2 flex flex-row gap-2">
       <a href="/" class="my-auto py-2">
         <IconExiLine class="h-4 text-mojo-600 hover:-rotate-6 transition-all" />
       </a>
-      <button type="button" @click="toggleTheme()" :title="theme == 'light' ? 'Dark' : 'Light'" aria-label="Switch theme"
-        class="p-2 ml-auto transition-all leading-none rounded bg-transparent border border-transparent hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10 text-yellow-500 dark:text-sky-100">
+      <button type="button" @click="toggleLang()"
+        class="p-2 ml-auto uppercase select-none transition-all leading-none rounded bg-transparent border border-transparent hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10">
+        {{ $t('lang') }}
+      </button>
+      <button type="button" @click="toggleTheme()" :title="theme == 'light' ? $t('theme.dark') : $t('theme.light')"
+        :aria-label="$t('theme.switch')"
+        class="p-2 transition-all leading-none rounded bg-transparent border border-transparent hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10 text-yellow-500 dark:text-sky-100">
         <i class="bi bi-moon-fill hidden dark:inline-block"></i>
         <i class="bi bi-brightness-high-fill inline-block dark:hidden"></i>
       </button>
@@ -126,16 +188,19 @@ export default {
     <section id="home" class="flex flex-row">
       <div class="flex flex-col gap-2">
         <h1 class="mx-auto text-3xl">
-          Hi, my name Egor,
-          <span class="text-2xl block">I'm a
-            <span class="text-mojo-600">Full-Stack Developer</span>
+          {{ $t('hero.title') }}
+          <span class="text-2xl block">
+            {{ $t('hero.subtitle') }}
+            <span class="text-mojo-600">{{ $t('hero.specialization') }}</span>
           </span>
         </h1>
         <div class="flex flex-row gap-2">
-          <a href="https://github.com/exi66" class="text-3xl hover:text-mojo-600 transition-all" title="My GitHub">
+          <a href="https://github.com/exi66" target="_blank" class="text-3xl hover:text-mojo-600 transition-all"
+            :title="$t('hero.github')">
             <i class="bi bi-github"></i>
           </a>
-          <a href="https://t.me/exi666" class="text-3xl hover:text-mojo-600 transition-all" title="Write to me">
+          <a href="https://t.me/exi666" target="_blank" class="text-3xl hover:text-mojo-600 transition-all"
+            :title="$t('hero.telegram')">
             <i class="bi bi-telegram"></i>
           </a>
         </div>
@@ -143,53 +208,46 @@ export default {
       <IconOrbit class="ml-auto h-24 w-auto hidden sm:block" />
     </section>
     <section id="about" class="flex flex-col md:flex-row gap-4">
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 flex-1">
         <h2 class="uppercase opacity-80">
-          <i class="bi bi-person me-1"></i>Summary
+          <i class="bi bi-person me-1"></i>{{ $t('about.title1') }}
         </h2>
         <div
-          class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 p-2">
+          class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 p-2 flex-grow">
           <p class="opacity-70">
-            Highly motivated junior web developer with 1 years of experience in developing and maintaining web
-            applications.
-            Proficient in
-            <span class="text-mojo-600 font-semibold">Vue</span>,
-            <span class="text-mojo-600 font-semibold">Laravel</span> and
-            <span class="text-mojo-600 font-semibold">SQL</span>,
-            with a strong understanding of front-end and back-end web development. Skilled in creating responsive and
-            user-friendly interfaces, as well as troubleshooting and debugging code. Committed to staying up-to-date with
-            the latest web development trends and best practices. Looking for an opportunity to apply and expand my skills
-            as part of a dynamic development team.
+            {{ $t('about.summary_text1') }}
+            <span class="text-mojo-600 font-semibold">{{ $t('about.summary_tech1') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.summary_tech2') }}</span> {{ $t('and') }}
+            <span class="text-mojo-600 font-semibold">{{ $t('about.summary_tech3') }}</span>
+            {{ $t('about.summary_text2') }}
           </p>
         </div>
       </div>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 flex-1">
         <h2 class="uppercase opacity-80">
-          <i class="bi bi-book me-1"></i>Education
+          <i class="bi bi-book me-1"></i>{{ $t('about.title2') }}
         </h2>
         <div
-          class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 p-2">
+          class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 p-2 flex-grow">
           <p class="opacity-70">
-            I studied at the Kuban State University with a Bachelor's degree in
-            <span class="text-mojo-600 font-semibold">Software Engineering and Information Systems Management</span>.
-            As part of my studies, I used technologies: <span class="text-mojo-600 font-semibold">dotNET (C#, C++)</span>,
-            <span class="text-mojo-600 font-semibold">Java</span>,
-            <span class="text-mojo-600 font-semibold">ASM</span>,
-            <span class="text-mojo-600 font-semibold">JS</span>,
-            <span class="text-mojo-600 font-semibold">PHP</span>,
-            <span class="text-mojo-600 font-semibold">Python</span>,
-            <span class="text-mojo-600 font-semibold">SQL</span>.
-            I dropped out in my third year because the knowledge was too
-            common. In fact, in each course, we studied the basics of previously unlearned programming languages,
-            without learning the main advantages and features of the language. General knowledge and skills in web
-            development were obtained by me through self-study.
+            {{ $t('about.education_text1') }}
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_degree') }}</span>.
+            {{ $t('about.education_text2') }}
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech1') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech2') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech3') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech4') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech5') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech6') }}</span>,
+            <span class="text-mojo-600 font-semibold">{{ $t('about.education_tech7') }}</span>.
+            {{ $t('about.education_text3') }}
           </p>
         </div>
       </div>
     </section>
     <section id="experience">
       <h2 class="uppercase opacity-80">
-        <i class="bi bi-building me-1"></i>Experience
+        <i class="bi bi-building me-1"></i>{{ $t('experience.title') }}
       </h2>
       <ol class="relative mx-5 mt-3">
         <li class="pb-8 pl-8 border-l border-mojo-600" v-for="e in experience" :key="e">
@@ -217,14 +275,14 @@ export default {
           </span>
           <h3 class="mb-1 text-lg uppercase leading-none">...</h3>
           <span class="block mb-3 leading-none opacity-70 text-sm font-normal">
-            <span>It can be your company</span>
+            <span>{{ $t('experience.last') }}</span>
           </span>
         </li>
       </ol>
     </section>
     <section id="stack" class="flex flex-col gap-2">
       <h2 class="uppercase opacity-80">
-        <i class="bi bi-code-slash me-1"></i>Stack
+        <i class="bi bi-code-slash me-1"></i>{{ $t('stack.title') }}
       </h2>
       <div
         class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 p-2">
@@ -261,7 +319,7 @@ export default {
     </section>
     <section id="projects" class="flex flex-col gap-2">
       <h2 class="uppercase opacity-80">
-        <i class="bi bi-terminal me-1"></i>Projects
+        <i class="bi bi-terminal me-1"></i>{{ $t('projects.title') }}
       </h2>
       <div
         class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 flex flex-col">
@@ -278,13 +336,13 @@ export default {
         </div>
         <button type="button" @click="openSlider = !openSlider; selected = null;"
           class="m-2 p-2 text-center text-sm font-semibold leading-4 border border-mojo-600 text-mojo-600 rounded uppercase transition-all dark:hover:text-shark-900 hover:text-white hover:bg-mojo-600 disabled:opacity-50 disabled:cursor-wait">
-          Show all
+          {{ $t('projects.show_all') }}
         </button>
       </div>
     </section>
     <section id="contacts" class="flex flex-col gap-2">
       <h2 class="uppercase opacity-80">
-        <i class="bi bi-envelope me-1"></i>Contacts
+        <i class="bi bi-envelope me-1"></i>{{ $t('contacts.title') }}
       </h2>
       <div
         class="rounded bg-black dark:bg-white bg-opacity-5 dark:bg-opacity-5 border border-black dark:border-white border-opacity-10 dark:border-opacity-10 p-2">
@@ -319,7 +377,7 @@ export default {
             <div
               class="border-t border-black border-opacity-10 bg-black bg-opacity-5 dark:border-white dark:border-opacity-10 flex-1 my-auto">
             </div>
-            <span class="uppercase text-xl">Or</span>
+            <span class="uppercase text-xl">{{ $t('or') }}</span>
             <div
               class="border-t border-black border-opacity-10 bg-black bg-opacity-5 dark:border-white dark:border-opacity-10 flex-1 my-auto">
             </div>
@@ -340,33 +398,36 @@ export default {
             <form class="flex flex-row flex-wrap gap-2" ref="form" @submit.prevent="submit">
               <div class="flex-1 mt-2">
                 <label class="uppercase text-sm dark:text-white dark:text-opacity-80 text-black
-                text-opacity-80">Name <span class="text-red-500" title="Required">*</span>
+                text-opacity-80">{{ $t('contacts.name') }} <span class="text-red-500"
+                    :title="$t('contacts.required')">*</span>
                   <input type="text" name="name"
                     class="mt-1 rounded-md w-full p-2 text-black dark:text-white dark:bg-shark-950 outline-none focus:ring-1 ring-mojo-600 ring-opacity-60 transition-all"
-                    placeholder="Enter your name" required v-model="form.name">
+                    :placeholder="$t('contacts.name_placeholder')" required v-model="form.name">
                 </label>
               </div>
               <div class="flex-1 mt-2">
                 <label class="uppercase text-sm dark:text-white dark:text-opacity-80 text-black
-                text-opacity-80">Email <span class="text-red-500" title="Required">*</span>
+                text-opacity-80">{{ $t('contacts.email') }} <span class="text-red-500"
+                    :title="$t('contacts.required')">*</span>
                   <input type="email" name="email"
                     class="mt-1 rounded-md w-full p-2 text-black dark:text-white dark:bg-shark-950 outline-none focus:ring-1 ring-mojo-600 ring-opacity-60 transition-all"
-                    placeholder="Enter an email that I can reply to" required v-model="form.email">
+                    :placeholder="$t('contacts.email_placeholder')" required v-model="form.email">
                 </label>
               </div>
               <div class="w-full">
                 <label class="uppercase text-sm dark:text-white dark:text-opacity-80 text-black
-                text-opacity-80">Message <span class="text-red-500" title="Required">*</span>
-                  <textarea type="email" name="email"
+                text-opacity-80">{{ $t('contacts.message') }} <span class="text-red-500"
+                    :title="$t('contacts.required')">*</span>
+                  <textarea name="text"
                     class="mt-1 rounded-md w-full p-2 text-black dark:text-white dark:bg-shark-950 outline-none focus:ring-1 ring-mojo-600 ring-opacity-60 transition-all"
-                    placeholder="Write your message" rows="4" required autocomplete="off"
+                    :placeholder="$t('contacts.message_placeholder')" rows="4" required autocomplete="off"
                     v-model="form.message"></textarea>
                 </label>
               </div>
               <div class="flex w-full">
                 <button type="submit" :disabled="waitResponse"
                   class="p-2 flex-grow text-center text-sm font-semibold leading-4 border border-mojo-600 text-mojo-600 rounded uppercase transition-all dark:hover:text-shark-900 hover:text-white hover:bg-mojo-600 disabled:opacity-50 disabled:cursor-wait">
-                  Send message
+                  {{ $t('contacts.submit') }}
                 </button>
               </div>
             </form>
@@ -379,17 +440,22 @@ export default {
         <img alt="favicon" src="/images/favicon.svg" width="24" title="by exi66">
         <small class="my-auto ms-2">© {{ new Date().getFullYear() }}</small>
       </div>
-      <small class="my-auto mx-auto">made with Vue.js</small>
+      <small class="my-auto mx-auto">{{ $t('footer_text') }}</small>
     </footer>
   </main>
   <transition name="fade">
-    <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
-      <a title="To top" href="#home"
-        class="py-2 px-4 ml-auto transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
+    <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2" tabindex="-1">
+      <a :title="$t('to_top')" href="#home"
+        class="py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
         <i class="bi bi-chevron-up"></i>
       </a>
-      <button type="button" @click="toggleTheme()" :title="theme == 'light' ? 'Dark' : 'Light'" aria-label="Switch theme"
-        class="py-2 px-4 ml-auto transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900 text-yellow-500 dark:text-sky-100">
+      <button type="button" @click="toggleLang()"
+        class="uppercase select-none py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
+        {{ $t('lang') }}
+      </button>
+      <button type="button" @click="toggleTheme()" :title="theme == 'light' ? $t('theme.dark') : $t('theme.light')"
+        :aria-label="$t('theme.switch')"
+        class="py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900 text-yellow-500 dark:text-sky-100">
         <i class="bi bi-moon-fill hidden dark:inline-block"></i>
         <i class="bi bi-brightness-high-fill inline-block dark:hidden"></i>
       </button>
@@ -398,31 +464,35 @@ export default {
   <SideBar v-model:open="openSlider">
     <div
       class="text-2xl font-semibold border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5">
-      Projects
+      {{ $t('projects.title') }}
     </div>
     <div class="flex flex-col">
       <div v-for="p in projects" :key="p.name" :ref="'project_' + p.name" :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3 last:border-none
           aria-selected:bg-mojo-600 aria-selected:bg-opacity-10">
-        <span class="text-2xl mb-1 block">
+        <a v-if="p.url" :href="p.url" class="text-2xl mb-1 block hover:underline transition-all text-mojo-600"
+          target="_blank">
+          {{ p.name }}
+        </a>
+        <span v-else class="text-2xl mb-1 block">
           {{ p.name }}
         </span>
         <viewer :images="p.images" :options="{ toolbar: false, title: false }" class="flex flex-wrap gap-2">
           <img v-for="src in p.images" :key="src" :src="src"
             class="h-16 w-16 object-cover rounded bg-black cursor-zoom-in hover:scale-110 transition duration-150">
         </viewer>
-        <span class="mb-1 mt-3 block uppercase font-semibold">Categories:</span>
+        <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.categories') }}:</span>
         <div class="flex flex-row flex-wrap gap-2">
           <span v-for="c in p.category" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
             {{ c }}
           </span>
         </div>
-        <span class="mb-1 mt-3 block uppercase font-semibold">Stack:</span>
+        <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.stack') }}:</span>
         <div class="flex flex-row flex-wrap gap-2">
           <span v-for="c in p.tech" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
             {{ c }}
           </span>
         </div>
-        <span class="mb-1 mt-3 block uppercase font-semibold">Details:</span>
+        <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.details') }}:</span>
         <p class="opacity-70">
           {{ p.description }}. {{ p.details }}
         </p>
