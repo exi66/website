@@ -66,6 +66,9 @@ export default {
     }
   },
   methods: {
+    toTop() {
+      this.$refs.header.scrollIntoView({ behavior: 'smooth' });
+    },
     handleScroll() {
       this.showToTop = window.scrollY >= this.$refs.header.clientHeight;
     },
@@ -454,10 +457,10 @@ export default {
   </main>
   <transition name="fade">
     <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2" tabindex="-1">
-      <a :title="$t('to_top')" href="#home"
+      <button type="button" :title="$t('to_top')" @click="toTop()"
         class="py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
         <i class="bi bi-chevron-up"></i>
-      </a>
+      </button>
       <button type="button" @click="toggleLang()"
         class="uppercase select-none py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black border-opacity-10 dark:border-white dark:border-opacity-10 hover:bg-gray-100 dark:hover:bg-shark-900">
         {{ $t('lang') }}
