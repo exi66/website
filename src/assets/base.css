@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html.dark {
+  background-color: theme(colors.shark.950);
+  color-scheme: dark;
+  color: theme(colors.white);
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+*::selection {
+  background-color: rgb(195 69 40 / 0.4);
+}
+
+.container-md {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container-md {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container-md {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container-md {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container-md {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container-md {
+    max-width: 1024px;
+  }
+}
+
+.fade-enter-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-leave-active {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

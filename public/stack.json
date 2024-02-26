@@ -1,0 +1,26 @@
+[
+  {
+    "label": "CSS",
+    "techs": ["Bootstrap", "Tailwindcss"]
+  },
+  {
+    "label": "Frontend",
+    "techs": ["Vue.js", "Webpack", "jQuery"]
+  },
+  {
+    "label": "Backend",
+    "techs": ["Laravel", "Express.js"]
+  },
+  {
+    "label": "Database",
+    "techs": ["MySQL"]
+  },
+  {
+    "label": "Web server",
+    "techs": ["Nginx"]
+  },
+  {
+    "label": "Environment",
+    "techs": ["Ubuntu", "CentOS", "Docker"]
+  }
+]
