@@ -53,7 +53,8 @@ export default {
       show_all: 'Show all',
       categories: 'Categories',
       stack: 'Stack',
-      details: 'Details'
+      details: 'Details',
+      search_placeholder: 'Search by tags, stacks'
     },
     contacts: {
       title: 'Contacts',
@@ -122,7 +123,8 @@ export default {
       show_all: 'Показать все',
       categories: 'Категории',
       stack: 'Технологии',
-      details: 'Описание'
+      details: 'Описание',
+      search_placeholder: 'Поиск по тегам'
     },
     contacts: {
       title: 'Контакты',

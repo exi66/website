@@ -35,6 +35,7 @@ export default {
       openSlider: false,
       selected: null,
       showToTop: false,
+      search: null,
     }
   },
   created() {
@@ -54,6 +55,14 @@ export default {
   computed: {
     getLastProjects() {
       return this.projects.map(e => e).reverse().slice(0, 3);
+    },
+    searchProjects() {
+      if (!this.search) return this.projects;
+      return this.projects.filter(e => {
+        let tags = e.category.join('|').toLocaleLowerCase();
+        let tech = e.tech.join('|').toLocaleLowerCase();
+        return tags.includes(this.search + ''.toLocaleLowerCase()) || tech.includes(this.search + ''.toLocaleLowerCase())
+      });
     }
   },
   methods: {
@@ -462,18 +471,27 @@ export default {
     </div>
   </transition>
   <SideBar v-model:open="openSlider">
-    <div
-      class="text-2xl font-semibold border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5">
-      {{ $t('projects.title') }}
+    <div class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5 flex flex-row">
+      <span class="text-2xl font-semibold">
+        {{ $t('projects.title') }}
+      </span>
+      <div class="relative ml-auto">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <i class="bi bi-search"></i>
+        </div>
+        <input type="search" id="search-projects" v-model="search"
+          class="block w-full px-2 py-1 ps-10 rounded text-sm border border-black border-opacity-10 dark:border-white dark:border-opacity-10 text-black dark:text-white dark:bg-shark-900 outline-none focus:border-mojo-600 focus:border-opacity-60 dark:focus:border-mojo-600 dark:focus:border-opacity-60 transition-all"
+          :placeholder="$t('projects.search_placeholder')" />
+      </div>
     </div>
     <div class="flex flex-col">
-      <div v-for="p in projects" :key="p.name" :ref="'project_' + p.name" :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3 last:border-none
+      <div v-for="p in searchProjects" :key="p.name" :ref="'project_' + p.name" :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3 last:border-none
           aria-selected:bg-mojo-600 aria-selected:bg-opacity-10">
-        <a v-if="p.url" :href="p.url" class="text-2xl mb-1 block hover:underline transition-all text-mojo-600"
+        <a v-if="p.url" :href="p.url" class="text-2xl mb-1 inline-block hover:underline transition-all text-mojo-600"
           target="_blank">
           {{ p.name }}
         </a>
-        <span v-else class="text-2xl mb-1 block">
+        <span v-else class="text-2xl mb-1 inline-block">
           {{ p.name }}
         </span>
         <viewer :images="p.images" :options="{ toolbar: false, title: false }" class="flex flex-wrap gap-2">
@@ -482,13 +500,17 @@ export default {
         </viewer>
         <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.categories') }}:</span>
         <div class="flex flex-row flex-wrap gap-2">
-          <span v-for="c in p.category" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
+          <span v-for="c in p.category" :key="c"
+            class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm cursor-pointer hover:opacity-80 transition-all"
+            @click="search = c">
             {{ c }}
           </span>
         </div>
         <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.stack') }}:</span>
         <div class="flex flex-row flex-wrap gap-2">
-          <span v-for="c in p.tech" :key="c" class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm">
+          <span v-for="c in p.tech" :key="c"
+            class="bg-mojo-600 text-white text-opacity-80 rounded px-1 text-sm cursor-pointer hover:opacity-80 transition-all"
+            @click="search = c">
             {{ c }}
           </span>
         </div>
