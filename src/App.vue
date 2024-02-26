@@ -475,7 +475,7 @@ export default {
       <span class="text-2xl font-semibold">
         {{ $t('projects.title') }}
       </span>
-      <div class="relative ml-auto">
+      <div class="relative ml-auto my-auto">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <i class="bi bi-search"></i>
         </div>

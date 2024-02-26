@@ -13,8 +13,8 @@ $_SESSION['__token'] = md5(uniqid(mt_rand(), true));
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="./assets/main.css?v6" />
-    <script defer type="module" src="./assets/main.js?v6"></script>
+    <link rel="stylesheet" href="./assets/main.css?v8" />
+    <script defer type="module" src="./assets/main.js?v8"></script>
     <title>About me</title>
   </head>
 
