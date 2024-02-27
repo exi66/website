@@ -555,6 +555,9 @@ export default {
           {{ p.description }}. {{ p.details }}
         </p>
       </div>
+      <div v-show="searchProjects.length < 1" class="p-3 opacity-70">
+        {{ $t('projects.search_not_found', { query: search }) }}
+      </div>
     </div>
   </SideBar>
 </template>

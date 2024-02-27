@@ -54,7 +54,8 @@ export default {
       categories: 'Categories',
       stack: 'Stack',
       details: 'Details',
-      search_placeholder: 'Search by tags, stacks'
+      search_placeholder: 'Search by tags, stacks',
+      search_not_found: 'Nothing found for «{query}»...'
     },
     contacts: {
       title: 'Contacts',
@@ -124,7 +125,8 @@ export default {
       categories: 'Категории',
       stack: 'Технологии',
       details: 'Описание',
-      search_placeholder: 'Поиск по тегам'
+      search_placeholder: 'Поиск по тегам',
+      search_not_found: 'По запросу «{query}» ничего не найдено...'
     },
     contacts: {
       title: 'Контакты',
