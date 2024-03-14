@@ -5,9 +5,6 @@ $_SESSION['__token'] = md5(uniqid(mt_rand(), true));
 
 <!DOCTYPE html>
 <html lang="en" class="dark">
-
-<head>
-
   <head>
     <meta name="csrf-token" content="<?= $_SESSION['__token'] ?>">
     <meta charset="UTF-8">
@@ -17,11 +14,9 @@ $_SESSION['__token'] = md5(uniqid(mt_rand(), true));
     <script defer type="module" src="./assets/main.js?v17"></script>
     <title>About me</title>
   </head>
-
-<body id="app">
-  <noscript>
-    Sorry, this site requires javascript
-  </noscript>
-</body>
-
+  <body id="app">
+    <noscript>
+      Sorry, this site requires javascript
+    </noscript>
+  </body>
 </html>
