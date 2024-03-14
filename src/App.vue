@@ -1,11 +1,9 @@
 <script setup>
-import axios from 'axios';
-import { nextTick } from 'vue';
-</script>
+import { nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+import axios from 'axios'
 
-<script>
 import IconExiLine from '@/components/icons/IconExiLine.vue';
-// import IconOrbit from '@/components/icons/IconOrbit.vue';
 import IconLaravel from '@/components/icons/IconLaravel.vue';
 import IconVue from '@/components/icons/IconVue.vue';
 import IconMySQL from '@/components/icons/IconMySQL.vue';
@@ -17,176 +15,153 @@ import SideBar from '@/components/SideBar.vue';
 axios.defaults.headers.post = {
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
 }
+const { t, locale } = useI18n()
+const loading = ref(true)
+const header = ref(null)
+const projectsElemets = ref({})
+const lang = ref(localStorage.getItem('lang') || navigator?.language == 'ru' ? 'ru' : 'en' || 'en')
+const theme = ref(localStorage.getItem('theme') || 'dark')
+const experience = ref([])
+const stack = ref([])
+const projects = ref([])
+const form = ref({
+  name: null,
+  email: null,
+  message: null,
+})
+const formResponse = ref(null)
+const waitResponse = ref(false)
+const openSlider = ref(false)
+const selected = ref(null)
+const showToTop = ref(false)
+const search = ref(null)
+const getLastProjects = computed(() => {
+  return projects.value.map(e => e).reverse().slice(0, 3)
+})
+const searchProjects = computed(() => {
+  if (!search.value) return projects.value
+  return projects.value.filter(e => e.category.includes(search.value.toLocaleLowerCase()) || e.tech.includes(search.value.toLocaleLowerCase()))
+})
 
-export default {
-  components: {
-    IconExiLine,
-    SideBar,
-    IconVue,
-    IconLaravel,
-    IconMySQL,
-    IconDocker,
-    IconUbuntu,
-    IconTailwind
-  },
-  data() {
-    return {
-      lang: 'en',
-      theme: 'dark',
-      experience: [],
-      stack: [],
-      projects: [],
-      form: {
-        name: null,
-        email: null,
-        message: null,
-      },
-      formResponse: null,
-      waitResponse: false,
-      openSlider: false,
-      selected: null,
-      showToTop: false,
-      search: null,
+function toTop() {
+  header.value.scrollIntoView({ behavior: 'smooth' })
+}
+function handleScroll() {
+  showToTop.value = window.scrollY >= header.value.clientHeight;
+}
+async function submit() {
+  waitResponse.value = true
+  try {
+    const body = new URLSearchParams(form.value).toString()
+    let res = await axios.post('./form/', body)
+    if (res.status === 200 && res.data.success) {
+      formResponse.value = res.data.success
+    } else {
+      formResponse.value = 'Error! ' + res.data.errors || res.status
     }
-  },
-  created() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  unmounted() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  async mounted() {
-    this.theme = localStorage.getItem('theme') || 'dark';
-    this.changeTheme();
+  } catch (e) {
+    formResponse.value = 'Error! ' + e.message
+  }
+  waitResponse.value = false
+}
+async function toggleSlider(name) {
+  openSlider.value = true
+  await nextTick()
+  let ref = projectsElemets.value[name]
+  if (ref) {
+    ref.scrollIntoView({ behavior: 'smooth' })
+    selected.value = name
+  }
+}
+function changeTheme() {
+  if (theme.value == 'light') {
+    document.documentElement.classList.remove('dark')
+  } else {
+    document.documentElement.classList.add('dark')
+  }
+}
+function toggleTheme() {
+  if (theme.value == 'dark') {
+    theme.value = 'light'
+    localStorage.setItem('theme', 'light')
+  } else {
+    theme.value = 'dark'
+    localStorage.setItem('theme', 'dark')
+  }
+  changeTheme()
+}
+function toggleLang() {
+  if (lang.value == 'en') {
+    lang.value = 'ru';
+    localStorage.setItem('lang', 'ru')
+  } else {
+    lang.value = 'en';
+    localStorage.setItem('lang', 'en')
+  }
+  changeLang()
+}
+async function changeLang() {
+  locale.value = lang.value
+  document.getElementsByTagName('html')[0].setAttribute('lang', lang.value);
+  document.title = t('title')
 
-    let n = navigator?.language == 'ru' ? 'ru' : 'en';
-    this.lang = localStorage.getItem('lang') || n || 'en';
-    await this.changeLang();
-  },
-  computed: {
-    getLastProjects() {
-      return this.projects.map(e => e).reverse().slice(0, 3);
-    },
-    searchProjects() {
-      if (!this.search) return this.projects;
-      return this.projects.filter(e => {
-        let tags = e.category.join('|').toLocaleLowerCase();
-        let tech = e.tech.join('|').toLocaleLowerCase();
-        return tags.includes(this.search + ''.toLocaleLowerCase()) || tech.includes(this.search + ''.toLocaleLowerCase())
-      });
-    }
-  },
-  methods: {
-    toTop() {
-      this.$refs.header.scrollIntoView({ behavior: 'smooth' });
-    },
-    handleScroll() {
-      this.showToTop = window.scrollY >= this.$refs.header.clientHeight;
-    },
-    async submit() {
-      this.waitResponse = true;
-      try {
-        const body = new URLSearchParams(this.form).toString();
-        let res = await axios.post('./form/', body);
-        if (res.status === 200 && res.data.success) {
-          this.formResponse = res.data.success;
-        } else {
-          this.formResponse = 'Error! ' + res.data.errors || res.status;
-        }
-      } catch (e) {
-        this.formResponse = 'Error! ' + e.message;
-      }
-      this.waitResponse = false;
-    },
-    async toggleSlider(name) {
-      this.openSlider = true;
-      await nextTick();
-      let ref = this.$refs['project_' + name][0] || null;
-      if (ref) {
-        ref.scrollIntoView({ behavior: 'smooth' })
-        this.selected = name;
-      };
-    },
-    changeTheme() {
-      if (this.theme == 'light') {
-        document.documentElement.classList.remove('dark');
-      } else {
-        document.documentElement.classList.add('dark');
-      }
-    },
-    toggleTheme() {
-      if (this.theme == 'dark') {
-        this.theme = 'light';
-        localStorage.setItem('theme', 'light')
-      } else {
-        this.theme = 'dark';
-        localStorage.setItem('theme', 'dark')
-      }
-      this.changeTheme();
-    },
-    toggleLang() {
-      if (this.lang == 'en') {
-        this.lang = 'ru';
-        localStorage.setItem('lang', 'ru')
-      } else {
-        this.lang = 'en';
-        localStorage.setItem('lang', 'en')
-      }
-      this.changeLang();
-    },
-    async changeLang() {
-      this.$i18n.locale = this.lang;
-      document.getElementsByTagName('html')[0].setAttribute('lang', this.lang);
-      document.title = this.$t('title')
-
-      await this.getExperience();
-      await this.getStack();
-      await this.getProjects();
-    },
-    async getExperience() {
-      if (this.lang === 'en') {
-        let res = await axios.get('/experience.json');
-        this.experience = res.data;
-      } else {
-        try {
-          let res = await axios.get(`/experience.${this.lang}.json`);
-          this.experience = res.data;
-        } catch (e) {
-          let res = await axios.get('/experience.json');
-          this.experience = res.data;
-        }
-      }
-    },
-    async getStack() {
-      if (this.lang === 'en') {
-        let res = await axios.get('/stack.json');
-        this.stack = res.data;
-      } else {
-        try {
-          let res = await axios.get(`/stack.${this.lang}.json`);
-          this.stack = res.data;
-        } catch (e) {
-          let res = await axios.get('/stack.json');
-          this.stack = res.data;
-        }
-      }
-    },
-    async getProjects() {
-      if (this.lang === 'en') {
-        let res = await axios.get('/projects.json');
-        this.projects = res.data;
-      } else {
-        try {
-          let res = await axios.get(`/projects.${this.lang}.json`);
-          this.projects = res.data;
-        } catch (e) {
-          let res = await axios.get('/projects.json');
-          this.projects = res.data;
-        }
-      }
+  await getExperience();
+  await getStack();
+  await getProjects();
+}
+async function getExperience() {
+  if (lang.value === 'en') {
+    let res = await axios.get('/experience.json');
+    experience.value = res.data;
+  } else {
+    try {
+      let res = await axios.get(`/experience.${lang.value}.json`);
+      experience.value = res.data;
+    } catch (e) {
+      let res = await axios.get('/experience.json');
+      experience.value = res.data;
     }
   }
 }
+async function getStack() {
+  if (lang.value === 'en') {
+    let res = await axios.get('/stack.json');
+    stack.value = res.data;
+  } else {
+    try {
+      let res = await axios.get(`/stack.${lang.value}.json`);
+      stack.value = res.data;
+    } catch (e) {
+      let res = await axios.get('/stack.json');
+      stack.value = res.data;
+    }
+  }
+}
+async function getProjects() {
+  if (lang.value === 'en') {
+    let res = await axios.get('/projects.json');
+    projects.value = res.data;
+  } else {
+    try {
+      let res = await axios.get(`/projects.${lang.value}.json`);
+      projects.value = res.data;
+    } catch (e) {
+      let res = await axios.get('/projects.json');
+      projects.value = res.data;
+    }
+  }
+}
+
+onMounted(async () => {
+  window.addEventListener('scroll', handleScroll)
+  changeTheme()
+  await changeLang()
+  loading.value = false;
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
 
 <template>
@@ -353,8 +328,8 @@ export default {
           <fieldset
             class="flex flex-row py-2 border rounded-md dark:border-white dark:border-opacity-70 border-black border-opacity-70"
             v-for="(t, index) in stack" :key="t">
-            <div class="text-center rounded mx-2 p-2 flex-1 flex bg-mojo-600 bg-opacity-[--opacity]" v-for="f in t.techs"
-              :key="f" :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'">
+            <div class="text-center rounded mx-2 p-2 flex-1 flex bg-mojo-600 bg-opacity-[--opacity]"
+              v-for="f in t.techs" :key="f" :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'">
               <span class="my-auto mx-auto">{{ f }}</span>
             </div>
             <legend class="mx-auto px-2 uppercase opacity-70">{{ t.label }}</legend>
@@ -440,7 +415,7 @@ export default {
                 </button>
               </div>
             </transition>
-            <form class="flex flex-row flex-wrap gap-2" ref="form" @submit.prevent="submit">
+            <form class="flex flex-row flex-wrap gap-2" @submit.prevent="submit">
               <div class="flex-1 mt-2">
                 <label class="uppercase text-sm dark:text-white dark:text-opacity-80 text-black
                 text-opacity-80">{{ $t('contacts.name') }} <span class="text-red-500"
@@ -506,12 +481,13 @@ export default {
       </button>
     </div>
   </transition>
-  <SideBar v-model:open="openSlider">
-    <div class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5 flex flex-row">
+  <SideBar v-model="openSlider">
+    <div
+      class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-5 flex flex-row flex-wrap justify-between gap-4">
       <span class="text-2xl font-semibold">
         {{ $t('projects.title') }}
       </span>
-      <div class="relative ml-auto my-auto">
+      <div class="relative my-auto">
         <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <i class="bi bi-search"></i>
         </div>
@@ -520,8 +496,12 @@ export default {
           :placeholder="$t('projects.search_placeholder')" />
       </div>
     </div>
-    <div class="flex flex-col">
-      <div v-for="p in searchProjects" :key="p.name" :ref="'project_' + p.name" :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3 last:border-none
+    <div class="flex flex-col mb-5">
+      <div v-show="searchProjects.length < 1" class="p-3 opacity-70">
+        {{ $t('projects.search_not_found', { query: search }) }}
+      </div>
+      <div v-for="p in searchProjects" :key="p.name" :ref="(el) => (projectsElemets[p.name] = el)"
+        :aria-selected="p.name == selected" class="border-b border-black border-opacity-10 dark:border-white dark:border-opacity-10 p-3
           aria-selected:bg-mojo-600 aria-selected:bg-opacity-10">
         <a v-if="p.url" :href="p.url" class="text-2xl mb-1 inline-block hover:underline transition-all text-mojo-600"
           target="_blank">
@@ -554,9 +534,6 @@ export default {
         <p class="opacity-70">
           {{ p.description }}. {{ p.details }}
         </p>
-      </div>
-      <div v-show="searchProjects.length < 1" class="p-3 opacity-70">
-        {{ $t('projects.search_not_found', { query: search }) }}
       </div>
     </div>
   </SideBar>
