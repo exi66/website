@@ -7,19 +7,7 @@ export default {
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
-        mojo: {
-          50: '#fdf5ef',
-          100: '#f9e7db',
-          200: '#f3ccb5',
-          300: '#ebaa86',
-          400: '#e17f56',
-          500: '#da5f35',
-          600: '#c34528',
-          700: '#aa3624',
-          800: '#882d24',
-          900: '#6e2820',
-          950: '#3b120f'
-        },
+        accent: '#c34528',
         shark: {
           50: '#f6f6f6',
           100: '#e7e7e7',

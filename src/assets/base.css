@@ -4,9 +4,19 @@
 @tailwind utilities;
 
 html.dark {
-  background-color: theme(colors.shark.950);
+  background: theme(colors.shark.950);
   color-scheme: dark;
-  color: theme(colors.white);
+  color: theme(colors.white / 90%);
+}
+
+button,
+a {
+  @apply outline-none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  @apply ring-2 ring-accent/60 rounded;
 }
 
 body {
@@ -18,7 +28,11 @@ body {
 }
 
 *::selection {
-  background-color: rgb(195 69 40 / 0.4);
+  background-color: theme(colors.accent / 30%);
+}
+
+.dark *::selection {
+  background-color: theme(colors.accent / 50%);
 }
 
 .container-md {
