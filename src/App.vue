@@ -3,14 +3,14 @@ import { nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import axios from 'axios'
 
-import IconExiLine from '@/components/icons/IconExiLine.vue';
-import IconLaravel from '@/components/icons/IconLaravel.vue';
-import IconVue from '@/components/icons/IconVue.vue';
-import IconMySQL from '@/components/icons/IconMySQL.vue';
-import IconDocker from '@/components/icons/IconDocker.vue';
-import IconUbuntu from '@/components/icons/IconUbuntu.vue';
-import IconTailwind from '@/components/icons/IconTailwind.vue';
-import SideBar from '@/components/SideBar.vue';
+import IconMoe from '@/components/icons/IconMoe.vue'
+import IconLaravel from '@/components/icons/IconLaravel.vue'
+import IconVue from '@/components/icons/IconVue.vue'
+import IconMySQL from '@/components/icons/IconMySQL.vue'
+import IconDocker from '@/components/icons/IconDocker.vue'
+import IconUbuntu from '@/components/icons/IconUbuntu.vue'
+import IconTailwind from '@/components/icons/IconTailwind.vue'
+import SideBar from '@/components/SideBar.vue'
 
 axios.defaults.headers.post = {
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
@@ -47,7 +47,7 @@ function toTop() {
   header.value.scrollIntoView({ behavior: 'smooth' })
 }
 function handleScroll() {
-  showToTop.value = window.scrollY >= header.value.clientHeight;
+  showToTop.value = window.scrollY >= header.value.clientHeight
 }
 async function submit() {
   waitResponse.value = true
@@ -92,62 +92,62 @@ function toggleTheme() {
 }
 function toggleLang() {
   if (lang.value == 'en') {
-    lang.value = 'ru';
+    lang.value = 'ru'
     localStorage.setItem('lang', 'ru')
   } else {
-    lang.value = 'en';
+    lang.value = 'en'
     localStorage.setItem('lang', 'en')
   }
   changeLang()
 }
 async function changeLang() {
   locale.value = lang.value
-  document.getElementsByTagName('html')[0].setAttribute('lang', lang.value);
+  document.getElementsByTagName('html')[0].setAttribute('lang', lang.value)
   document.title = t('title')
 
-  await getExperience();
-  await getStack();
-  await getProjects();
+  await getExperience()
+  await getStack()
+  await getProjects()
 }
 async function getExperience() {
   if (lang.value === 'en') {
-    let res = await axios.get('/experience.json');
-    experience.value = res.data;
+    let res = await axios.get('/experience.json')
+    experience.value = res.data
   } else {
     try {
-      let res = await axios.get(`/experience.${lang.value}.json`);
-      experience.value = res.data;
+      let res = await axios.get(`/experience.${lang.value}.json`)
+      experience.value = res.data
     } catch (e) {
-      let res = await axios.get('/experience.json');
-      experience.value = res.data;
+      let res = await axios.get('/experience.json')
+      experience.value = res.data
     }
   }
 }
 async function getStack() {
   if (lang.value === 'en') {
-    let res = await axios.get('/stack.json');
-    stack.value = res.data;
+    let res = await axios.get('/stack.json')
+    stack.value = res.data
   } else {
     try {
-      let res = await axios.get(`/stack.${lang.value}.json`);
-      stack.value = res.data;
+      let res = await axios.get(`/stack.${lang.value}.json`)
+      stack.value = res.data
     } catch (e) {
-      let res = await axios.get('/stack.json');
-      stack.value = res.data;
+      let res = await axios.get('/stack.json')
+      stack.value = res.data
     }
   }
 }
 async function getProjects() {
   if (lang.value === 'en') {
-    let res = await axios.get('/projects.json');
-    projects.value = res.data;
+    let res = await axios.get('/projects.json')
+    projects.value = res.data
   } else {
     try {
-      let res = await axios.get(`/projects.${lang.value}.json`);
-      projects.value = res.data;
+      let res = await axios.get(`/projects.${lang.value}.json`)
+      projects.value = res.data
     } catch (e) {
-      let res = await axios.get('/projects.json');
-      projects.value = res.data;
+      let res = await axios.get('/projects.json')
+      projects.value = res.data
     }
   }
 }
@@ -156,7 +156,7 @@ onMounted(async () => {
   window.addEventListener('scroll', handleScroll)
   changeTheme()
   await changeLang()
-  loading.value = false;
+  loading.value = false
 })
 
 onUnmounted(() => {
@@ -167,8 +167,8 @@ onUnmounted(() => {
 <template>
   <header class="container container-md mx-auto" ref="header">
     <nav class="p-2 flex flex-row gap-2">
-      <a href="/" class="my-auto py-2">
-        <IconExiLine class="h-4 text-mojo-600 hover:-rotate-6 transition-all" />
+      <a href="/" class="my-auto">
+        <IconMoe class="h-6 hover:-rotate-6 transition-all" />
       </a>
       <button type="button" @click="toggleLang()"
         class="p-2 ml-auto uppercase select-none transition-all leading-none rounded bg-transparent border border-transparent hover:bg-black hover:bg-opacity-10 dark:hover:bg-white dark:hover:bg-opacity-10">
@@ -455,14 +455,11 @@ onUnmounted(() => {
         </div>
       </div>
     </section>
-    <footer class="flex flex-col mb-4 opacity-80">
-      <div class="mx-auto text-center flex">
-        <img alt="favicon" src="/images/favicon.svg" width="24" title="by exi66">
-        <small class="my-auto ms-2">© {{ new Date().getFullYear() }}</small>
-      </div>
-      <small class="my-auto mx-auto">{{ $t('footer_text') }}</small>
-    </footer>
   </main>
+  <footer class="flex flex-col pt-2 pb-4 gap-1">
+    <img class="my-auto h-5 w-auto" alt="favicon" src="/images/favicon.svg" title="by exi66">
+    <small class="mx-auto opacity-70">© {{ new Date().getFullYear() }}</small>
+  </footer>
   <transition name="fade">
     <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2" tabindex="-1">
       <button type="button" :title="$t('to_top')" @click="toTop()"

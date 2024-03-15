@@ -7,8 +7,8 @@ const props = defineProps({
 const emits = defineEmits(['update:modelValue'])
 
 watch(() => props.modelValue, (newValue) => {
-  if (newValue) document.getElementById('app').style.overflow = 'hidden';
-  else document.getElementById('app').style.overflow = 'auto';
+  if (newValue) document.getElementById('app').style.overflow = 'hidden'
+  else document.getElementById('app').style.overflow = 'auto'
 })
 </script>
 

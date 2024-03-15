@@ -9,9 +9,16 @@ $_SESSION['__token'] = md5(uniqid(mt_rand(), true));
     <meta name="csrf-token" content="<?= $_SESSION['__token'] ?>">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="One page portfolio website"
+    />
+    <meta name="author" content="exi66" />
+    <meta name="copyright" content="exi66" />
+    <meta name="robots" content="index, follow" />
     <link rel="icon" href="/favicon.ico">
-    <link rel="stylesheet" href="./assets/main.css?v17" />
-    <script defer type="module" src="./assets/main.js?v17"></script>
+    <link rel="stylesheet" href="./assets/main.css?v18" />
+    <script defer type="module" src="./assets/main.js?v18"></script>
     <title>About me</title>
   </head>
   <body id="app">
