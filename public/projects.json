@@ -1,88 +1,56 @@
 [
   {
-    "name": "simple-chat",
-    "description": "Simple chat on express.js and socket.io on back and vue.js on front",
-    "url": "https://github.com/exi66/simple-chat",
-    "thumbnail": "/images/projects/simple-chat.png",
-    "category": ["backend", "frontend"],
-    "images": ["/images/projects/simple-chat.png"],
-    "tech": ["node.js", "vue.js", "express.js"]
-  },
-  {
-    "name": "bdo-market-wait-list",
-    "description": "Discord.js bot for web-scraping black desert market registration queue",
-    "details": "The project is built on the discord.js library. Data is obtained by accessing the web marketplace API and scraping the web page (for coupons).",
-    "url": "https://github.com/exi66/bdo-market-wait-list",
-    "thumbnail": "/images/projects/bdo-market-wait-list.png",
-    "category": ["backend", "others"],
-    "images": [
-      "/images/projects/bdo-market-wait-list.png",
-      "/images/projects/bdo-market-wait-list/1.png",
-      "/images/projects/bdo-market-wait-list/2.png",
-      "/images/projects/bdo-market-wait-list/3.png"
-    ],
-    "tech": ["node.js", "discord.js", "sapphirejs"]
-  },
-  {
     "name": "mcgl.polypha.ga",
     "description": "Simple game project website",
     "details": "The site consists of four pages: the main page, a page with a search for leaked data, a page with the history of the project in the form of a timeline, and a page with hacks and scripts for the game. The search is carried out at the level of sql queries. Hacks page has authorization to access content.",
-    "thumbnail": "/images/projects/mcgl.polypha.ga.png",
+    "thumbnail": "/images/projects/mcgl.polypha.ga.webp",
     "category": ["backend", "frontend"],
     "images": [
-      "/images/projects/mcgl.polypha.ga/1.png",
-      "/images/projects/mcgl.polypha.ga/2.png",
-      "/images/projects/mcgl.polypha.ga/3.png"
+      "/images/projects/mcgl.polypha.ga/1.webp",
+      "/images/projects/mcgl.polypha.ga/2.webp",
+      "/images/projects/mcgl.polypha.ga/3.webp"
     ],
-    "tech": ["php", "laravel", "js", "mysql"]
-  },
-  {
-    "name": "simple-blog",
-    "description": "A simple blog with the implementation of user management, roles and published content",
-    "details": "The site implements registration (without confirmation), creation and privilege of roles and rights, management of material, comments.",
-    "url": "https://github.com/exi66/simple-blog/",
-    "thumbnail": "/images/projects/simple-blog.png",
-    "category": ["backend", "frontend"],
-    "images": ["/images/projects/simple-blog.png"],
-    "tech": ["php", "laravel", "js", "mysql"]
-  },
-  {
-    "name": "startup-it-test",
-    "description": "Small test task. It is an online library with the ability to add resources, links to them, link them to tags and search for them",
-    "url": "https://github.com/exi66/startup-it-test",
-    "thumbnail": "/images/projects/test-work.png",
-    "category": ["backend"],
-    "images": [
-      "/images/projects/test-work.png",
-      "/images/projects/test-work/1.png",
-      "/images/projects/test-work/2.png"
-    ],
-    "tech": ["laravel", "js", "mysql"]
+    "tech": ["php", "laravel", "mysql"]
   },
   {
     "name": "helper-bot",
-    "description": "Discord.js bot for answering popular questions. Includes web-ui for editing bot answers",
-    "thumbnail": "/images/projects/helper-bot.png",
+    "description": "Discord bot for answering popular questions. Includes web-ui for editing bot answers",
+    "thumbnail": "/images/projects/helper-bot.webp",
     "category": ["backend", "frontend", "others"],
     "images": [
-      "/images/projects/helper-bot.png",
-      "/images/projects/helper-bot/1.png",
-      "/images/projects/helper-bot/2.png"
+      "/images/projects/helper-bot.webp",
+      "/images/projects/helper-bot/1.webp",
+      "/images/projects/helper-bot/2.webp"
     ],
-    "tech": ["node.js", "exrpess.js"]
+    "tech": ["node.js", "exrpess.js", "discord.js"]
+  },
+  {
+    "name": "shiel-bot",
+    "description": "Discord bot for web-scraping black desert market registration queue",
+    "details": "Data is obtained by accessing the web marketplace API and scraping the web page (for coupons). Includes a web interface for easy setup",
+    "url": "https://github.com/exi66/shiel-bot",
+    "thumbnail": "/images/projects/shiel-bot.webp",
+    "category": ["backend", "others"],
+    "images": [
+      "/images/projects/shiel-bot/1.webp",
+      "/images/projects/shiel-bot/2.webp",
+      "/images/projects/shiel-bot/3.webp",
+      "/images/projects/shiel-bot/4.webp"
+    ],
+    "tech": ["express.js", "vue.js", "discord.js", "sapphirejs"]
   },
   {
     "name": "tcp-servers-status",
     "description": "Down detector for any servers",
-    "details": "A small service and web application that pings tcp ports and maintains latency statistics with subsequent visualization in charts.js.",
+    "details": "A small service and web application that pings tcp ports and maintains latency statistics with subsequent visualization in charts.js",
     "url": "https://github.com/exi66/tcp-servers-status",
-    "thumbnail": "/images/projects/tcp-servers-status.png",
+    "thumbnail": "/images/projects/tcp-servers-status.webp",
     "category": ["backend", "frontend", "others"],
     "images": [
-      "/images/projects/tcp-servers-status.png",
-      "/images/projects/tcp-servers-status/1.png",
-      "/images/projects/tcp-servers-status/2.png"
+      "/images/projects/tcp-servers-status.webp",
+      "/images/projects/tcp-servers-status/1.webp",
+      "/images/projects/tcp-servers-status/2.webp"
     ],
-    "tech": ["node.js", "vue.js"]
+    "tech": ["node.js", "vue.js", "chart.js"]
   }
 ]

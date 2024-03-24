@@ -183,7 +183,7 @@ onUnmounted(() => {
     </nav>
   </header>
   <main class="mt-4 p-2 container container-md mx-auto flex flex-col gap-6">
-    <section id="home" class="flex flex-row">
+    <section id="home" class="flex flex-row relative">
       <div class="w-auto hidden sm:flex my-auto mr-8 ml-8">
         <div class="box3d text-white">
           <div class="p1 flex bg-[#42b883]">
@@ -206,7 +206,7 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2 z-10">
         <h1 class="mx-auto text-3xl">
           {{ $t('hero.title') }}
           <span class="text-2xl block">

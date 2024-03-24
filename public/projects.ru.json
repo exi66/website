@@ -1,88 +1,56 @@
 [
   {
-    "name": "simple-chat",
-    "description": "Простой чат на express.js и socket.io на беке и Vue на фронте",
-    "url": "https://github.com/exi66/simple-chat",
-    "thumbnail": "/images/projects/simple-chat.png",
-    "category": ["backend", "frontend"],
-    "images": ["/images/projects/simple-chat.png"],
-    "tech": ["node.js", "vue.js", "express.js"]
-  },
-  {
-    "name": "bdo-market-wait-list",
-    "description": "Discord.js бот для веб-парсинга аукциона игры Black Desert и последующей интеграций в мессенджер",
-    "details": "Этот проект построен на библиотеке Discord.js. Данные получаются из веб API аукциона и парсинга html страниц.",
-    "url": "https://github.com/exi66/bdo-market-wait-list",
-    "thumbnail": "/images/projects/bdo-market-wait-list.png",
-    "category": ["backend", "others"],
-    "images": [
-      "/images/projects/bdo-market-wait-list.png",
-      "/images/projects/bdo-market-wait-list/1.png",
-      "/images/projects/bdo-market-wait-list/2.png",
-      "/images/projects/bdo-market-wait-list/3.png"
-    ],
-    "tech": ["node.js", "discord.js", "sapphirejs"]
-  },
-  {
     "name": "mcgl.polypha.ga",
     "description": "Простой сайт посвещенный игровому проекту",
     "details": "Сайт включает в себя четыре страницы: главная, страница с поиском по leaked-данным, интерактивный таймлайн проекта и страница с скриптами/читами для игры. Поиск по leaked данным осущeствляется с помощью SQL запросов со сложными фильтрами, так как часть данных представляла собой html страницы. Страница с читами имеет авторизацию.",
-    "thumbnail": "/images/projects/mcgl.polypha.ga.png",
+    "thumbnail": "/images/projects/mcgl.polypha.ga.webp",
     "category": ["backend", "frontend"],
     "images": [
-      "/images/projects/mcgl.polypha.ga/1.png",
-      "/images/projects/mcgl.polypha.ga/2.png",
-      "/images/projects/mcgl.polypha.ga/3.png"
+      "/images/projects/mcgl.polypha.ga/1.webp",
+      "/images/projects/mcgl.polypha.ga/2.webp",
+      "/images/projects/mcgl.polypha.ga/3.webp"
     ],
     "tech": ["php", "laravel", "js", "mysql"]
-  },
-  {
-    "name": "simple-blog",
-    "description": "Простой блог с функционалом управлять пользователями, ролями и публикуемым контентом",
-    "details": "На сайте доступна регистрация, создание и привилегирование ролей и прав, управление контентом. Все управление сделано через REST API",
-    "url": "https://github.com/exi66/simple-blog/",
-    "thumbnail": "/images/projects/simple-blog.png",
-    "category": ["backend", "frontend"],
-    "images": ["/images/projects/simple-blog.png"],
-    "tech": ["php", "laravel", "js", "mysql"]
-  },
-  {
-    "name": "startup-it-test",
-    "description": "Небольшое тестовое задание. Это онлайн-библиотека с возможностью добавлять ресурсы, ссылки на них, привязывать их к тегам и осуществлять поиск по ним",
-    "url": "https://github.com/exi66/startup-it-test",
-    "thumbnail": "/images/projects/test-work.png",
-    "category": ["backend"],
-    "images": [
-      "/images/projects/test-work.png",
-      "/images/projects/test-work/1.png",
-      "/images/projects/test-work/2.png"
-    ],
-    "tech": ["laravel", "js", "mysql"]
   },
   {
     "name": "helper-bot",
-    "description": "Discord.js бот для ответов на популярные вопросы. Включает веб-интерфейс для редактирования ответов бота",
-    "thumbnail": "/images/projects/helper-bot.png",
+    "description": "Discord бот для ответов на популярные вопросы. Есть веб-интерфейс для редактирования ответов бота",
+    "thumbnail": "/images/projects/helper-bot.webp",
     "category": ["backend", "frontend", "others"],
     "images": [
-      "/images/projects/helper-bot.png",
-      "/images/projects/helper-bot/1.png",
-      "/images/projects/helper-bot/2.png"
+      "/images/projects/helper-bot.webp",
+      "/images/projects/helper-bot/1.webp",
+      "/images/projects/helper-bot/2.webp"
     ],
-    "tech": ["node.js", "exrpess.js"]
+    "tech": ["node.js", "exrpess.js", "discord.js"]
+  },
+  {
+    "name": "shiel-bot",
+    "description": "Discord бот для отслеживания аукциона игры Black Desert и последующей интеграцией в мессенджер",
+    "details": "Данные получаются из веб API аукциона и парсинга html страниц. Есть веб-интерфейс для удобной настройки",
+    "url": "https://github.com/exi66/shiel-bot",
+    "thumbnail": "/images/projects/shiel-bot.webp",
+    "category": ["backend", "others"],
+    "images": [
+      "/images/projects/shiel-bot/1.webp",
+      "/images/projects/shiel-bot/2.webp",
+      "/images/projects/shiel-bot/3.webp",
+      "/images/projects/shiel-bot/4.webp"
+    ],
+    "tech": ["express.js", "vue.js", "discord.js", "sapphirejs"]
   },
   {
     "name": "tcp-servers-status",
     "description": "Down detector для любых серверов",
-    "details": "Небольшой сервис и веб-приложение, которое пингует tcp-порты и ведет статистику задержки с последующей визуализацией в charts.js.",
+    "details": "Небольшой сервис и веб-приложение, которое пингует tcp-порты и ведет статистику задержки с последующей визуализацией в charts.js",
     "url": "https://github.com/exi66/tcp-servers-status",
-    "thumbnail": "/images/projects/tcp-servers-status.png",
+    "thumbnail": "/images/projects/tcp-servers-status.webp",
     "category": ["backend", "frontend", "others"],
     "images": [
-      "/images/projects/tcp-servers-status.png",
-      "/images/projects/tcp-servers-status/1.png",
-      "/images/projects/tcp-servers-status/2.png"
+      "/images/projects/tcp-servers-status.webp",
+      "/images/projects/tcp-servers-status/1.webp",
+      "/images/projects/tcp-servers-status/2.webp"
     ],
-    "tech": ["node.js", "vue.js"]
+    "tech": ["node.js", "vue.js", "chart.js"]
   }
 ]
