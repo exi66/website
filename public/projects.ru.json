@@ -10,7 +10,7 @@
       "/images/projects/mcgl.polypha.ga/2.webp",
       "/images/projects/mcgl.polypha.ga/3.webp"
     ],
-    "tech": ["php", "laravel", "js", "mysql"]
+    "tech": ["php", "laravel", "mysql"]
   },
   {
     "name": "helper-bot",
