@@ -52,5 +52,15 @@
       "/images/projects/tcp-servers-status/2.webp"
     ],
     "tech": ["node.js", "vue.js", "chart.js"]
+  },
+  {
+    "name": "bdo-sieges",
+    "description": "Интерактивная карта для стадии планировани осад в Black Desert Online",
+    "details": "Позволяет разместить на игровой карте различные объекты для визуализации процесса осады.",
+    "url": "https://github.com/exi66/bdo-sieges",
+    "thumbnail": "/images/projects/bdo-sieges.webp",
+    "category": ["frontend"],
+    "images": ["/images/projects/bdo-sieges/1.webp", "/images/projects/bdo-sieges/2.webp"],
+    "tech": ["vue.js", "leafletjs"]
   }
 ]
