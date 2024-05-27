@@ -16,22 +16,20 @@ watch(
       app.style.overflow = 'hidden'
       const buttons = app.getElementsByTagName('button')
       const links = app.getElementsByTagName('a')
-      for (const b of buttons) {
-        b.tabIndex = -1
-      }
-      for (const b of links) {
-        b.tabIndex = -1
+      const inputs = app.getElementsByTagName('input')
+      const textareas = app.getElementsByTagName('textarea')
+      for (const elem of [...buttons, ...links, ...inputs, ...textareas]) {
+        elem.tabIndex = -1
       }
     } else {
       app.style.overflow = 'auto'
       app.style.setProperty('--scrollbar-width', 0)
       const buttons = app.getElementsByTagName('button')
       const links = app.getElementsByTagName('a')
-      for (const b of buttons) {
-        b.removeAttribute('tabindex')
-      }
-      for (const b of links) {
-        b.removeAttribute('tabindex')
+      const inputs = app.getElementsByTagName('input')
+      const textareas = app.getElementsByTagName('textarea')
+      for (const elem of [...buttons, ...links, ...inputs, ...textareas]) {
+        elem.removeAttribute('tabindex')
       }
     }
   }
