@@ -9,10 +9,13 @@ const emits = defineEmits(['update:modelValue'])
 watch(
   () => props.modelValue,
   (newValue) => {
+    const app = document.getElementById('app')
     if (newValue) {
-      document.getElementById('app').style.overflow = 'hidden'
-      const buttons = document.getElementById('app').getElementsByTagName('button')
-      const links = document.getElementById('app').getElementsByTagName('a')
+      const scrollbarWidth = window.innerWidth - document.body.clientWidth + 'px'
+      app.style.setProperty('--scrollbar-width', scrollbarWidth)
+      app.style.overflow = 'hidden'
+      const buttons = app.getElementsByTagName('button')
+      const links = app.getElementsByTagName('a')
       for (const b of buttons) {
         b.tabIndex = -1
       }
@@ -20,9 +23,10 @@ watch(
         b.tabIndex = -1
       }
     } else {
-      document.getElementById('app').style.overflow = 'auto'
-      const buttons = document.getElementById('app').getElementsByTagName('button')
-      const links = document.getElementById('app').getElementsByTagName('a')
+      app.style.overflow = 'auto'
+      app.style.setProperty('--scrollbar-width', 0)
+      const buttons = app.getElementsByTagName('button')
+      const links = app.getElementsByTagName('a')
       for (const b of buttons) {
         b.removeAttribute('tabindex')
       }

@@ -9,6 +9,10 @@ html.dark {
   color: theme(colors.white / 90%);
 }
 
+#app {
+  padding-right: var(--scrollbar-width, 0);
+}
+
 button,
 a {
   @apply outline-none;
