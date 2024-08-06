@@ -1,9 +1,22 @@
+import animate from 'tailwindcss-animate'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'class',
   content: ['./src/main.js', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
+    container: {
+      center: true,
+      screens: {
+        lg: '1024px',
+        xl: '1024px',
+        '2xl': '1024px'
+      }
+    },
     extend: {
+      lineHeight: {
+        0: '0px'
+      },
       colors: {
         transparent: 'transparent',
         current: 'currentColor',
@@ -24,5 +37,5 @@ export default {
       }
     }
   },
-  plugins: []
+  plugins: [animate]
 }

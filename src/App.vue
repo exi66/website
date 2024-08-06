@@ -1,35 +1,25 @@
 <script setup>
-import { nextTick, ref, onUnmounted, onMounted, computed } from 'vue'
-import { useI18n } from 'vue-i18n'
+import { nextTick, ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 
-import IconMoe from '@/components/icons/IconMoe.vue'
-import IconLaravel from '@/components/icons/IconLaravel.vue'
-import IconVue from '@/components/icons/IconVue.vue'
-import IconMySQL from '@/components/icons/IconMySQL.vue'
-import IconDocker from '@/components/icons/IconDocker.vue'
-import IconUbuntu from '@/components/icons/IconUbuntu.vue'
-import IconTailwind from '@/components/icons/IconTailwind.vue'
+import { useAppStore } from '@/stores/app'
+import { storeToRefs } from 'pinia'
+
+import { useWindowScroll } from '@vueuse/core'
+const { y: windowY } = useWindowScroll()
+
+const { changeLang, changeTheme, toggleTheme, toggleLang } = useAppStore()
+const { projects, stack, experience, isDarkTheme } = storeToRefs(useAppStore())
+
+import { Laravel, Vue, MySQL, Ubuntu, Tailwind, Docker } from '@/components/icons'
 import SideBar from '@/components/SideBar.vue'
 
 axios.defaults.headers.post = {
   'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
 }
-const { t, locale } = useI18n()
 const loading = ref(true)
 const header = ref(null)
 const projectsElemets = ref({})
-const lang = ref(
-  localStorage.getItem('lang')
-    ? localStorage.getItem('lang')
-    : navigator?.language == 'ru'
-      ? 'ru'
-      : 'en'
-)
-const theme = ref(localStorage.getItem('theme') || 'dark')
-const experience = ref([])
-const stack = ref([])
-const projects = ref([])
 const form = ref({
   name: null,
   email: null,
@@ -39,7 +29,8 @@ const formResponse = ref(null)
 const waitResponse = ref(false)
 const openSlider = ref(false)
 const selected = ref(null)
-const showToTop = ref(false)
+const offsetY = ref(50)
+const showToTop = computed(() => windowY.value > offsetY.value)
 const search = ref(null)
 const getLastProjects = computed(() => {
   return projects.value
@@ -58,9 +49,6 @@ const searchProjects = computed(() => {
 
 function toTop() {
   header.value.scrollIntoView({ behavior: 'smooth' })
-}
-function handleScroll() {
-  showToTop.value = window.scrollY >= header.value.clientHeight
 }
 async function submit() {
   waitResponse.value = true
@@ -90,94 +78,11 @@ function toggleAllSlider() {
   openSlider.value = true
   selected.value = null
 }
-function changeTheme() {
-  if (theme.value == 'light') {
-    document.documentElement.classList.remove('dark')
-  } else {
-    document.documentElement.classList.add('dark')
-  }
-}
-function toggleTheme() {
-  if (theme.value == 'dark') {
-    theme.value = 'light'
-    localStorage.setItem('theme', 'light')
-  } else {
-    theme.value = 'dark'
-    localStorage.setItem('theme', 'dark')
-  }
-  changeTheme()
-}
-function toggleLang() {
-  if (lang.value == 'en') {
-    lang.value = 'ru'
-    localStorage.setItem('lang', 'ru')
-  } else {
-    lang.value = 'en'
-    localStorage.setItem('lang', 'en')
-  }
-  changeLang()
-}
-async function changeLang() {
-  locale.value = lang.value
-  document.getElementsByTagName('html')[0].setAttribute('lang', lang.value)
-  document.title = t('title')
-
-  await getExperience()
-  await getStack()
-  await getProjects()
-}
-async function getExperience() {
-  if (lang.value === 'en') {
-    let res = await axios.get('/experience.json')
-    experience.value = res.data
-  } else {
-    try {
-      let res = await axios.get(`/experience.${lang.value}.json`)
-      experience.value = res.data
-    } catch (e) {
-      let res = await axios.get('/experience.json')
-      experience.value = res.data
-    }
-  }
-}
-async function getStack() {
-  if (lang.value === 'en') {
-    let res = await axios.get('/stack.json')
-    stack.value = res.data
-  } else {
-    try {
-      let res = await axios.get(`/stack.${lang.value}.json`)
-      stack.value = res.data
-    } catch (e) {
-      let res = await axios.get('/stack.json')
-      stack.value = res.data
-    }
-  }
-}
-async function getProjects() {
-  if (lang.value === 'en') {
-    let res = await axios.get('/projects.json')
-    projects.value = res.data
-  } else {
-    try {
-      let res = await axios.get(`/projects.${lang.value}.json`)
-      projects.value = res.data
-    } catch (e) {
-      let res = await axios.get('/projects.json')
-      projects.value = res.data
-    }
-  }
-}
-
 onMounted(async () => {
-  window.addEventListener('scroll', handleScroll)
+  offsetY.value = header.value.clientHeight
   changeTheme()
   await changeLang()
   loading.value = false
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
@@ -185,7 +90,11 @@ onUnmounted(() => {
   <header class="container container-md mx-auto" ref="header">
     <nav class="p-2 flex flex-row gap-2">
       <a href="/" class="my-auto">
-        <IconMoe class="h-6 hover:-rotate-6 transition-all" />
+        <img
+          class="h-6 hover:-rotate-6 transition-all w-auto"
+          alt="favicon"
+          src="/images/favicon.svg"
+        />
       </a>
       <button
         type="button"
@@ -197,7 +106,7 @@ onUnmounted(() => {
       <button
         type="button"
         @click="toggleTheme()"
-        :title="theme == 'light' ? $t('theme.dark') : $t('theme.light')"
+        :title="isDarkTheme ? $t('theme.dark') : $t('theme.light')"
         :aria-label="$t('theme.switch')"
         class="p-2 transition-all leading-none rounded bg-transparent border border-transparent hover:bg-black/10 dark:hover:bg-white/10 text-yellow-500 dark:text-sky-100"
       >
@@ -211,22 +120,22 @@ onUnmounted(() => {
       <div class="w-auto hidden sm:flex my-auto mr-8 ml-8">
         <div class="box3d text-white">
           <div class="p1 flex bg-[#42b883]">
-            <IconVue class="m-auto h-16 w-auto" />
+            <Vue class="m-auto h-16 w-auto" />
           </div>
           <div class="p2 flex bg-[#ff2d20]">
-            <IconLaravel class="m-auto h-16 w-auto" />
+            <Laravel class="m-auto h-16 w-auto" />
           </div>
           <div class="p3 flex bg-[#00678c]">
-            <IconMySQL class="m-auto h-16 w-auto" />
+            <MySQL class="m-auto h-16 w-auto" />
           </div>
           <div class="p4 flex bg-[#066da5]">
-            <IconDocker class="m-auto h-16 w-auto" />
+            <Docker class="m-auto h-16 w-auto" />
           </div>
           <div class="p5 flex bg-[#38bdf8]">
-            <IconTailwind class="m-auto w-16 h-auto" />
+            <Tailwind class="m-auto w-16 h-auto" />
           </div>
           <div class="p6 flex bg-[#f47421]">
-            <IconUbuntu class="m-auto h-16 w-auto" />
+            <Ubuntu class="m-auto h-16 w-auto" />
           </div>
         </div>
       </div>
@@ -242,7 +151,7 @@ onUnmounted(() => {
           <a
             href="https://github.com/exi66"
             target="_blank"
-            class="text-3xl hover:text-accent transition-all"
+            class="hover:text-accent transition-all rounded-full leading-0 text-3xl"
             :title="$t('hero.github')"
           >
             <i class="bi bi-github"></i>
@@ -250,14 +159,13 @@ onUnmounted(() => {
           <a
             href="https://t.me/exi666"
             target="_blank"
-            class="text-3xl hover:text-accent transition-all"
+            class="hover:text-accent transition-all rounded-full leading-0 text-3xl"
             :title="$t('hero.telegram')"
           >
             <i class="bi bi-telegram"></i>
           </a>
         </div>
       </div>
-      <!-- <IconOrbit class="ml-auto h-24 w-auto hidden sm:block" /> -->
     </section>
     <section id="about" class="flex flex-col md:flex-row gap-4">
       <div class="flex flex-col gap-2 flex-1">
@@ -561,7 +469,7 @@ onUnmounted(() => {
     >
   </footer>
   <transition name="fade">
-    <div v-if="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2" tabindex="-1">
+    <div v-show="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
       <button
         type="button"
         :title="$t('to_top')"
@@ -580,7 +488,7 @@ onUnmounted(() => {
       <button
         type="button"
         @click="toggleTheme()"
-        :title="theme == 'light' ? $t('theme.dark') : $t('theme.light')"
+        :title="isDarkTheme ? $t('theme.dark') : $t('theme.light')"
         :aria-label="$t('theme.switch')"
         class="py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black/10 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-shark-900 text-yellow-500 dark:text-sky-100"
       >

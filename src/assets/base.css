@@ -9,7 +9,7 @@ html.dark {
   color: theme(colors.white / 90%);
 }
 
-#app {
+body {
   padding-right: var(--scrollbar-width, 0);
 }
 
@@ -20,7 +20,7 @@ a {
 
 button:focus-visible,
 a:focus-visible {
-  @apply ring-2 ring-accent/60 rounded;
+  @apply ring-2 ring-accent/60;
 }
 
 body {
@@ -37,40 +37,6 @@ body {
 
 .dark *::selection {
   background-color: theme(colors.accent / 50%);
-}
-
-.container-md {
-  width: 100%;
-}
-
-@media (min-width: 640px) {
-  .container-md {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container-md {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container-md {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container-md {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container-md {
-    max-width: 1024px;
-  }
 }
 
 .fade-enter-active {
