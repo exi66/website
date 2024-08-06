@@ -1,24 +1,17 @@
 <script setup>
 import { nextTick, ref, onMounted, computed } from 'vue'
 import axios from 'axios'
-
 import { useAppStore } from '@/stores/app'
 import { storeToRefs } from 'pinia'
-
 import { useWindowScroll } from '@vueuse/core'
-const { y: windowY } = useWindowScroll()
-
-const { changeLang, changeTheme, toggleTheme, toggleLang } = useAppStore()
-const { projects, stack, experience, isDarkTheme } = storeToRefs(useAppStore())
-
 import { Laravel, Vue, MySQL, Ubuntu, Tailwind, Docker } from '@/components/icons'
 import SideBar from '@/components/SideBar.vue'
 
-axios.defaults.headers.post = {
-  'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
-}
-const loading = ref(true)
-const header = ref(null)
+const { y: windowY } = useWindowScroll()
+const { changeLang, changeTheme, toggleTheme, toggleLang } = useAppStore()
+const { projects, stack, experience, isDarkTheme } = storeToRefs(useAppStore())
+
+const headerElement = ref(null)
 const projectsElemets = ref({})
 const form = ref({
   name: null,
@@ -32,12 +25,14 @@ const selected = ref(null)
 const offsetY = ref(50)
 const showToTop = computed(() => windowY.value > offsetY.value)
 const search = ref(null)
+
 const getLastProjects = computed(() => {
   return projects.value
     .map((e) => e)
     .reverse()
     .slice(0, 3)
 })
+
 const searchProjects = computed(() => {
   if (!search.value) return projects.value
   return projects.value.filter(
@@ -48,8 +43,9 @@ const searchProjects = computed(() => {
 })
 
 function toTop() {
-  header.value.scrollIntoView({ behavior: 'smooth' })
+  headerElement.value.scrollIntoView({ behavior: 'smooth' })
 }
+
 async function submit() {
   waitResponse.value = true
   try {
@@ -65,6 +61,7 @@ async function submit() {
   }
   waitResponse.value = false
 }
+
 async function toggleSlider(name) {
   openSlider.value = true
   await nextTick()
@@ -78,16 +75,16 @@ function toggleAllSlider() {
   openSlider.value = true
   selected.value = null
 }
+
 onMounted(async () => {
-  offsetY.value = header.value.clientHeight
+  offsetY.value = headerElement.value.clientHeight
   changeTheme()
   await changeLang()
-  loading.value = false
 })
 </script>
 
 <template>
-  <header class="container container-md mx-auto" ref="header">
+  <header class="container container-md mx-auto" ref="headerElement">
     <nav class="p-2 flex flex-row gap-2">
       <a href="/" class="my-auto">
         <img
@@ -169,8 +166,8 @@ onMounted(async () => {
     </section>
     <section id="about" class="flex flex-col md:flex-row gap-4">
       <div class="flex flex-col gap-2 flex-1">
-        <h2 class="uppercase text-black/80 dark:text-white/80">
-          <i class="bi bi-person me-1"></i>{{ $t('about.title1') }}
+        <h2 class="text-xl text-black/80 dark:text-white/80">
+          <i class="bi bi-person me-2"></i>{{ $t('about.title1') }}
         </h2>
         <div
           class="rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 p-2 flex-grow"
@@ -186,8 +183,8 @@ onMounted(async () => {
         </div>
       </div>
       <div class="flex flex-col gap-2 flex-1">
-        <h2 class="uppercase text-black/80 dark:text-white/80">
-          <i class="bi bi-book me-1"></i>{{ $t('about.title2') }}
+        <h2 class="text-xl text-black/80 dark:text-white/80">
+          <i class="bi bi-mortarboard me-2"></i>{{ $t('about.title2') }}
         </h2>
         <div
           class="rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 p-2 flex-grow"
@@ -211,10 +208,10 @@ onMounted(async () => {
       </div>
     </section>
     <section id="experience">
-      <h2 class="uppercase text-black/80 dark:text-white/80">
-        <i class="bi bi-building me-1"></i>{{ $t('experience.title') }}
+      <h2 class="text-xl text-black/80 dark:text-white/80">
+        <i class="bi bi-building me-2"></i>{{ $t('experience.title') }}
       </h2>
-      <ol class="relative mx-5 mt-3">
+      <ol class="relative mx-5 mt-5">
         <li class="pb-8 pl-8 border-l border-accent" v-for="e in experience" :key="e">
           <span
             class="absolute flex items-center justify-center w-8 h-8 -left-4 rounded-full bg-white ring-4 ring-accent/60"
@@ -222,14 +219,12 @@ onMounted(async () => {
             :title="e.company"
           >
           </span>
-          <h3 class="mb-1 text-lg uppercase leading-none">{{ e.job }}</h3>
-          <span
-            class="block mb-3 leading-none text-black/70 dark:text-white/70 text-sm font-normal"
-          >
-            <span v-if="e.company" title="Company name">{{ e.company + ', ' }}</span>
+          <h3 class="mb-1 text-lg leading-none">{{ e.job }}</h3>
+          <span class="block mb-3 text-sm leading-none text-black/70 dark:text-white/70">
+            <span v-if="e.company">{{ e.company + ', ' }}</span>
             <time class="inline-block">{{ e.subtitle }}</time>
           </span>
-          <p class="text-base font-normal text-black/70 dark:text-white/50">
+          <p class="text-black/70 dark:text-white/50">
             {{ e.desctiption }}
           </p>
         </li>
@@ -237,29 +232,18 @@ onMounted(async () => {
           <span
             class="absolute flex items-center justify-center w-8 h-8 -left-4 rounded-full bg-white ring-4 ring-accent/60"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              class="bi bi-question text-black"
-              viewBox="0 0 16 16"
-            >
-              <path
-                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z"
-              />
-            </svg>
+            <span class="text-black font-bold">?</span>
           </span>
-          <h3 class="mb-1 text-lg uppercase leading-none">...</h3>
-          <span
-            class="block mb-3 leading-none text-black/70 dark:text-white/50 text-sm font-normal"
-          >
-            <span>{{ $t('experience.last') }}</span>
+          <h3 class="mb-1 text-lg leading-none">...</h3>
+          <span class="block mb-3 text-sm leading-none text-black/70 dark:text-white/50">
+            {{ $t('experience.last') }}
           </span>
         </li>
       </ol>
     </section>
     <section id="stack" class="flex flex-col gap-2">
-      <h2 class="uppercase text-black/80 dark:text-white/80">
-        <i class="bi bi-code-slash me-1"></i>{{ $t('stack.title') }}
+      <h2 class="text-xl text-black/80 dark:text-white/80">
+        <i class="bi bi-code-slash me-2"></i>{{ $t('stack.title') }}
       </h2>
       <div
         class="rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 p-2"
@@ -267,7 +251,7 @@ onMounted(async () => {
         <div class="hidden lg:flex flex-row">
           <div class="flex flex-col gap-2">
             <div class="my-auto flex" v-for="t in stack" :key="t">
-              <span class="uppercase">{{ t.label }}</span>
+              <span class="opacity-80">{{ t.label }}</span>
               <div
                 class="mx-2 flex-grow border-t min-w-4 my-auto dark:border-white/70 border-black/70"
               ></div>
@@ -288,26 +272,26 @@ onMounted(async () => {
         </div>
         <div class="flex flex-col flex-grow lg:hidden gap-2">
           <fieldset
-            class="flex flex-row py-2 border rounded-md dark:border-white/70 border-black/70"
+            class="flex flex-row gap-2 p-2 border rounded-md dark:border-white/70 border-black/70"
             v-for="(t, index) in stack"
             :key="t"
           >
             <div
-              class="text-center rounded mx-2 p-2 flex-1 flex bg-accent bg-opacity-[--opacity]"
+              class="text-center rounded p-2 flex-1 flex bg-accent bg-opacity-[--opacity]"
               v-for="f in t.techs"
               :key="f"
               :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'"
             >
               <span class="my-auto mx-auto">{{ f }}</span>
             </div>
-            <legend class="mx-auto px-2 uppercase">{{ t.label }}</legend>
+            <legend class="mx-auto px-2 opacity-90">{{ t.label }}</legend>
           </fieldset>
         </div>
       </div>
     </section>
     <section id="projects" class="flex flex-col gap-2">
-      <h2 class="uppercase text-black/80 dark:text-white/80">
-        <i class="bi bi-terminal me-1"></i>{{ $t('projects.title') }}
+      <h2 class="text-xl text-black/80 dark:text-white/80">
+        <i class="bi bi-terminal me-2"></i>{{ $t('projects.title') }}
       </h2>
       <div
         class="rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 flex flex-col"
@@ -336,8 +320,8 @@ onMounted(async () => {
       </div>
     </section>
     <section id="contacts" class="flex flex-col gap-2">
-      <h2 class="uppercase text-black/80 dark:text-white/80">
-        <i class="bi bi-envelope me-1"></i>{{ $t('contacts.title') }}
+      <h2 class="text-xl text-black/80 dark:text-white/80">
+        <i class="bi bi-envelope me-2"></i>{{ $t('contacts.title') }}
       </h2>
       <div
         class="rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 p-2"
@@ -405,7 +389,7 @@ onMounted(async () => {
             </transition>
             <form class="flex flex-row flex-wrap gap-2" @submit.prevent="submit">
               <div class="flex-1 mt-2">
-                <label class="uppercase text-sm dark:text-white/80 text-black/80"
+                <label class="text-sm dark:text-white/80 text-black/80"
                   >{{ $t('contacts.name') }}
                   <span class="text-red-500" :title="$t('contacts.required')">*</span>
                   <input
@@ -419,7 +403,7 @@ onMounted(async () => {
                 </label>
               </div>
               <div class="flex-1 mt-2">
-                <label class="uppercase text-sm dark:text-white/80 text-black/80"
+                <label class="text-sm dark:text-white/80 text-black/80"
                   >{{ $t('contacts.email') }}
                   <span class="text-red-500" :title="$t('contacts.required')">*</span>
                   <input
@@ -433,7 +417,7 @@ onMounted(async () => {
                 </label>
               </div>
               <div class="w-full">
-                <label class="uppercase text-sm dark:text-white/80 text-black/80"
+                <label class="text-sm dark:text-white/80 text-black/80"
                   >{{ $t('contacts.message') }}
                   <span class="text-red-500" :title="$t('contacts.required')">*</span>
                   <textarea
@@ -469,15 +453,11 @@ onMounted(async () => {
     >
   </footer>
   <transition name="fade">
-    <div v-show="showToTop" class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
-      <button
-        type="button"
-        :title="$t('to_top')"
-        @click="toTop()"
-        class="py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black/10 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-shark-900"
-      >
-        <i class="bi bi-chevron-up"></i>
-      </button>
+    <div
+      v-show="showToTop"
+      role="dialog"
+      class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2"
+    >
       <button
         type="button"
         @click="toggleLang()"
@@ -494,6 +474,14 @@ onMounted(async () => {
       >
         <i class="bi bi-moon-fill hidden dark:inline-block"></i>
         <i class="bi bi-brightness-high-fill inline-block dark:hidden"></i>
+      </button>
+      <button
+        type="button"
+        :title="$t('to_top')"
+        @click="toTop()"
+        class="py-2 px-4 transition-all leading-none rounded bg-transparent border bg-white dark:bg-shark-950 border-black/10 dark:border-white/10 hover:bg-gray-100 dark:hover:bg-shark-900"
+      >
+        <i class="bi bi-chevron-up"></i>
       </button>
     </div>
   </transition>
