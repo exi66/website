@@ -15,8 +15,8 @@ $_SESSION['__token'] = md5(uniqid(mt_rand(), true));
   <meta name="copyright" content="exi66" />
   <meta name="robots" content="index, follow" />
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="./assets/main.css?v26" />
-  <script defer type="module" src="./assets/main.js?v26"></script>
+  <link rel="stylesheet" href="./assets/main.css?v27" />
+  <script defer type="module" src="./assets/main.js?v27"></script>
   <title>About me</title>
 </head>
 
