@@ -175,9 +175,12 @@ onMounted(async () => {
           <p class="text-black/70 dark:text-white/70">
             {{ $t('about.summary_text1') }}
             <span class="text-accent font-semibold">{{ $t('about.summary_tech1') }}</span
-            >, <span class="text-accent font-semibold">{{ $t('about.summary_tech2') }}</span>
-            {{ $t('and') }}
+            >, <span class="text-accent font-semibold">{{ $t('about.summary_tech2') }}</span
+            >,
             <span class="text-accent font-semibold">{{ $t('about.summary_tech3') }}</span>
+            {{ $t('and') }}
+            <span class="text-accent font-semibold">{{ $t('about.summary_tech4') }}</span
+            >.
             {{ $t('about.summary_text2') }}
           </p>
         </div>
@@ -539,7 +542,7 @@ onMounted(async () => {
             class="h-16 w-16 object-cover rounded bg-black cursor-zoom-in hover:scale-110 transition duration-150"
           />
         </viewer>
-        <span class="mb-1 mt-3 block uppercase font-semibold"
+        <span class="mb-1 mt-3 block text-lg text-black/80 dark:text-white/80"
           >{{ $t('projects.categories') }}:</span
         >
         <div class="flex flex-row flex-wrap gap-2">
@@ -552,7 +555,9 @@ onMounted(async () => {
             {{ c }}
           </span>
         </div>
-        <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.stack') }}:</span>
+        <span class="mb-1 mt-3 block text-lg text-black/80 dark:text-white/80"
+          >{{ $t('projects.stack') }}:</span
+        >
         <div class="flex flex-row flex-wrap gap-2">
           <span
             v-for="c in p.tech"
@@ -563,7 +568,9 @@ onMounted(async () => {
             {{ c }}
           </span>
         </div>
-        <span class="mb-1 mt-3 block uppercase font-semibold">{{ $t('projects.details') }}:</span>
+        <span class="mb-1 mt-3 block text-lg text-black/80 dark:text-white/80"
+          >{{ $t('projects.details') }}:</span
+        >
         <p class="text-black/70 dark:text-white/70">{{ p.description }}. {{ p.details }}</p>
       </div>
     </div>

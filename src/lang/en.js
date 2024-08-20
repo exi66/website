@@ -21,12 +21,13 @@ export default {
     title1: 'Summary',
     title2: 'Education',
     summary_text1:
-      'Highly motivated junior developer with 1 years of experience in developing and maintaining web applications. Proficient in',
+      'Highly motivated developer with two years of experience in creating and supporting web applications. I have a wide range of technologies, including',
     summary_tech1: 'Vue',
     summary_tech2: 'Laravel',
-    summary_tech3: 'SQL',
+    summary_tech3: 'Express.js',
+    summary_tech4: 'SQL',
     summary_text2:
-      ', with a strong understanding of front-end and back-end web development. I have skills in creating adaptive and user-friendly interfaces, as well as troubleshooting and debugging code. I strive to stay up to date with the latest trends and best practices in web development. Looking for an opportunity to apply and expand my skills as part of a dynamic development team.',
+      'I have strong analytical skills, a creative approach to problem solving and excellent communication skills. I strive for continuous improvement and mastering new technologies to achieve the best results.',
     education_text1: "I studied at the Kuban State University with a Bachelor's degree in",
     education_degree: 'Software Engineering and Information Systems Management',
     education_text2: 'As part of my studies, I used technologies: ',
