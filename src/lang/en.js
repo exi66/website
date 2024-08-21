@@ -27,7 +27,7 @@ export default {
     summary_tech3: 'Express.js',
     summary_tech4: 'SQL',
     summary_text2:
-      'I have strong analytical skills, a creative approach to problem solving and excellent communication skills. I strive for continuous improvement and mastering new technologies to achieve the best results.',
+      'I have strong analytical skills, a creative approach to problem solving and excellent communication skills. I strive for continuous improvement and mastering new technologies to achieve the best results. Looking for an opportunity to apply and expand my skills as part of a dynamic development team.',
     education_text1: "I studied at the Kuban State University with a Bachelor's degree in",
     education_degree: 'Software Engineering and Information Systems Management',
     education_text2: 'As part of my studies, I used technologies: ',
