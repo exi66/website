@@ -6,11 +6,12 @@ services:
     volumes:
       - app:/app
       - ./nginx:/etc/nginx/conf.d
-    links:
-      - php
   php:
     build: .
+    container_name: php-fpm
     volumes:
       - app:/app
+    expose:
+      - 9000
 volumes:
   app:
