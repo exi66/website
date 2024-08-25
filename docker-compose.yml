@@ -6,7 +6,9 @@ services:
     volumes:
       - app:/app
       - ./nginx:/etc/nginx/conf.d
-  php:
+    links:
+      - php-fpm
+  php-fpm:
     build: .
     container_name: php-fpm
     volumes:
