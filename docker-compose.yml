@@ -1,7 +1,7 @@
 services:
   nginx:
     image: nginx:alpine
-    expose:
+    ports:
       - 80
     volumes:
       - app:/app
