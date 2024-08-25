@@ -6,14 +6,16 @@ services:
     volumes:
       - app:/app
       - ./nginx:/etc/nginx/conf.d
-    links:
-      - php-fpm
-  php-fpm:
+    networks:
+      - dokploy-network
+  php:
     build: .
-    container_name: php-fpm
     volumes:
       - app:/app
-    expose:
-      - 9000
+    networks:
+      - dokploy-network
 volumes:
   app:
+networks:
+  dokploy-network:
+    external: true
