@@ -1,10 +1,11 @@
 services:
   nginx:
-    build: ./nginx/
+    image: nginx:alpine
     ports:
       - 8888:80
     volumes:
       - app:/app
+      - ./nginx:/etc/nginx/conf.d
     links:
       - php
   php:
