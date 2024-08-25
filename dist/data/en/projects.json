@@ -1,0 +1,66 @@
+[
+  {
+    "name": "mcgl.polypha.ga",
+    "description": "Simple game project website",
+    "details": "The site consists of four pages: the main page, a page with a search for leaked data, a page with the history of the project in the form of a timeline, and a page with hacks and scripts for the game. The search is carried out at the level of sql queries. Hacks page has authorization to access content.",
+    "thumbnail": "/images/projects/mcgl.polypha.ga.webp",
+    "category": ["backend", "frontend"],
+    "images": [
+      "/images/projects/mcgl.polypha.ga/1.webp",
+      "/images/projects/mcgl.polypha.ga/2.webp",
+      "/images/projects/mcgl.polypha.ga/3.webp"
+    ],
+    "tech": ["php", "laravel", "mysql"]
+  },
+  {
+    "name": "helper-bot",
+    "description": "Discord bot for answering popular questions. Includes web-ui for editing bot answers",
+    "thumbnail": "/images/projects/helper-bot.webp",
+    "category": ["backend", "frontend", "others"],
+    "images": [
+      "/images/projects/helper-bot.webp",
+      "/images/projects/helper-bot/1.webp",
+      "/images/projects/helper-bot/2.webp"
+    ],
+    "tech": ["node.js", "exrpess.js", "discord.js"]
+  },
+  {
+    "name": "shiel-bot",
+    "description": "Discord bot for web-scraping black desert market registration queue",
+    "details": "Data is obtained by accessing the web marketplace API and scraping the web page (for coupons). Includes a web interface for easy setup",
+    "url": "https://github.com/exi66/shiel-bot",
+    "thumbnail": "/images/projects/shiel-bot.webp",
+    "category": ["backend", "others"],
+    "images": [
+      "/images/projects/shiel-bot/1.webp",
+      "/images/projects/shiel-bot/2.webp",
+      "/images/projects/shiel-bot/3.webp",
+      "/images/projects/shiel-bot/4.webp"
+    ],
+    "tech": ["express.js", "vue.js", "discord.js", "sapphirejs"]
+  },
+  {
+    "name": "tcp-servers-status",
+    "description": "Down detector for any servers",
+    "details": "A small service and web application that pings tcp ports and maintains latency statistics with subsequent visualization in charts.js",
+    "url": "https://github.com/exi66/tcp-servers-status",
+    "thumbnail": "/images/projects/tcp-servers-status.webp",
+    "category": ["backend", "frontend", "others"],
+    "images": [
+      "/images/projects/tcp-servers-status.webp",
+      "/images/projects/tcp-servers-status/1.webp",
+      "/images/projects/tcp-servers-status/2.webp"
+    ],
+    "tech": ["node.js", "vue.js", "chart.js"]
+  },
+  {
+    "name": "bdo-sieges",
+    "description": "Interactive map for the planning stage of sieges in Black Desert Online",
+    "details": "Allows you to place various objects on the game map to visualize the siege process.",
+    "url": "https://github.com/exi66/bdo-sieges",
+    "thumbnail": "/images/projects/bdo-sieges.webp",
+    "category": ["frontend"],
+    "images": ["/images/projects/bdo-sieges/1.webp", "/images/projects/bdo-sieges/2.webp"],
+    "tech": ["vue.js", "leafletjs"]
+  }
+]

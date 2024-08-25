@@ -1,0 +1,15 @@
+services:
+  nginx:
+    build: ./nginx/
+    ports:
+      - 8888:80
+    volumes:
+      - app:/app
+    links:
+      - php
+  php:
+    build: .
+    volumes:
+      - app:/app
+volumes:
+  app:
