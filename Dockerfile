@@ -19,6 +19,8 @@ WORKDIR /app/
 
 COPY --from=builder /form/ ./form/
 
+COPY .env ./form/.env
+
 COPY ./dist .
 
 CMD ["php-fpm"]
