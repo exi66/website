@@ -1,6 +1,4 @@
 <script setup>
-import {navigationMenuTriggerStyle} from '@/components/ui/navigation-menu'
-
 const colorMode = useColorMode();
 const toggleDarkTheme = () => {
   if (colorMode.preference === "light") {
@@ -33,13 +31,19 @@ const toTop = () => {
       </a>
       <ul class="w-full hidden md:flex">
         <li>
-          <a :class="navigationMenuTriggerStyle()" :href="localePath('/')">{{ $t("menu.home") }}</a>
+          <Button as="a" variant="link" class="text-muted-foreground hover:no-underline hover:text-foreground"
+                  :href="localePath('/')">{{ $t("menu.home") }}
+          </Button>
         </li>
         <li>
-          <a :class="navigationMenuTriggerStyle()" :href="localePath('/projects')">{{ $t("menu.projects") }}</a>
+          <Button as="a" variant="link" class="text-muted-foreground hover:no-underline hover:text-foreground"
+                  :href="localePath('/projects')">{{ $t("menu.projects") }}
+          </Button>
         </li>
         <li>
-          <a :class="navigationMenuTriggerStyle()" :href="localePath('/blog')">{{ $t("menu.blog") }}</a>
+          <Button as="a" variant="link" class="text-muted-foreground hover:no-underline hover:text-foreground"
+                  :href="localePath('/blog')">{{ $t("menu.blog") }}
+          </Button>
         </li>
       </ul>
       <div class="ml-auto flex flex-row gap-2">
