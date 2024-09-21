@@ -12,6 +12,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "nuxt-lucide-icons",
     "nuxt-csurf",
+    "@nuxt/image",
   ],
   csurf: {
     https: false, // default true if in production

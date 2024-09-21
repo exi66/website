@@ -32,15 +32,17 @@
             <LucideExternalLink class="h-4 w-4 ms-1"/>
           </Button>
         </div>
-        <viewer v-if="doc.navigation.images" :images="doc.navigation.images"
-                :options="{ toolbar: false, title: false, button: false }" class="flex flex-row gap-4">
-          <div class="h-16" v-for="src in doc.navigation.images" :key="src">
-            <img
-              :src="src"
-              class="h-16 min-w-16 w-auto object-cover rounded-md bg-card border cursor-zoom-in hover:scale-110 transition-transform"
-            />
-          </div>
-        </viewer>
+        <ClientOnly>
+          <viewer v-if="doc.navigation.images" :images="doc.navigation.images"
+                  :options="{ toolbar: false, title: false, button: false }" class="flex flex-row gap-4">
+            <div class="h-16" v-for="src in doc.navigation.images" :key="src">
+              <img
+                :src="src"
+                class="h-16 min-w-16 w-auto object-cover rounded-md bg-card border cursor-zoom-in hover:scale-110 transition-transform"
+              />
+            </div>
+          </viewer>
+        </ClientOnly>
         <div class="markdown">
           <ContentRenderer :value="doc"/>
         </div>
@@ -78,7 +80,8 @@
 
 <script setup>
 const localePath = useLocalePath();
-
-import 'viewerjs/dist/viewer.css'
-import {component as Viewer} from "v-viewer"
 </script>
+
+<style scoped>
+@import 'viewerjs/dist/viewer.css';
+</style>

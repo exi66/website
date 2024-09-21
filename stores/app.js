@@ -7,17 +7,17 @@ export const useAppStore = defineStore("app", () => {
   const {locale} = useI18n();
   const localePath = useLocalePath();
 
-  function onChangeLangIndex() {
-    fetchExperience().then();
-    fetchStack().then();
+  async function onChangeLangIndex() {
+    await fetchExperience();
+    await fetchStack();
   }
 
-  function onChangeLangBlog() {
-    fetchBlogs().then();
+  async function onChangeLangBlog() {
+    await fetchBlogs();
   }
 
-  function onChangeLangProjects() {
-    fetchProjects().then();
+  async function onChangeLangProjects() {
+    await fetchProjects();
   }
 
   const __experience = reactive({
