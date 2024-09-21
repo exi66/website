@@ -245,47 +245,47 @@
           <fieldset
             class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
           >
-            <div
-              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-              style="--opacity: 10%"
-            ></div>
-            <div
-              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-              style="--opacity: 10%"
-            ></div>
-            <div
-              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-              style="--opacity: 10%"
-            ></div>
             <legend class="mx-auto px-2">
               <Skeleton class="h-6 w-32 rounded-full bg-foreground/80"/>
             </legend>
+            <div
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 10%"
+            ></div>
+            <div
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 10%"
+            ></div>
+            <div
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 10%"
+            ></div>
           </fieldset>
           <fieldset
             class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
           >
-            <div
-              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-              style="--opacity: 20%"
-            ></div>
-            <div
-              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-              style="--opacity: 20%"
-            ></div>
             <legend class="mx-auto px-2">
               <Skeleton class="h-6 w-20 rounded-full bg-foreground/80"/>
             </legend>
+            <div
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 20%"
+            ></div>
+            <div
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 20%"
+            ></div>
           </fieldset>
           <fieldset
             class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
           >
+            <legend class="mx-auto px-2">
+              <Skeleton class="h-6 w-48 rounded-full bg-foreground/80"/>
+            </legend>
             <div
               class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
               style="--opacity: 30%"
             ></div>
-            <legend class="mx-auto px-2">
-              <Skeleton class="h-6 w-48 rounded-full bg-foreground/80"/>
-            </legend>
           </fieldset>
         </div>
       </div>
@@ -322,6 +322,7 @@
             v-for="(t, index) in stack"
             :key="t"
           >
+            <legend class="mx-auto px-2">{{ t.label }}</legend>
             <div
               class="text-center rounded p-2 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
               v-for="f in t.techs"
@@ -330,7 +331,6 @@
             >
               <span class="my-auto mx-auto">{{ f }}</span>
             </div>
-            <legend class="mx-auto px-2">{{ t.label }}</legend>
           </fieldset>
         </div>
       </div>

@@ -80,8 +80,9 @@
 
 <script setup>
 const localePath = useLocalePath();
-</script>
+const {t} = useI18n();
 
-<style scoped>
-@import 'viewerjs/dist/viewer.css';
-</style>
+useHead({
+  title: t("menu.projects"),
+});
+</script>
