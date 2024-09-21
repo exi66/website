@@ -59,7 +59,7 @@
         </div>
       </div>
     </section>
-    <section id="summary" class="-scroll-m-16">
+    <section id="summary" class="scroll-m-16">
       <h2 class="text-xl flex gap-1 mb-2">
         <span class="w-7 h-7 flex"
         ><LucideUserCircle class="w-6 h-6 m-auto"/></span
@@ -92,7 +92,7 @@
         </p>
       </div>
     </section>
-    <section id="education">
+    <section id="education" class="scroll-m-16">
       <h2 class="text-xl flex gap-1 mb-2">
         <span class="w-7 h-7 flex"
         ><LucideGraduationCap class="w-6 h-6 m-auto"/></span
@@ -115,7 +115,7 @@
         </p>
       </div>
     </section>
-    <section id="experience" class="anch">
+    <section id="experience" class="scroll-m-16">
       <h2 class="text-xl flex gap-1 mb-2">
         <span class="w-7 h-7 flex"
         ><LucideBriefcaseBusiness class="w-6 h-6 m-auto"/></span
@@ -396,7 +396,7 @@
           </div>
           <form
             id="callback-form"
-            class="grid grid-cols-2 pt-2 gap-2"
+            class="grid grid-cols-2 pt-2 gap-2 scroll-m-16"
             @submit.prevent="submit"
           >
             <div>

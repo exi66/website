@@ -1,6 +1,6 @@
-# Nuxt 3 Minimal Starter
+# website
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+My [portfolio](https://me.exi.moe/) site. This version is written in Nuxt.
 
 ## Setup
 
