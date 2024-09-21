@@ -28,9 +28,17 @@ export const useAppStore = defineStore("app", () => {
   async function fetchExperience() {
     if (!__experience[locale.value]) {
       loadingExperience.value = true;
-      const res = await axios.get(`/data/${locale.value}/experience.json`);
-      __experience[locale.value] = res.data;
-      loadingExperience.value = false;
+      queryContent("/data/" + locale.value)
+        .where({
+          _type: "json",
+          _file:
+            `data/${locale.value}/experience.json`
+        })
+        .findOne()
+        .then((data) => {
+          __experience[locale.value] = data.body;
+          loadingExperience.value = false;
+        });
     }
   }
 
@@ -42,9 +50,17 @@ export const useAppStore = defineStore("app", () => {
   async function fetchStack() {
     if (!__stack[locale.value]) {
       loadingStack.value = true;
-      const res = await axios.get(`/data/${locale.value}/stack.json`);
-      __stack[locale.value] = res.data;
-      loadingStack.value = false;
+      queryContent("/data/" + locale.value)
+        .where({
+          _type: "json",
+          _file:
+            `data/${locale.value}/stack.json`
+        })
+        .findOne()
+        .then((data) => {
+          __stack[locale.value] = data.body;
+          loadingStack.value = false;
+        });
     }
   }
 
