@@ -3,9 +3,9 @@ navigation:
   author: 'Exi'
   publishedAt: '2024-09-20'
   tags: [ 'ExpressJs', 'VueJs', 'DiscordJs', 'SapphireJs', 'SQLite', 'Docker' ]
-source: 'https://github.com/exi66/mcgl-data-api/'
-demo: 'https://mcgl.exi.moe/'
-images: [ '/images/projects/mcgl-data-api/1.webp' ]
+  source: 'https://github.com/exi66/mcgl-data-api/'
+  demo: 'https://mcgl.exi.moe/'
+  images: [ '/images/projects/mcgl-data-api/1.webp' ]
 ---
 
 # mcgl-data-api

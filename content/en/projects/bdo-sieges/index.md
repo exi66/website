@@ -3,10 +3,10 @@ navigation:
   author: 'Exi'
   publishedAt: '2024-04-20'
   tags: [ 'VueJs', 'LeafletJs', 'Docker' ]
-source: 'https://github.com/exi66/bdo-sieges'
-demo: 'https://sieges.exi.moe/'
-images: [ '/images/projects/bdo-sieges/1.webp', '/images/projects/bdo-sieges/2.webp' ]
-avatar: '/images/projects/bdo-sieges/index.webp'
+  source: 'https://github.com/exi66/bdo-sieges'
+  demo: 'https://sieges.exi.moe/'
+  images: [ '/images/projects/bdo-sieges/1.webp', '/images/projects/bdo-sieges/2.webp' ]
+  avatar: '/images/projects/bdo-sieges/index.webp'
 ---
 
 # bdo-sieges

@@ -27,10 +27,10 @@ const toTop = () => {
 <template>
   <header class="border-b sticky top-0 left-0 bg-background">
     <div class="flex justify-start container max-w-screen-xl py-2">
-      <div class="h-9 w-20 flex mr-4">
+      <a class="h-9 w-20 flex mr-4" :href="localePath('/')">
         <img class="h-5 w-20 mt-auto mb-2.5 bg-transparent rounded-md transition-transform hover:-rotate-6"
              src="/images/favicon.svg" alt="site favicon"/>
-      </div>
+      </a>
       <ul class="w-full hidden md:flex">
         <li>
           <a :class="navigationMenuTriggerStyle()" :href="localePath('/')">{{ $t("menu.home") }}</a>
@@ -44,50 +44,54 @@ const toTop = () => {
       </ul>
       <div class="ml-auto flex flex-row gap-2">
         <div>
-          <DropdownMenu>
-            <DropdownMenuTrigger as-child>
-              <Button variant="ghost" size="icon">{{ currentLocale.emoji }}</Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent class="min-w-0">
-              <DropdownMenuItem
+          <ClientOnly>
+            <DropdownMenu>
+              <DropdownMenuTrigger as-child>
+                <Button variant="ghost" size="icon">{{ currentLocale.emoji }}</Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="min-w-0">
+                <DropdownMenuItem
                   v-for="__locale in locales"
                   :key="__locale.code"
                   as-child
-              >
-                <NuxtLink :to="switchLocalePath(__locale.code)">{{ __locale.emoji }} {{ __locale.name }}</NuxtLink>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                >
+                  <NuxtLink :to="switchLocalePath(__locale.code)">{{ __locale.emoji }} {{ __locale.name }}</NuxtLink>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ClientOnly>
         </div>
         <Button size="icon" variant="ghost" @click="toggleDarkTheme">
           <LucideMoon class="dark:hidden w-4 h-4"/>
           <LucideSun class="dark:inline hidden w-4 h-4"/>
         </Button>
         <div class="block md:hidden">
-          <DropdownMenu>
-            <DropdownMenuTrigger as-child>
-              <Button variant="ghost" size="icon">
-                <LucideMenu clas="w-4 h-4"/>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent class="min-w-0">
-              <NuxtLink :href="localePath('/')">
-                <DropdownMenuItem>
-                  {{ $t("menu.home") }}
-                </DropdownMenuItem>
-              </NuxtLink>
-              <NuxtLink :href="localePath('/projects')">
-                <DropdownMenuItem>
-                  {{ $t("menu.projects") }}
-                </DropdownMenuItem>
-              </NuxtLink>
-              <NuxtLink :href="localePath('/blog')">
-                <DropdownMenuItem>
-                  {{ $t("menu.blog") }}
-                </DropdownMenuItem>
-              </NuxtLink>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <ClientOnly>
+            <DropdownMenu>
+              <DropdownMenuTrigger as-child>
+                <Button variant="ghost" size="icon">
+                  <LucideMenu clas="w-4 h-4"/>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent class="min-w-0">
+                <NuxtLink :href="localePath('/')">
+                  <DropdownMenuItem>
+                    {{ $t("menu.home") }}
+                  </DropdownMenuItem>
+                </NuxtLink>
+                <NuxtLink :href="localePath('/projects')">
+                  <DropdownMenuItem>
+                    {{ $t("menu.projects") }}
+                  </DropdownMenuItem>
+                </NuxtLink>
+                <NuxtLink :href="localePath('/blog')">
+                  <DropdownMenuItem>
+                    {{ $t("menu.blog") }}
+                  </DropdownMenuItem>
+                </NuxtLink>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </ClientOnly>
         </div>
       </div>
     </div>
@@ -97,18 +101,18 @@ const toTop = () => {
   </main>
   <footer class="flex flex-col my-4 gap-1">
     <img
-        class="my-auto h-5 w-auto"
-        alt="favicon"
-        src="/images/favicon.svg"
-        title="by exi66"
+      class="my-auto h-5 w-auto"
+      alt="favicon"
+      src="/images/favicon.svg"
+      title="by exi66"
     />
     <small class="mx-auto text-muted-foreground">© {{ new Date().getFullYear() }}</small>
   </footer>
   <transition name="fade">
     <div
-        v-show="windowY > 100"
-        role="dialog"
-        class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
+      v-show="windowY > 100"
+      role="dialog"
+      class="fixed bottom-0 right-0 z-10 p-4 flex flex-row gap-2">
       <Button @click="toTop()" :title="$t('menu.scroll_to_top')">
         <LucideChevronUp/>
       </Button>

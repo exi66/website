@@ -33,25 +33,25 @@
         </h1>
         <div class="flex flex-row gap-2">
           <Button
-              variant="ghost"
-              size="icon"
-              as="a"
-              href="https://github.com/exi66"
-              target="_blank"
-              :title="$t('hero.github')"
-              class="h-auto w-auto p-2 rounded-full hover:bg-inherit hover:text-primary"
+            variant="ghost"
+            size="icon"
+            as="a"
+            href="https://github.com/exi66"
+            target="_blank"
+            :title="$t('hero.github')"
+            class="h-auto w-auto p-2 rounded-full hover:bg-inherit hover:text-primary"
           >
             <LucideGithub class="w-7 h-7"
             />
           </Button>
           <Button
-              variant="ghost"
-              size="icon"
-              as="a"
-              href="https://t.me/exi666"
-              target="_blank"
-              :title="$t('hero.telegram')"
-              class="h-auto w-auto p-2 rounded-full hover:bg-inherit hover:text-primary"
+            variant="ghost"
+            size="icon"
+            as="a"
+            href="https://t.me/exi666"
+            target="_blank"
+            :title="$t('hero.telegram')"
+            class="h-auto w-auto p-2 rounded-full hover:bg-inherit hover:text-primary"
           >
             <LucideMessageCircleMore class="w-7 h-7"
             />
@@ -122,16 +122,16 @@
         >{{ $t("experience.title") }}
       </h2>
       <ol
-          class="relative mx-5 my-3 -z-10"
-          v-if="loading || experience.length < 1"
+        class="relative mx-5 my-3 -z-10"
+        v-if="loading || experience.length < 1"
       >
         <li
-            class="pb-8 pl-8 border-l border-transparent"
-            v-for="e in 3"
-            :key="e"
+          class="pb-8 pl-8 border-l border-transparent"
+          v-for="e in 3"
+          :key="e"
         >
           <Skeleton
-              class="absolute flex items-center justify-center w-8 h-8 -left-4 rounded-full bg-white ring-4 ring-ring/60"
+            class="absolute flex items-center justify-center w-8 h-8 -left-4 rounded-full bg-white ring-4 ring-ring/60"
           />
           <Skeleton class="mb-1 rounded-full h-4 p-0.5 w-32"/>
           <Skeleton class="mb-3 h-3 p-0.5 rounded-full w-48"/>
@@ -140,14 +140,14 @@
       </ol>
       <ol class="relative mx-5 my-3 -z-10" v-else>
         <li
-            class="pb-8 pl-8 border-l border-primary"
-            v-for="e in experience"
-            :key="e"
+          class="pb-8 pl-8 border-l border-primary"
+          v-for="e in experience"
+          :key="e"
         >
           <span
-              class="absolute flex items-center justify-center w-8 h-8 leading-none -left-4 rounded-full bg-white ring-4 ring-ring/60"
-              v-html="e.icon"
-              :title="e.company"
+            class="absolute flex items-center justify-center w-8 h-8 leading-none -left-4 rounded-full bg-white ring-4 ring-ring/60"
+            v-html="e.icon"
+            :title="e.company"
           >
           </span>
           <h3 class="mb-1 text-lg leading-none">{{ e.job }}</h3>
@@ -161,7 +161,7 @@
         </li>
         <li class="pl-8 border-l border-transparent">
           <span
-              class="absolute flex items-center justify-center w-8 h-8 -left-4 rounded-full bg-white ring-4 ring-ring/60"
+            class="absolute flex items-center justify-center w-8 h-8 -left-4 rounded-full bg-white ring-4 ring-ring/60"
           >
             <span class="text-black font-bold">?</span>
           </span>
@@ -178,110 +178,110 @@
         >{{ $t("stack.title") }}
       </h2>
       <div
-          class="rounded border bg-card text-card-foreground p-3"
-          v-if="loading || stack.length < 1"
+        class="rounded border bg-card text-card-foreground p-3"
+        v-if="loading || stack.length < 1"
       >
         <div class="hidden lg:flex flex-row">
           <div class="flex flex-col gap-2">
             <div class="my-auto flex">
               <Skeleton class="w-24 h-6 rounded-full bg-foreground/80"/>
               <div
-                  class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
+                class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
               ></div>
             </div>
             <div class="my-auto flex">
               <Skeleton class="w-32 h-6 rounded-full bg-foreground/80"/>
               <div
-                  class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
+                class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
               ></div>
             </div>
             <div class="my-auto flex">
               <Skeleton class="w-16 h-6 rounded-full bg-foreground/80"/>
               <div
-                  class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
+                class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
               ></div>
             </div>
             <div class="my-auto flex">
               <Skeleton class="w-28 h-6 rounded-full bg-foreground/80"/>
               <div
-                  class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
+                class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
               ></div>
             </div>
           </div>
           <div class="flex flex-col gap-2 flex-grow">
             <div class="flex flex-row gap-2">
               <div
-                  class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
-                  style="--opacity: 10%"
+                class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
+                style="--opacity: 10%"
               ></div>
               <div
-                  class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
-                  style="--opacity: 10%"
+                class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
+                style="--opacity: 10%"
               ></div>
               <div
-                  class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
-                  style="--opacity: 10%"
-              ></div>
-            </div>
-            <div class="flex flex-row gap-2">
-              <div
-                  class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
-                  style="--opacity: 20%"
-              ></div>
-              <div
-                  class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
-                  style="--opacity: 20%"
+                class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
+                style="--opacity: 10%"
               ></div>
             </div>
             <div class="flex flex-row gap-2">
               <div
-                  class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
-                  style="--opacity: 30%"
+                class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
+                style="--opacity: 20%"
+              ></div>
+              <div
+                class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
+                style="--opacity: 20%"
+              ></div>
+            </div>
+            <div class="flex flex-row gap-2">
+              <div
+                class="text-center rounded flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))] animate-pulse h-10"
+                style="--opacity: 30%"
               ></div>
             </div>
           </div>
         </div>
         <div class="flex flex-col flex-grow lg:hidden gap-2">
           <fieldset
-              class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
+            class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
           >
             <div
-                class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                style="--opacity: 10%"
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 10%"
             ></div>
             <div
-                class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                style="--opacity: 10%"
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 10%"
             ></div>
             <div
-                class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                style="--opacity: 10%"
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 10%"
             ></div>
             <legend class="mx-auto px-2">
               <Skeleton class="h-6 w-32 rounded-full bg-foreground/80"/>
             </legend>
           </fieldset>
           <fieldset
-              class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
+            class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
           >
             <div
-                class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                style="--opacity: 20%"
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 20%"
             ></div>
             <div
-                class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                style="--opacity: 20%"
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 20%"
             ></div>
             <legend class="mx-auto px-2">
               <Skeleton class="h-6 w-20 rounded-full bg-foreground/80"/>
             </legend>
           </fieldset>
           <fieldset
-              class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
+            class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground animate-pulse"
           >
             <div
-                class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                style="--opacity: 30%"
+              class="text-center rounded h-10 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              style="--opacity: 30%"
             ></div>
             <legend class="mx-auto px-2">
               <Skeleton class="h-6 w-48 rounded-full bg-foreground/80"/>
@@ -295,21 +295,21 @@
             <div class="my-auto flex" v-for="t in stack" :key="t">
               <span>{{ t.label }}</span>
               <div
-                  class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
+                class="mx-2 flex-grow border-t min-w-4 my-auto border-muted-foreground"
               ></div>
             </div>
           </div>
           <div class="flex flex-col gap-2 flex-grow">
             <div
-                class="flex flex-row gap-2"
-                v-for="(t, index) in stack"
-                :key="t"
+              class="flex flex-row gap-2"
+              v-for="(t, index) in stack"
+              :key="t"
             >
               <div
-                  class="text-center rounded p-2 flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))]"
-                  v-for="f in t.techs"
-                  :key="f"
-                  :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'"
+                class="text-center rounded p-2 flex-1 align-middle bg-[hsl(var(--primary)/var(--opacity))]"
+                v-for="f in t.techs"
+                :key="f"
+                :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'"
               >
                 {{ f }}
               </div>
@@ -318,15 +318,15 @@
         </div>
         <div class="flex flex-col flex-grow lg:hidden gap-2">
           <fieldset
-              class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground"
-              v-for="(t, index) in stack"
-              :key="t"
+            class="flex flex-row gap-2 p-2 border rounded-md border-muted-foreground"
+            v-for="(t, index) in stack"
+            :key="t"
           >
             <div
-                class="text-center rounded p-2 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
-                v-for="f in t.techs"
-                :key="f"
-                :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'"
+              class="text-center rounded p-2 flex-1 flex bg-[hsl(var(--primary)/var(--opacity))]"
+              v-for="f in t.techs"
+              :key="f"
+              :style="'--opacity: ' + Math.min((index + 1) * 10, 100) + '%'"
             >
               <span class="my-auto mx-auto">{{ f }}</span>
             </div>
@@ -336,7 +336,6 @@
       </div>
     </section>
     <section id="contacts">
-      <Toaster/>
       <h2 class="text-xl flex gap-1 mb-2">
         <span class="w-7 h-7 flex"
         ><LucideMailbox class="w-6 h-6 m-auto"/></span
@@ -345,18 +344,18 @@
       <div class="rounded border bg-card text-card-foreground p-3">
         <div class="flex flex-col">
           <div
-              class="flex flex-1 flex-row flex-wrap justify-center gap-6 px-3 mb-3"
+            class="flex flex-1 flex-row flex-wrap justify-center gap-6 px-3 mb-3"
           >
             <div class="flex flex-row">
               <LucideGithub class="my-auto h-8 w-8 me-2"/>
               <div class="flex flex-col my-auto">
                 <span>GitHub</span>
                 <Button
-                    as="a"
-                    variant="link"
-                    href="https://github.com/exi66"
-                    target="_blank"
-                    class="p-0 h-auto justify-start"
+                  as="a"
+                  variant="link"
+                  href="https://github.com/exi66"
+                  target="_blank"
+                  class="p-0 h-auto justify-start"
                 >@exi66
                 </Button>
               </div>
@@ -366,11 +365,11 @@
               <div class="flex flex-col my-auto">
                 <span>Telegram</span>
                 <Button
-                    as="a"
-                    variant="link"
-                    href="https://t.me/exi666"
-                    target="_blank"
-                    class="p-0 h-auto justify-start"
+                  as="a"
+                  variant="link"
+                  href="https://t.me/exi666"
+                  target="_blank"
+                  class="p-0 h-auto justify-start"
                 >@exi666
                 </Button>
               </div>
@@ -380,11 +379,11 @@
               <div class="flex flex-col my-auto">
                 <span>Email</span>
                 <Button
-                    as="a"
-                    variant="link"
-                    href="mailto:me@exi.moe"
-                    target="_blank"
-                    class="p-0 h-auto justify-start"
+                  as="a"
+                  variant="link"
+                  href="mailto:me@exi.moe"
+                  target="_blank"
+                  class="p-0 h-auto justify-start"
                 >me@exi.moe
                 </Button>
               </div>
@@ -396,9 +395,9 @@
             <div class="border-t flex-grow my-auto"></div>
           </div>
           <form
-              id="callback-form"
-              class="grid grid-cols-2 pt-2 gap-2"
-              @submit.prevent="submit"
+            id="callback-form"
+            class="grid grid-cols-2 pt-2 gap-2"
+            @submit.prevent="submit"
           >
             <div>
               <Label for="name"
@@ -408,13 +407,13 @@
                 ></Label
               >
               <Input
-                  id="name"
-                  type="text"
-                  name="name"
-                  v-model="form.name"
-                  autocomplete="on"
-                  class="bg-background text-foreground"
-                  required
+                id="name"
+                type="text"
+                name="name"
+                v-model="form.name"
+                autocomplete="on"
+                class="bg-background text-foreground"
+                required
               />
             </div>
             <div>
@@ -425,13 +424,13 @@
                 ></Label
               >
               <Input
-                  id="email"
-                  type="email"
-                  name="email"
-                  v-model="form.email"
-                  autocomplete="on"
-                  class="bg-background text-foreground"
-                  required
+                id="email"
+                type="email"
+                name="email"
+                v-model="form.email"
+                autocomplete="on"
+                class="bg-background text-foreground"
+                required
               />
             </div>
             <div class="col-span-2">
@@ -442,13 +441,13 @@
                 ></Label
               >
               <Textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  required
-                  autocomplete="off"
-                  class="bg-background text-foreground"
-                  v-model="form.message"
+                id="message"
+                name="message"
+                rows="4"
+                required
+                autocomplete="off"
+                class="bg-background text-foreground"
+                v-model="form.message"
               ></Textarea>
             </div>
             <Button type="submit" class="col-span-2" :disabled="waitResponse">
@@ -458,6 +457,9 @@
         </div>
       </div>
     </section>
+    <ClientOnly>
+      <Toaster/>
+    </ClientOnly>
   </div>
 </template>
 

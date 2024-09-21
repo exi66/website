@@ -79,7 +79,7 @@ export default defineNuxtConfig({
       },
     },
     navigation: {
-      fields: ['author', 'publishedAt', 'tags']
+      fields: ['author', 'publishedAt', 'tags', 'source', 'demo', 'images', 'avatar']
     },
     markdown: {
       anchorLinks: false

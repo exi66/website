@@ -21,23 +21,23 @@
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <div v-if="doc.source || doc.demo" class="flex flex-row gap-4">
-          <Button v-if="doc.source" variant="link" as="a" class="p-0 h-auto" :href="doc.source" target="_blank">
+        <div v-if="doc.navigation.source || doc.navigation.demo" class="flex flex-row gap-4">
+          <Button v-if="doc.navigation.source" variant="link" as="a" class="p-0 h-auto" :href="doc.navigation.source"
+                  target="_blank">
             {{ $t("projects.source") }}
             <LucideExternalLink class="h-4 w-4 ms-1"/>
           </Button>
-          <Button v-if="doc.demo" variant="link" as="a" class="p-0 h-auto" :href="doc.demo" target="_blank">
-            {{ $t("projects.demo") }}
+          <Button v-if="doc.navigation.demo" variant="link" as="a" class="p-0 h-auto" :href="doc.navigation.demo"
+                  target="_blank">{{ $t("projects.demo") }}
             <LucideExternalLink class="h-4 w-4 ms-1"/>
           </Button>
         </div>
-        <viewer v-if="doc.images" :images="doc.images" :options="{ toolbar: false, title: false, button: false }"
-                class="flex flex-row gap-4">
-          <div class="h-16" v-for="src in doc.images"
-               :key="src">
+        <viewer v-if="doc.navigation.images" :images="doc.navigation.images"
+                :options="{ toolbar: false, title: false, button: false }" class="flex flex-row gap-4">
+          <div class="h-16" v-for="src in doc.navigation.images" :key="src">
             <img
-                :src="src"
-                class="h-16 min-w-16 w-auto object-cover rounded-md bg-card border cursor-zoom-in hover:scale-110 transition-transform"
+              :src="src"
+              class="h-16 min-w-16 w-auto object-cover rounded-md bg-card border cursor-zoom-in hover:scale-110 transition-transform"
             />
           </div>
         </viewer>
