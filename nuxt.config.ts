@@ -86,4 +86,8 @@ export default defineNuxtConfig({
       anchorLinks: false
     }
   },
+  sourcemap: {
+    client: true,
+    server: true
+  }
 });
