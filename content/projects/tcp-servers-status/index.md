@@ -1,11 +1,16 @@
 ---
-navigation:
-  author: 'Exi'
-  publishedAt: '2023-04-16'
-  tags: [ 'NodeJs', 'VueJs', 'ChartJs' ]
-  source: 'https://github.com/exi66/tcp-servers-status'
-  images: [ '/images/projects/tcp-servers-status/index.webp', '/images/projects/tcp-servers-status/1.webp', '/images/projects/tcp-servers-status/2.webp' ]
-  avatar: '/images/projects/tcp-servers-status/index.webp'
+created: "2023-04-16"
+tags: ["NodeJs", "VueJs", "ChartJs"]
+source: "https://github.com/exi66/tcp-servers-status"
+images:
+  [
+    "/images/projects/tcp-servers-status/index.webp",
+    "/images/projects/tcp-servers-status/1.webp",
+    "/images/projects/tcp-servers-status/2.webp",
+  ]
+avatar: "/images/projects/tcp-servers-status/index.webp"
+title: "tcp-servers-status"
+description: "Down detector, использующий tcp-ping, для любых серверов"
 ---
 
 # tcp-servers-status

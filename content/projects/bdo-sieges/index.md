@@ -1,12 +1,13 @@
 ---
-navigation:
-  author: 'Exi'
-  publishedAt: '2024-04-20'
-  tags: [ 'VueJs', 'LeafletJs', 'Docker' ]
-  source: 'https://github.com/exi66/bdo-sieges'
-  demo: 'https://sieges.exi.moe/'
-  images: [ '/images/projects/bdo-sieges/1.webp', '/images/projects/bdo-sieges/2.webp' ]
-  avatar: '/images/projects/bdo-sieges/index.webp'
+created: "2024-04-20"
+tags: ["VueJs", "LeafletJs", "Docker"]
+source: "https://github.com/exi66/bdo-sieges"
+demo: "https://sieges.exi.moe/"
+images:
+  ["/images/projects/bdo-sieges/1.webp", "/images/projects/bdo-sieges/2.webp"]
+avatar: "/images/projects/bdo-sieges/index.webp"
+title: "bdo-sieges"
+description: "Интерактивная карта для стадии планирования осад в Black Desert Online"
 ---
 
 # bdo-sieges

@@ -1,12 +1,18 @@
 ---
-navigation:
-  author: 'Exi'
-  publishedAt: '2022-06-07'
-  tags: [ 'ExpressJs', 'VueJs', 'DiscordJs', 'SapphireJs', 'SQLite', 'Docker' ]
-  source: 'https://github.com/exi66/shiel-bot'
-  demo: 'https://market.exi.moe/'
-  images: [ '/images/projects/shiel-bot/1.webp', '/images/projects/shiel-bot/2.webp', '/images/projects/shiel-bot/3.webp', '/images/projects/shiel-bot/4.webp' ]
-  avatar: '/images/projects/shiel-bot/index.webp'
+created: "2022-06-07"
+tags: ["ExpressJs", "VueJs", "DiscordJs", "SapphireJs", "SQLite", "Docker"]
+source: "https://github.com/exi66/shiel-bot"
+demo: "https://market.exi.moe/"
+images:
+  [
+    "/images/projects/shiel-bot/1.webp",
+    "/images/projects/shiel-bot/2.webp",
+    "/images/projects/shiel-bot/3.webp",
+    "/images/projects/shiel-bot/4.webp",
+  ]
+avatar: "/images/projects/shiel-bot/index.webp"
+title: "Аукционист Шил"
+description: "Discord бот для отслеживания аукциона игры Black Desert и последующей интеграцией в мессенджер"
 ---
 
 # Аукционист Шил

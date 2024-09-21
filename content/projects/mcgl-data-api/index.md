@@ -1,11 +1,12 @@
 ---
-navigation:
-  author: 'Exi'
-  publishedAt: '2024-09-20'
-  tags: [ 'ExpressJs', 'VueJs', 'DiscordJs', 'SapphireJs', 'SQLite', 'Docker' ]
-  source: 'https://github.com/exi66/mcgl-data-api/'
-  demo: 'https://mcgl.exi.moe/'
-  images: [ '/images/projects/mcgl-data-api/1.webp' ]
+created: "2024-09-20"
+tags: ["ExpressJs", "VueJs", "DiscordJs", "SapphireJs", "SQLite", "Docker"]
+source: "https://github.com/exi66/mcgl-data-api/"
+demo: "https://mcgl.exi.moe/"
+images: ["/images/projects/mcgl-data-api/1.webp"]
+title: "mcgl-data-api"
+description: "Приложение для преобразования различных, сырых массивов информации в структурированные данные для последующего удобного
+REST-подобного поиска"
 ---
 
 # mcgl-data-api

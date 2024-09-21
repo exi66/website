@@ -1,7 +1,8 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: false,
   compatibilityDate: "2024-04-03",
-  devtools: {enabled: true},
+  devtools: { enabled: true },
   modules: [
     "@nuxtjs/tailwindcss",
     "shadcn-nuxt",
@@ -79,12 +80,9 @@ export default defineNuxtConfig({
         "dark-mode": "github-dark",
       },
     },
-    navigation: {
-      fields: ['author', 'publishedAt', 'tags', 'source', 'demo', 'images', 'avatar']
-    },
     markdown: {
-      anchorLinks: false
-    }
+      anchorLinks: false,
+    },
   },
   // sourcemap: {
   //   client: true,

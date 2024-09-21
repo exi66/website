@@ -1,8 +1,8 @@
 ---
-navigation:
-  author: 'Exi'
-  publishedAt: '2024-09-21'
-  tags: [ 'notes', 'experience' ]
+created: "2024-09-21"
+tags: ["notes", "experience"]
+title: "Experience using dokploy"
+description: "Description of the experience of getting to know and working with dokploy"
 ---
 
 # Experience using dokploy

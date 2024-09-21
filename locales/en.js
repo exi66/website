@@ -74,7 +74,7 @@ export default {
     description: "Applications, services and utilities made by me",
     document_not_found: "Project not found",
     source: "Source",
-    demo: "Demo"
+    demo: "Demo",
   },
   contacts: {
     title: "Contacts",
@@ -92,6 +92,6 @@ export default {
     description: "Personal discoveries, cases, interesting notes",
     not_found: "Nothing found",
     search_placeholder: "Search",
-    document_not_found: "Document not found"
+    document_not_found: "Document not found",
   },
 };

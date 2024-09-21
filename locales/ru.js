@@ -76,7 +76,7 @@ export default {
     description: "Приложения, сервисы и утилиты, сделанные мной",
     document_not_found: "Проект не найден",
     source: "Код проекта",
-    demo: "Демо"
+    demo: "Демо",
   },
   contacts: {
     title: "Контакты",
@@ -94,6 +94,6 @@ export default {
     description: "Личные открытия, кейсы, интересные заметки",
     not_found: "Ничего не найдено",
     search_placeholder: "Поиск",
-    document_not_found: "Документ не найден"
+    document_not_found: "Документ не найден",
   },
 };

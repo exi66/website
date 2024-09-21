@@ -1,10 +1,10 @@
-import {computed, reactive} from "vue";
-import {defineStore} from "pinia";
-import {useI18n, useLocalePath, queryContent, useCsrf} from "#imports";
+import { computed, reactive } from "vue";
+import { defineStore } from "pinia";
+import { useI18n, useLocalePath, queryContent, useCsrf } from "#imports";
 import axios from "axios";
 
 export const useAppStore = defineStore("app", () => {
-  const {locale} = useI18n();
+  const { locale } = useI18n();
   const localePath = useLocalePath();
 
   async function onChangeLangIndex() {
@@ -31,8 +31,7 @@ export const useAppStore = defineStore("app", () => {
       queryContent("/data/" + locale.value)
         .where({
           _type: "json",
-          _file:
-            `data/${locale.value}/experience.json`
+          _file: `data/${locale.value}/experience.json`,
         })
         .findOne()
         .then((data) => {
@@ -53,8 +52,7 @@ export const useAppStore = defineStore("app", () => {
       queryContent("/data/" + locale.value)
         .where({
           _type: "json",
-          _file:
-            `data/${locale.value}/stack.json`
+          _file: `data/${locale.value}/stack.json`,
         })
         .findOne()
         .then((data) => {
@@ -73,22 +71,22 @@ export const useAppStore = defineStore("app", () => {
   const __blogs = reactive({
     ru: null,
     en: null,
-  })
+  });
   const blogs = computed(() => __blogs[locale.value] || []);
-  const loadingBlogs = ref(false)
+  const loadingBlogs = ref(false);
 
   const __projects = reactive({
     ru: null,
     en: null,
-  })
+  });
   const projects = computed(() => __projects[locale.value] || []);
-  const loadingProjects = ref(false)
+  const loadingProjects = ref(false);
 
   async function fetchProjects() {
     if (!__projects[locale.value]) {
       loadingProjects.value = true;
       queryContent(localePath("/projects"))
-        .where({_type: "markdown"})
+        .where({ _type: "markdown" })
         .without("body")
         .find()
         .then((data) => {
@@ -102,7 +100,7 @@ export const useAppStore = defineStore("app", () => {
     if (!__blogs[locale.value]) {
       loadingBlogs.value = true;
       queryContent(localePath("/blog"))
-        .where({_type: "markdown"})
+        .where({ _type: "markdown" })
         .without("body")
         .find()
         .then((data) => {
@@ -112,14 +110,14 @@ export const useAppStore = defineStore("app", () => {
     }
   }
 
-  const {csrf} = useCsrf();
+  const { csrf } = useCsrf();
   const __waitForm = ref(false);
   const waitForm = computed(() => __waitForm.value);
   const form = ref({
     name: "",
     email: "",
-    message: ""
-  })
+    message: "",
+  });
 
   async function submit() {
     __waitForm.value = true;
@@ -135,16 +133,16 @@ export const useAppStore = defineStore("app", () => {
         form.value = {
           name: "",
           email: "",
-          message: ""
-        }
-        return {success: true, result: res.data}
+          message: "",
+        };
+        return { success: true, result: res.data };
       } else {
         __waitForm.value = false;
-        return {success: false, result: res.data}
+        return { success: false, result: res.data };
       }
     } catch (e) {
       __waitForm.value = false;
-      return {success: false, result: e.message}
+      return { success: false, result: e.message };
     }
   }
 
@@ -161,6 +159,6 @@ export const useAppStore = defineStore("app", () => {
     projects,
     form,
     submit,
-    waitForm
+    waitForm,
   };
 });
