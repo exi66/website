@@ -477,53 +477,28 @@ import {
   Tailwind,
   Docker,
 } from "@/components/icons";
-import axios from "axios";
 import {useToast} from "@/components/ui/toast/use-toast";
 import {onMounted} from "vue";
 
-const {csrf} = useCsrf();
 const {t, locale} = useI18n();
-const {onChangeLangIndex} = useAppStore();
-const {experience, stack, loading} = storeToRefs(useAppStore());
+const {onChangeLangIndex, submit: __submit, waitForm: waitResponse} = useAppStore();
+const {experience, stack, loading, form} = storeToRefs(useAppStore());
 const {toast} = useToast();
 
-const waitResponse = ref(false);
-
-const form = ref({
-  name: "",
-  email: "",
-  message: "",
-});
-
 async function submit() {
-  waitResponse.value = true;
-  try {
-    const body = new URLSearchParams(form.value).toString();
-    let res = await axios.post("/api/submit/", body, {
-      headers: {
-        "csrf-token": csrf,
-      },
+  const res = await __submit();
+  if (res.success) {
+    toast({
+      title: t("contacts.success"),
+      description: t("contacts.success_desc"),
     });
-    if (res.status === 200 && res.data.success) {
-      toast({
-        title: t("contacts.success"),
-        description: t("contacts.success_desc"),
-      });
-    } else {
-      toast({
-        variant: "destructive",
-        title: t("contacts.error"),
-        description: res.data,
-      });
-    }
-  } catch (e) {
+  } else {
     toast({
       variant: "destructive",
       title: t("contacts.error"),
-      description: e.message,
+      description: res.result,
     });
   }
-  waitResponse.value = false;
 }
 
 useHead({

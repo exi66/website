@@ -1,6 +1,6 @@
 import {computed, reactive} from "vue";
 import {defineStore} from "pinia";
-import {useI18n, useLocalePath, queryContent} from "#imports";
+import {useI18n, useLocalePath, queryContent, useCsrf} from "#imports";
 import axios from "axios";
 
 export const useAppStore = defineStore("app", () => {
@@ -96,6 +96,42 @@ export const useAppStore = defineStore("app", () => {
     }
   }
 
+  const {csrf} = useCsrf();
+  const __waitForm = ref(false);
+  const waitForm = computed(() => __waitForm.value);
+  const form = ref({
+    name: "",
+    email: "",
+    message: ""
+  })
+
+  async function submit() {
+    __waitForm.value = true;
+    try {
+      const body = new URLSearchParams(form.value).toString();
+      let res = await axios.post("/api/submit/", body, {
+        headers: {
+          "csrf-token": csrf,
+        },
+      });
+      if (res.status === 200 && res.data.success) {
+        __waitForm.value = false;
+        form.value = {
+          name: "",
+          email: "",
+          message: ""
+        }
+        return {success: true, result: res.data}
+      } else {
+        __waitForm.value = false;
+        return {success: false, result: res.data}
+      }
+    } catch (e) {
+      __waitForm.value = false;
+      return {success: false, result: e.message}
+    }
+  }
+
   return {
     experience,
     stack,
@@ -106,6 +142,9 @@ export const useAppStore = defineStore("app", () => {
     blogs,
     loadingBlogs,
     loadingProjects,
-    projects
+    projects,
+    form,
+    submit,
+    waitForm
   };
 });
