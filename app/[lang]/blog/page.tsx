@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import LocalizedLink from "@/components/localized-link";
 import { Dictionary, getDictionary, LangProps } from "@/lib/dictionaries";
 import { Author, BlogMdxFrontmatter, getAllBlogs } from "@/lib/markdown";
-import { formatDate2, stringToDate } from "@/lib/utils";
+import { stringToDate } from "@/lib/utils";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Time } from "@/components/ui/time";
 
 export async function generateMetadata(params: LangProps): Promise<Metadata> {
   const { lang } = await params.params;
@@ -65,12 +66,11 @@ function BlogCard({
       </div>
       <p className="text-sm text-muted-foreground mb-4">{description}</p>
       <div className="flex items-center justify-between w-full mt-auto">
-        <time
+        <Time
+          variant="short"
+          date={stringToDate(date)}
           className="text-[13px] text-muted-foreground"
-          dateTime={stringToDate(date).toISOString()}
-        >
-          {formatDate2(date)}
-        </time>
+        />
         <AvatarGroup users={authors} />
       </div>
     </LocalizedLink>

@@ -5,10 +5,11 @@ import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { formatDate, stringToDate } from "@/lib/utils";
+import { stringToDate } from "@/lib/utils";
 import Image from "next/image";
 import { getDictionary, LangProps } from "@/lib/dictionaries";
 import LocalizedLink from "@/components/localized-link";
+import { Time } from "@/components/ui/time";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -56,12 +57,11 @@ export default async function BlogPage(props: PageProps & LangProps) {
         <ArrowLeftIcon className="w-4 h-4 mr-1.5" /> {dict.blog.back_to_blog}
       </LocalizedLink>
       <div className="flex flex-col gap-3 pb-7 w-full mb-2">
-        <time
-          dateTime={stringToDate(res.frontmatter.date).toISOString()}
+        <Time
+          variant="long"
+          date={stringToDate(res.frontmatter.date)}
           className="text-muted-foreground text-sm"
-        >
-          {formatDate(res.frontmatter.date)}
-        </time>
+        />
         <h1 className="sm:text-4xl text-3xl font-extrabold">
           {res.frontmatter.title}
         </h1>
