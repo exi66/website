@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "exi.moe",
+    "description": "A personal website for the presentation of a web developer and his skills"
+  },
+  "home": {
+    "main_header": "Hi, my name Egor",
+    "sub_header": "I'm a",
+    "work_position": "Full-Stack Developer",
+    "about_website": "This is a simple personal website. Here you will find my resume with a brief description of skills and experience, a small blog with notes on recent projects, interesting tasks and technologies that I am interested in, and a contact form. The website is based on",
+    "name": "Home",
+    "summary_desc": "Briefly and to the point",
+    "blog_desc": "My writing and thoughts",
+    "contacts_desc": "Feedback form"
+  },
+  "footer": {
+    "built_by": "Build by",
+    "source_code_available": "The source code is available on"
+  },
+  "navbar": {
+    "links": {
+      "summary": "Resume",
+      "blog": "Blog",
+      "contacts": "Contacts"
+    },
+    "search": {
+      "search_documentation": "Search in resume...",
+      "no_results_found": "No results found for",
+      "type_something": "Type something to search..."
+    },
+    "theme": {
+      "light": "Light",
+      "dark": "Dark",
+      "system": "System"
+    }
+  },
+  "docs": {
+    "on_this_page": "On this page",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "not_found": {
+    "404": "404",
+    "page_not_found": "Page not found",
+    "sub_text": "Oops! The page you're looking for doesn't exist.",
+    "back_to_homepage": "Back to homepage"
+  },
+  "leftbar": {
+    "introduction": "Introduction"
+  },
+  "blog": {
+    "title": "The most recent blog entries",
+    "sub_title": "All my recent notes and thoughts.",
+    "published_on": "Published on",
+    "back_to_blog": "Back to blog",
+    "posted_by": "Author"
+  },
+  "error": {
+    "oops": "Oops!",
+    "something_went_wrong": "Something went wrong.",
+    "sub_text": "We're sorry, but an error occurred while processing your request.",
+    "reload_page": "Reload Page",
+    "back_to_homepage": "Back to homepage"
+  },
+  "contacts": {
+    "title": "Write to me",
+    "sub_title": "and I'll call you back :)",
+    "email_label": "Email address",
+    "name_label": "Name",
+    "text_label": "Message",
+    "text_placeholder": "You're really cool!",
+    "submit": "Submit",
+    "success": "Success",
+    "success_desc": "Your message has been sent successfully!",
+    "error": "Error"
+  }
+}

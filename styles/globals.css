@@ -1,0 +1,272 @@
+@import url("./syntax.css");
+
+:root {
+  font-variant-ligatures: none;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 346.8 77.2% 49.8%;
+
+    --radius: 0.5rem;
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 346.8 77.2% 49.8%;
+    --primary-foreground: 355.7 100% 97.3%;
+
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 346.8 77.2% 49.8%;
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.prose {
+  margin: 0 !important;
+}
+
+pre {
+  padding: 2px 0 !important;
+  width: inherit !important;
+  overflow-x: auto;
+}
+
+pre > code {
+  display: grid;
+  max-width: inherit !important;
+  padding: 14px 0 !important;
+}
+
+.code-line {
+  padding: 0.75px 16px;
+  @apply border-l-2 border-transparent;
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  margin-right: 22px;
+  margin-left: -2px;
+  color: rgb(110, 110, 110);
+  content: attr(line);
+  font-size: 13.5px;
+  text-align: right;
+}
+
+.highlight-line {
+  @apply bg-primary/5 border-l-2 border-primary/30;
+}
+
+.rehype-code-title {
+  @apply px-2 -mb-8 w-full text-sm pb-5 font-medium mt-5 font-code;
+}
+
+.highlight-comp > code {
+  background-color: transparent !important;
+}
+
+/* Global Custom Scrollbar */
+:root {
+  --scrollbar-thumb: rgba(
+    113,
+    113,
+    122,
+    0.6
+  ); /* Subtle dark gray for light mode thumb */
+}
+
+[data-theme="dark"],
+[class*="dark"] {
+  --scrollbar-thumb: rgba(
+    160,
+    160,
+    160,
+    0.4
+  ); /* Softer gray for dark mode thumb */
+}
+
+/* Apply globally */
+* {
+  scrollbar-width: thin; /* Firefox thin scrollbar */
+  scrollbar-color: var(--scrollbar-thumb) transparent; /* Thumb color with transparent track */
+}
+
+*::-webkit-scrollbar {
+  width: 8px; /* Vertical scrollbar width */
+  height: 8px; /* Horizontal scrollbar height */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb); /* Thumb color */
+  border-radius: 9999px; /* Fully rounded thumb */
+  border: 2px solid transparent; /* Thin padding effect */
+  background-clip: content-box; /* Smooth thumb edges */
+}
+
+*::-webkit-scrollbar-track {
+  background-color: transparent; /* Transparent track */
+}
+
+.box3d {
+  transform-style: preserve-3d;
+  @apply w-24 h-24 my-0 mx-auto relative text-white;
+}
+
+.box3d div {
+  transform-origin: 50% 50% -2.5rem;
+  @apply left-0 top-0 absolute w-20 h-20 opacity-80;
+}
+
+.p1 {
+  transform: perspective(600px) rotateX(0deg) rotateY(90deg) rotateZ(0deg);
+  animation: spin1 10s infinite linear;
+}
+
+.p2 {
+  animation: spin2 10s infinite linear;
+}
+
+.p3 {
+  animation: spin3 10s infinite linear;
+}
+
+.p4 {
+  animation: spin4 10s infinite linear;
+}
+
+.p5 {
+  animation: spin5 10s infinite linear;
+}
+
+.p6 {
+  animation: spin6 10s infinite linear;
+}
+
+@keyframes spin1 {
+  to {
+    transform: perspective(600px) rotateX(360deg) rotateY(450deg) rotateZ(0deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: perspective(600px) rotateX(0deg) rotateY(270deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(360deg) rotateY(630deg) rotateZ(0deg);
+  }
+}
+
+@keyframes spin3 {
+  0% {
+    transform: perspective(600px) rotateX(90deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(450deg) rotateY(0deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes spin4 {
+  0% {
+    transform: perspective(600px) rotateX(-90deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(270deg) rotateY(0deg) rotateZ(360deg);
+  }
+}
+
+@keyframes spin5 {
+  0% {
+    transform: perspective(600px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(360deg) rotateY(360deg) rotateZ(0deg);
+  }
+}
+
+@keyframes spin6 {
+  0% {
+    transform: perspective(600px) rotateX(0deg) rotateY(180deg) rotateZ(0deg);
+  }
+
+  100% {
+    transform: perspective(600px) rotateX(360deg) rotateY(540deg) rotateZ(0deg);
+  }
+}
