@@ -10,6 +10,63 @@ authors:
 cover: "https://raw.githubusercontent.com/Dokploy/dokploy/canary/.github/sponsors/logo.png"
 ---
 
-## Introduction: What is Dokploy?
+## What is Dokploy?
 
-I'm too lazy to write a real text yet, this is a test article.
+Dokploy is a self-hosted solution for automatic deployment of web applications, which allows you to quickly and conveniently deploy projects on your own server.
+It supports popular programming languages and frameworks, provides CI/CD, domain management, and SSL certificates.
+The project positions itself as a replacement for Vercel, Netlify and Heroku, but in terms of workflow organization and integrations with other services, it is still far from its paid brothers.
+
+## Personal usage experience
+
+### Introduction
+
+I have never used platforms for application development, deployment, and management before.
+Most of my personal projects were too local in terms of audience reach, or they didn't have one at all and there was simply no need for such a service to deploy.
+Originally coming across a video about [Coolify](https://github.com/coollabsio/coolify), another self-hosted Vercel killer, I decided to experiment.
+I quickly abandoned the hero of the video, as he turned out to be too demanding for the resources of the local machine, but I managed to appreciate the very idea of the service for deploying applications and its convenience.
+That's how I got to know a smaller solution called Dokploy.
+
+### General impressions
+
+At the time of my full transition to this project deployment solution, Dokploy already had all the necessary killer features for convenient personal use:
+
+- nice and intuitive interface based on **Radix-ui**
+- integration with all GIT-like systems
+- API
+- integration with messengers and mail for notification
+- wide list of templates for applications and databases
+- support for **nixpacks**, **docker**, **docker compose**
+- full ability to manage containers directly in the web interface
+- dns and certs
+- Docker Registry
+- clusterization
+- monitoring of consumed resources
+- detailed logs
+- auto-update
+
+and all this was already in `v0.5.1`. No corporate tinsel like competitors, just what you really need from such a service.
+Despite the fact that the project is the youngest of the available alternatives, it has managed to find the right audience and is actively developing. Over the entire time of my use, more than 100 new releases have been released, which have brought both minor fixes and completely new functionality, for example:
+
+- git submodules
+- backups
+- users and organization management
+- the ability to combine multiple servers
+- integration with AI
+
+### Performance
+
+Under the hood, **Dokploy** has a service on **Node.js**, front on **React**, as a web server **Traefik**, as a base here
+**PostgreSQL** and a cache in the form of **Redis**. This modest stack makes Dokploy one of the lowest-cost solutions among
+competitors in terms of hardware capacity.
+
+### Ease of use
+
+The project has a minimalistic interface, which makes it stand out from its competitors. It's immediately clear what's responsible for what.
+The service also conveniently integrates with Git, which allows you to automate updates every time you push to a branch or create a tag.
+
+## Conclusion
+
+I am very glad that I tried such a wonderful tool and I can confidently say that I will continue using it.
+use. If you are looking for a simple and reliable tool for automating deployment, I can safely recommend Dokploy.
+He saved me a lot of time and helped me focus on development rather than routine.
+I really hope that the project will remain the lightest analogue of PaaS.
