@@ -1,14 +1,18 @@
-## website
+# website
 
-## Getting Started
+My one page portfolio site. This version is written in Next.js, based on [aria-docs](https://github.com/nisabmohd/Aria-Docs).
 
-First, run the development server:
+## Deploy
 
 ```plaintext
-pnpm dev
+pnpm run build
+
+pnpm run start
 ```
 
 ## Key Features
+
+All of these features from aria-docs are just as accessible, as the site uses the same base.
 
 | **Feature**                     | **Description**                                       |
 | ------------------------------- | ----------------------------------------------------- |
@@ -29,3 +33,10 @@ pnpm dev
 | Static Site Generation          | Generate a static, high-performance site.             |
 | SEO-Optimized                   | Structured for optimal search engine indexing.        |
 | Internationalisation            | Added support for i18n for multiple languages.        |
+
+It also has its own functionality.
+
+| **Feature**       | **Description**                                                                                |
+| ----------------- | ---------------------------------------------------------------------------------------------- |
+| Contact form      | A feedback form that implements server actions with sending input data to the discord webhook. |
+| Classic home page | Classic front page with hero section, links and quick access buttons.                          |
