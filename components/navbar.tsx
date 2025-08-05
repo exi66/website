@@ -83,8 +83,8 @@ export function NavMenu({
         const Comp = (
           <LocalizedLink
             key={item.title + item.href}
-            className="flex items-center gap-1 dark:text-stone-300/85 text-stone-800"
-            activeClassName="!text-red-600 dark:font-medium font-semibold"
+            className="flex items-center gap-1 text-muted-foreground"
+            activeClassName="text-primary dark:font-medium font-semibold"
             href={item.href}
             absolute={item.absolute}
           >

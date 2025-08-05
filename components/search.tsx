@@ -50,13 +50,13 @@ export default function Search({ dict }: { dict: Dictionary }) {
       >
         <DialogTrigger asChild>
           <div className="relative flex-1 max-w-md cursor-pointer">
-            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-500 dark:text-stone-400" />
+            <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               className="md:w-full rounded-md dark:bg-background/95 bg-background border h-9 pl-10 pr-0 sm:pr-7 text-sm shadow-sm overflow-ellipsis"
               placeholder={dict.navbar.search.search_documentation}
               type="search"
             />
-            <div className="sm:flex hidden absolute top-1/2 -translate-y-1/2 right-2 text-xs font-medium font-mono items-center gap-0.5 dark:bg-stone-900 bg-stone-200/65 p-1 rounded-sm">
+            <div className="sm:flex hidden absolute top-1/2 -translate-y-1/2 right-2 text-xs font-medium font-mono items-center gap-0.5 bg-muted p-1 rounded-sm">
               <CommandIcon className="w-3 h-3" />
               <span>k</span>
             </div>
@@ -90,7 +90,7 @@ export default function Search({ dict }: { dict: Dictionary }) {
                   <DialogClose key={item.href} asChild>
                     <LocalizedLink
                       className={cn(
-                        "dark:hover:bg-stone-900 hover:bg-stone-100 w-full px-3 rounded-sm text-sm flex items-center gap-2.5",
+                        "hover:bg-accent w-full px-3 rounded-sm text-sm flex items-center gap-2.5",
                         paddingClass
                       )}
                       href={`/resume${item.href}`}

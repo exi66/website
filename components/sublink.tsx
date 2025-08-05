@@ -30,7 +30,7 @@ export default function SubLink({
 
   const Comp = (
     <LocalizedLink
-      activeClassName="text-red-500 dark:font-medium font-semibold"
+      activeClassName="text-primary dark:font-medium font-semibold"
       href={href}
     >
       {dict.leftbar[title as keyof typeof dict.leftbar]}
@@ -71,7 +71,7 @@ export default function SubLink({
         <CollapsibleContent>
           <div
             className={cn(
-              "flex flex-col items-start sm:text-sm dark:text-stone-300/85 text-stone-800 ml-0.5 mt-2.5 gap-3",
+              "flex flex-col items-start sm:text-sm text-muted-foreground ml-0.5 mt-2.5 gap-3",
               level > 0 && "pl-4 border-l ml-1.5"
             )}
           >
