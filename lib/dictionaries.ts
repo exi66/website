@@ -1,5 +1,5 @@
 import { cache } from "react";
-import { Locale } from "./locale";
+import { Locale, locales } from "./locale";
 
 export type LangProps = { params: Promise<{ lang: Locale }> };
 
@@ -8,7 +8,10 @@ const dictionaries = {
   ru: () => import("@/dictionaries/ru.json").then((module) => module.default),
 };
 
-const getDictionaryUncached = async (locale: Locale) => dictionaries[locale]();
+const getDictionaryUncached = async (locale: Locale) => {
+  if (Object.hasOwn(dictionaries, locale)) return dictionaries[locale]();
+  else return dictionaries[locales[0]]();
+};
 
 export const getDictionary = cache(getDictionaryUncached);
 
