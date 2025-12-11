@@ -1,11 +1,6 @@
 "use server";
 
-import { Inputs } from "./contacts/page";
-
-export type Response = {
-  success: boolean;
-  error: string;
-};
+import { Inputs, Response } from "@/lib/types";
 
 export async function sendToDiscordHook(formBody: Inputs): Promise<Response> {
   try {

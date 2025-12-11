@@ -8,12 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { sendToDiscordHook } from "../actions";
 import { toast } from "sonner";
-
-export type Inputs = {
-  email: string;
-  name: string;
-  text: string;
-};
+import { Inputs } from "@/lib/types";
 
 export default function ContactsIndexPage() {
   const dict = useDictionary();
