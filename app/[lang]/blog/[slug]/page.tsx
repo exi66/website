@@ -10,6 +10,7 @@ import Image from "next/image";
 import { getDictionary, LangProps } from "@/lib/dictionaries";
 import LocalizedLink from "@/components/localized-link";
 import { Time } from "@/components/ui/time";
+import { Locale } from "@/lib/locale";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -29,8 +30,12 @@ export async function generateMetadata(props: PageProps & LangProps) {
   };
 }
 
-export async function generateStaticParams({ params }: LangProps) {
-  const { lang } = await params;
+export async function generateStaticParams({
+  params,
+}: {
+  params: { lang: string; slug: string };
+}) {
+  const lang = params.lang as Locale;
   const val = await getAllBlogStaticPaths(lang);
   if (!val) return [];
   return val.map((it) => ({ slug: it }));

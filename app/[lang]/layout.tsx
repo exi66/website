@@ -5,7 +5,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { getDictionary, LangProps } from "@/lib/dictionaries";
 import { ClientDictionary } from "@/components/contexts/dictionary-provider";
-import { locales } from "@/lib/locale";
+import { locales, Locale } from "@/lib/locale";
 import "@/styles/globals.css";
 
 const sansFont = Geist({
@@ -35,13 +35,13 @@ export async function generateMetadata(params: LangProps): Promise<Metadata> {
 export default async function RootLayout({
   children,
   params,
-}: Readonly<
-  {
-    children: React.ReactNode;
-  } & LangProps
->) {
+}: Readonly<{
+  children: React.ReactNode;
+  params: Promise<{ lang: string }>;
+}>) {
   const { lang } = await params;
-  const dict = await getDictionary(lang);
+  const dict = await getDictionary(lang as Locale);
+
   return (
     <html lang={lang} suppressHydrationWarning>
       <body
