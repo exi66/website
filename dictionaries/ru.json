@@ -46,7 +46,10 @@
     "back_to_homepage": "На главную"
   },
   "leftbar": {
-    "introduction": "Введение"
+    "introduction": "Введение",
+    "work-experience": "Опыт работы",
+    "projects": "Проекты",
+    "example-project": "Пример проекта"
   },
   "blog": {
     "title": "Последние записи блога",

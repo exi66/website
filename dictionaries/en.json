@@ -46,7 +46,10 @@
     "back_to_homepage": "Back to homepage"
   },
   "leftbar": {
-    "introduction": "Introduction"
+    "introduction": "Introduction",
+    "work-experience": "Work experience",
+    "projects": "Projects",
+    "example-project": "Example project"
   },
   "blog": {
     "title": "The most recent blog entries",

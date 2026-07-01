@@ -14,7 +14,23 @@ export const ROUTES: EachRoute[] = [
     title: "introduction",
     href: "/introduction",
     noLink: false,
-    items: [],
+  },
+  {
+    // translation key present in dictionaries/*.json under "leftbar"
+    title: "work-experience",
+    href: "/work-experience",
+    noLink: false,
+  },
+  {
+    title: "projects",
+    href: "/projects",
+    noLink: false,
+    items: [
+      {
+        title: "example-project",
+        href: "/example-project",
+      },
+    ],
   },
 ];
 
