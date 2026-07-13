@@ -1,6 +1,6 @@
 # website
 
-My one page portfolio site. This version is written in Next.js, based on [aria-docs](https://github.com/nisabmohd/Aria-Docs).
+My personal portfolio site. This version is written in Next.js, based on [aria-docs](https://github.com/nisabmohd/Aria-Docs).
 
 ## Deploy
 
