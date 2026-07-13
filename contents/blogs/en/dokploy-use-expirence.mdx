@@ -1,72 +1,53 @@
 ---
-title: "Experience using dokploy"
-description: "Talking about the most convenient self-hosted solution for deploying and managing docker-based applications and databases."
+title: "What is Dokploy"
+description: "Dokploy — a self-hosted open-source alternative to Vercel, Netlify and Heroku"
 date: 21-09-2024
 authors:
   - avatar: "https://avatars.githubusercontent.com/u/58086435"
     handle: exi66
     username: Exi
-    handleUrl: "https://github.com/exi66"
+    handleUrl: "https://github.com/exi66/"
 cover: "https://raw.githubusercontent.com/Dokploy/dokploy/canary/.github/sponsors/logo.png"
 ---
 
-## What is Dokploy?
+## What Dokploy is
 
-Dokploy is a self-hosted solution for automatic deployment of web applications, which allows you to quickly and conveniently deploy projects on your own server.
-It supports popular programming languages and frameworks, provides CI/CD, domain management, and SSL certificates.
-The project positions itself as a replacement for Vercel, Netlify and Heroku, but in terms of workflow organization and integrations with other services, it is still far from its paid brothers.
+[Dokploy](https://dokploy.com) is a self-hosted platform for deploying and managing applications and databases, built around a "no vendor lock-in" principle: everything runs on your own server, with no tie-in to a specific cloud provider and no monthly deployment fees.
 
-## Personal usage experience
+Essentially, it's an open-source alternative to services like Vercel, Netlify, or Heroku, with one important difference — it isn't a managed service, it's a tool you host yourself. Dokploy installs with a single command:
 
-### Introduction
+```bash
+curl -sSL https://dokploy.com/install.sh | bash
+```
 
-I have never used platforms for application development, deployment, and management before.
-Most of my personal projects were too local in terms of audience reach, or they didn't have one at all and there was simply no need for such a service to deploy.
-Originally coming across a video about [Coolify](https://github.com/coollabsio/coolify), another self-hosted Vercel killer, I decided to experiment.
-I quickly abandoned the hero of the video, as he turned out to be too demanding for the resources of the local machine, but I managed to appreciate the very idea of the service for deploying applications and its convenience.
-That's how I got to know a smaller solution called Dokploy.
+From there, everything — apps, databases, servers — is managed through a web interface.
 
-### General impressions
+## The problem it solves
 
-At the time of my full transition to this project deployment solution, Dokploy already had all the necessary killer features for convenient personal use:
+To publish a regular web app, a developer usually has to take on a whole set of adjacent tasks: set up the web server and its environment, build an image and configure Docker, set up CI/CD, watch logs and resource usage, and, for a database, stand it up and maintain it separately.
 
-- nice and intuitive interface based on **Radix-ui**
-- integration with all GIT-like systems
-- API
-- integration with messengers and mail for notification
-- wide list of templates for applications and databases
-- support for **nixpacks**, **docker**, **docker compose**
-- full ability to manage containers directly in the web interface
-- dns and certs
-- Docker Registry
-- clusterization
-- monitoring of consumed resources
-- detailed logs
-- auto-update
+Dokploy takes all of that work off your hands and hides it behind a graphical interface.
 
-and all this was already in `v0.5.1`. No corporate tinsel like competitors, just what you really need from such a service.
-Despite the fact that the project is the youngest of the available alternatives, it has managed to find the right audience and is actively developing. Over the entire time of my use, more than 100 new releases have been released, which have brought both minor fixes and completely new functionality, for example:
+## Deploying applications
 
-- git submodules
-- backups
-- users and organization management
-- the ability to combine multiple servers
-- integration with AI
+Dokploy supports several ways to build and run an application:
 
-### Performance
+- **Nixpacks** — automatic stack detection and build with zero configuration
+- **Heroku Buildpacks** — the same approach classic Heroku uses
+- **a plain Dockerfile** — for full control over the build
+- **Docker Compose** — for more complex, multi-service applications
 
-Under the hood, **Dokploy** has a service on **Node.js**, front on **React**, as a web server **Traefik**, as a base here
-**PostgreSQL** and a cache in the form of **Redis**. This modest stack makes Dokploy one of the lowest-cost solutions among
-competitors in terms of hardware capacity.
+Applications in **Node.js, PHP, Python, Go, Ruby**, and other languages are all supported — the platform doesn't care what the project is written in, as long as it fits one of these build methods. Deploys trigger on a git push to a branch or on creating a tag, so once the initial setup is done, deployment becomes fully automatic.
 
-### Ease of use
+## Everything else
 
-The project has a minimalistic interface, which makes it stand out from its competitors. It's immediately clear what's responsible for what.
-The service also conveniently integrates with Git, which allows you to automate updates every time you push to a branch or create a tag.
+Beyond deployment itself, Dokploy also covers everything that usually surrounds it:
 
-## Conclusion
+- **databases** — create and maintain MySQL, PostgreSQL, MongoDB, MariaDB, Redis, and libSQL right from the interface, with automated backups and quick restoration
+- **ready-made templates** — Supabase, Cal.com, Plausible, PocketBase, and 200+ others spin up in one click, with no manual docker-compose setup
+- **monitoring and notifications** — real-time CPU, memory, disk, and network usage, detailed logs, and notifications about successful and failed deploys via Slack, Discord, Telegram, or email
+- **scaling and access** — managing multiple servers and clustering via Docker Swarm, plus a role-based access model with fine-grained permissions for teams
 
-I am very glad that I tried such a wonderful tool and I can confidently say that I will continue using it.
-use. If you are looking for a simple and reliable tool for automating deployment, I can safely recommend Dokploy.
-He saved me a lot of time and helped me focus on development rather than routine.
-I really hope that the project will remain the lightest analogue of PaaS.
+## The bottom line
+
+Dokploy closes exactly the gap that usually forces a developer to either dive into DevOps or pay for a managed platform. Reverse proxying, certificates, image builds, push-to-deploy, databases with backups, and monitoring are all already set up and tucked behind a straightforward interface — while the server itself stays entirely yours.
