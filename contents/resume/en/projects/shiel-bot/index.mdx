@@ -1,0 +1,38 @@
+---
+title: shiel-bot
+description: Discord alerts for the Black Desert Online market and coupons.
+---
+
+## Resources
+
+- **[Source](https://github.com/exi66/shiel-bot)**
+- **[Demo](https://market.exi.moe/)**
+
+## About
+
+A Discord bot that monitors the in-game market and coupons in **Black Desert Online**. It removes the need to watch the registration queue by hand: the moment a tracked item is listed or new coupons appear, the bot sends a Discord notification.
+
+## Features
+
+- **Queue monitoring** — tracks the market registration queue (every minute by default).
+- **Item notifications** — alerts you when an item from your subscriptions gets registered.
+- **Coupons** — alerts you when new in-game coupons are published.
+- **Web-based configuration** — manage subscriptions and notifications through a web interface.
+
+### Commands
+
+Everything is managed in direct messages with the bot through slash commands:
+
+- `/queue` — the current market queue
+- `/coupons` — available coupons
+- `/settings` — opens the settings web interface
+
+## Tech stack
+
+- **Sapphire.js** (built on **Discord.js**) — the bot framework
+- **Express** — the settings web service
+- **SQLite** — stores subscriptions and settings
+- **Vue** — the settings web interface
+- **shadcn/vue** — the web interface UI components
+- **Node.js**
+- **Docker** — deployment

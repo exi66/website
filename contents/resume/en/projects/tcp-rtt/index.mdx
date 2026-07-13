@@ -1,0 +1,26 @@
+---
+title: tcp-rtt
+description: Real latency to a game server measured from TCP traffic.
+---
+
+## Resources
+
+- **[Source](https://github.com/exi66/tcp-rtt)**
+
+## About
+
+An application for monitoring latency (**RTT**) to a game server. It measures the real latency of the game traffic by intercepting TCP packets on a network interface, without separate ping requests to the server.
+
+## Features
+
+- **Traffic interception** — captures TCP packets on a selected network interface.
+- **RTT calculation** — records send times and expected ACK numbers, then computes the latency the moment the server responds.
+- **Real-time graph** — a live graph that visualizes the latency at a glance.
+- **Threshold filter** — drops packets whose time is below a configurable value in ms. This removes packets that never leave the network card, so they don't skew the real latency.
+
+## Tech stack
+
+- **.NET 10 / C# / Windows Forms** — the UI
+- **SharpPcap** (Npcap) — packet interception
+- **PacketDotNet** — IP/TCP parsing
+- **ScottPlot** — the real-time latency graph

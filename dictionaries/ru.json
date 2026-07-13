@@ -49,7 +49,15 @@
     "introduction": "Введение",
     "work-experience": "Опыт работы",
     "projects": "Проекты",
-    "example-project": "Пример проекта"
+    "website": "website",
+    "shiel-bot": "shiel-bot",
+    "bdo-sieges": "bdo-sieges",
+    "tcp-rtt": "tcp-rtt",
+    "mcgl-timeline": "mcgl-timeline",
+    "mcgl-arts": "mcgl-arts",
+    "mcgl-slimes": "mcgl-slimes",
+    "mcgl-data": "mcgl-data",
+    "mcgl-correct-evasion-calculator": "mcgl-correct-evasion-calculator"
   },
   "blog": {
     "title": "Последние записи блога",

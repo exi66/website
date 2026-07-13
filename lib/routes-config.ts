@@ -26,10 +26,15 @@ export const ROUTES: EachRoute[] = [
     href: "/projects",
     noLink: false,
     items: [
-      {
-        title: "example-project",
-        href: "/example-project",
-      },
+      { title: "website", href: "/website" },
+      { title: "shiel-bot", href: "/shiel-bot" },
+      { title: "bdo-sieges", href: "/bdo-sieges" },
+      { title: "tcp-rtt", href: "/tcp-rtt" },
+      { title: "mcgl-timeline", href: "/mcgl-timeline" },
+      { title: "mcgl-arts", href: "/mcgl-arts" },
+      { title: "mcgl-slimes", href: "/mcgl-slimes" },
+      { title: "mcgl-data", href: "/mcgl-data" },
+      { title: "mcgl-correct-evasion-calculator", href: "/mcgl-correct-evasion-calculator" },
     ],
   },
 ];

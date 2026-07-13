@@ -1,0 +1,30 @@
+---
+title: mcgl-data
+description: A unified database and search over Minecraft Galaxy data.
+---
+
+## Resources
+
+- **[Source](https://github.com/exi66/mcgl-data)**
+- **[Table generator](https://github.com/exi66/mcgl-data-api)**
+- **[Demo](https://exi66.github.io/mcgl-data/)**
+
+## About
+
+A system for collecting, storing and searching the data of the **[Minecraft Galaxy](https://minecraft-galaxy.ru/ru/)** gaming project. Assorted data dumps are consolidated into a single **PostgreSQL** database, served through **PostgREST**, and made searchable in a web interface.
+
+## Features
+
+- **Data collection** — data dumps are consolidated into a single database.
+- **Text search** — search over the body text of a record.
+- **Key search** — filter by fields. For comments the available keys are `id`, `user`, `author`; for posts — `id`, `usersInText`, `linksInText`.
+- **Infinite scroll** — results are paginated by loading more as you scroll.
+
+## Tech stack
+
+- **React**
+- **shadcn** — UI components
+- **PostgREST** — the REST API over the database
+- **PostgreSQL** — the database
+- **TypeScript**
+- **Knex** — migrations and table seeding

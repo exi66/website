@@ -1,0 +1,26 @@
+---
+title: mcgl-slimes
+description: A slime-chunk layer for the Minecraft Galaxy web map.
+---
+
+## Resources
+
+- **[Source](https://github.com/exi66/mcgl-slimes)**
+
+## About
+
+A **Tampermonkey** userscript that displays slime chunks on the map of the **[Minecraft Galaxy](https://minecraft-galaxy.ru/ru/)** gaming project.
+
+To reproduce the original slime-chunk algorithm, it uses **WebAssembly** that reimplements Java's pseudorandom generator, the one the game uses to determine slime chunks.
+
+## Features
+
+- **Slime-chunk layer** — toggled on and off with a «Slimes» button on the map.
+- **Manual seed input** — a field to enter the world seed by hand.
+- **Known seeds** — world seeds are stored right inside the script.
+
+## Tech stack
+
+- **Tampermonkey** — the userscript environment
+- **JavaScript**
+- **WebAssembly** (D, ldc2) — slime-chunk computation

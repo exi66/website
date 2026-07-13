@@ -36,7 +36,7 @@ export default function Search({ dict }: { dict: Dictionary }) {
 
   const filteredResults = useMemo(
     () => advanceSearch(searchedInput.trim(), dict),
-    [searchedInput, dict]
+    [searchedInput, dict],
   );
 
   return (
@@ -90,15 +90,15 @@ export default function Search({ dict }: { dict: Dictionary }) {
                   <DialogClose key={item.href} asChild>
                     <LocalizedLink
                       className={cn(
-                        "hover:bg-accent w-full px-3 rounded-sm text-sm flex items-center gap-2.5",
-                        paddingClass
+                        "hover:bg-accent w-full rounded-sm text-sm flex items-center gap-2.5",
+                        paddingClass,
                       )}
                       href={`/resume${item.href}`}
                     >
                       <div
                         className={cn(
                           "flex items-center w-fit h-full py-3 gap-1.5 px-2",
-                          level > 1 && "border-l pl-4"
+                          level > 1 && "border-l pl-4",
                         )}
                       >
                         <FileIcon className="h-[1.1rem] w-[1.1rem] mr-1" />{" "}
