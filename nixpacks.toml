@@ -1,0 +1,17 @@
+providers = ["node"]
+
+[phases.setup]
+nixPkgs = ["nodejs_24"]
+
+[phases.install]
+cmds = [
+  "corepack enable",
+  "corepack prepare pnpm@10.33.4 --activate",
+  "pnpm install --frozen-lockfile"
+]
+
+[phases.build]
+cmds = ["pnpm run build"]
+
+[start]
+cmd = "pnpm run start"
