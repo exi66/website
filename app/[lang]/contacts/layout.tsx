@@ -15,7 +15,7 @@ export async function generateMetadata(params: LangProps): Promise<Metadata> {
 
 export default function ContactsLayout({ children }: PropsWithChildren) {
   return (
-    <div className="flex flex-col items-start justify-center w-full mx-auto">
+    <div className="flex flex-col items-start justify-center w-full mx-auto pt-8 pb-10">
       {children}
       <Toaster />
     </div>
