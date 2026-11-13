@@ -32,8 +32,11 @@ jobs:
       - name: Lint
         run: pnpm lint
 
+      # next-env.d.ts is gitignored, typegen creates it along with route types
       - name: Typecheck
-        run: pnpm exec tsc --noEmit
+        run: |
+          pnpm exec next typegen
+          pnpm exec tsc --noEmit
 
       - name: Build
         run: pnpm build
