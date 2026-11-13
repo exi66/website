@@ -141,7 +141,7 @@ export default function ContactsIndexPage() {
             </Button>
           </form>
         </div>
-        <div className="p-6 text-muted-foreground flex items-center justify-center w-full lg:w-1/3 overflow-x-auto">
+        <div className="p-6 text-muted-foreground flex items-center justify-center flex-grow">
           <pre className="whitespace-pre font-code">
             POST /some-api HTTP/1.1{"\r\n"}
             {JSON.stringify(
