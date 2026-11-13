@@ -8,7 +8,6 @@ export async function generateMetadata(params: LangProps): Promise<Metadata> {
   const dict = await getDictionary(lang);
   return {
     title: dict.navbar.links.contacts,
-    metadataBase: new URL("https://me.exi.moe/"),
     description: dict.metadata.description,
   };
 }

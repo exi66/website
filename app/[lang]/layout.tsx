@@ -9,14 +9,14 @@ import { locales, Locale } from "@/lib/locale";
 import "@/styles/globals.css";
 
 const sansFont = Geist({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   variable: "--font-geist-sans",
   display: "swap",
   weight: "400",
 });
 
 const monoFont = Geist_Mono({
-  subsets: ["latin"],
+  subsets: ["latin", "cyrillic"],
   variable: "--font-geist-mono",
   display: "swap",
   weight: "400",

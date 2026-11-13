@@ -12,7 +12,6 @@ export async function generateMetadata(params: LangProps): Promise<Metadata> {
   const dict = await getDictionary(lang);
   return {
     title: dict.navbar.links.blog,
-    metadataBase: new URL("https://me.exi.moe/"),
     description: dict.metadata.description,
   };
 }
@@ -21,7 +20,7 @@ export default async function BlogIndexPage({ params }: LangProps) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
   const blogs = (await getAllBlogs(lang)).sort(
-    (a, b) => stringToDate(b.date).getTime() - stringToDate(a.date).getTime()
+    (a, b) => stringToDate(b.date).getTime() - stringToDate(a.date).getTime(),
   );
   return (
     <div className="w-full mx-auto flex flex-col gap-1 sm:min-h-[91vh] min-h-[88vh] pt-2">

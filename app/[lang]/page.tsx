@@ -6,12 +6,16 @@ import { Pen, User, ExternalLink, MessageCircleReply } from "lucide-react";
 import { TechBox } from "@/components/box3d";
 import type { Metadata } from "next";
 
+const socialLinks = [
+  { title: "Github", href: "https://github.com/exi66" },
+  { title: "Telegram", href: "https://t.me/exi666" },
+];
+
 export async function generateMetadata(params: LangProps): Promise<Metadata> {
   const { lang } = await params.params;
   const dict = await getDictionary(lang);
   return {
     title: dict.home.name,
-    metadataBase: new URL("https://me.exi.moe/"),
     description: dict.metadata.description,
   };
 }
@@ -19,6 +23,28 @@ export async function generateMetadata(params: LangProps): Promise<Metadata> {
 export default async function Home({ params }: LangProps) {
   const { lang } = await params;
   const dict = await getDictionary(lang);
+
+  const sections = [
+    {
+      href: `/resume${page_routes[0].href}`,
+      Icon: User,
+      title: dict.navbar.links.summary,
+      description: dict.home.summary_desc,
+    },
+    {
+      href: "/blog",
+      Icon: Pen,
+      title: dict.navbar.links.blog,
+      description: dict.home.blog_desc,
+    },
+    {
+      href: "/contacts",
+      Icon: MessageCircleReply,
+      title: dict.navbar.links.contacts,
+      description: dict.home.contacts_desc,
+    },
+  ];
+
   return (
     <div className="max-w-4xl mx-auto">
       <div className="flex sm:min-h-[85.5vh] min-h-[85vh] flex-col items-start justify-center px-2 sm:py-8 py-12 space-y-6">
@@ -33,16 +59,13 @@ export default async function Home({ params }: LangProps) {
               </span>
             </h1>
             <div className="flex flex-row space-x-4">
-              <Button asChild className="text-xl">
-                <a href="https://github.com/exi66" target="_blank">
-                  Github <ExternalLink size={16} className="ml-1" />
-                </a>
-              </Button>
-              <Button asChild className="text-xl">
-                <a href="https://t.me/exi666" target="_blank">
-                  Telegram <ExternalLink size={16} className="ml-1" />
-                </a>
-              </Button>
+              {socialLinks.map(({ title, href }) => (
+                <Button key={href} asChild className="text-xl">
+                  <a href={href} target="_blank" rel="noopener noreferrer">
+                    {title} <ExternalLink size={16} className="ml-1" />
+                  </a>
+                </Button>
+              ))}
             </div>
           </div>
         </div>
@@ -54,7 +77,11 @@ export default async function Home({ params }: LangProps) {
               variant="link"
               className="px-0 h-auto text-base py-0"
             >
-              <a href="https://github.com/nisabmohd/Aria-Docs" target="_blank">
+              <a
+                href="https://github.com/nisabmohd/Aria-Docs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 aria-docs
               </a>
             </Button>
@@ -62,42 +89,21 @@ export default async function Home({ params }: LangProps) {
         </div>
 
         <div className="grid md:grid-cols-3 gap-4 mt-6 w-full">
-          <LocalizedLink
-            className="border h-48 bg-accent/50 rounded-lg p-4 flex flex-col justify-between hover:scale-[1.02] transition-all"
-            href={`/resume${page_routes[0].href}`}
-          >
-            <User size={32} />
-            <span>
-              {dict.navbar.links.summary}{" "}
-              <span className="block text-sm text-muted-foreground">
-                {dict.home.summary_desc}
+          {sections.map(({ href, Icon, title, description }) => (
+            <LocalizedLink
+              key={href}
+              className="border h-48 bg-accent/50 rounded-lg p-4 flex flex-col justify-between hover:scale-[1.02] transition-all"
+              href={href}
+            >
+              <Icon size={32} />
+              <span>
+                {title}{" "}
+                <span className="block text-sm text-muted-foreground">
+                  {description}
+                </span>
               </span>
-            </span>
-          </LocalizedLink>
-          <LocalizedLink
-            className="border h-48 bg-accent/50 rounded-lg p-4 flex flex-col justify-between hover:scale-[1.02] transition-all"
-            href="/blog"
-          >
-            <Pen size={32} />
-            <span>
-              {dict.navbar.links.blog}{" "}
-              <span className="block text-sm text-muted-foreground">
-                {dict.home.blog_desc}
-              </span>
-            </span>
-          </LocalizedLink>
-          <LocalizedLink
-            className="border h-48 bg-accent/50 rounded-lg p-4 flex flex-col justify-between hover:scale-[1.02] transition-all"
-            href="/contacts"
-          >
-            <MessageCircleReply size={32} />
-            <span>
-              {dict.navbar.links.contacts}{" "}
-              <span className="block text-sm text-muted-foreground">
-                {dict.home.contacts_desc}
-              </span>
-            </span>
-          </LocalizedLink>
+            </LocalizedLink>
+          ))}
         </div>
       </div>
     </div>

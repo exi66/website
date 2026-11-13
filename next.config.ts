@@ -6,21 +6,21 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "raw.githubusercontent.com/**",
+        hostname: "raw.githubusercontent.com",
       },
       {
         protocol: "https",
-        hostname: "*.exi.moe/**",
+        hostname: "*.exi.moe",
       },
       {
         protocol: "https",
-        hostname: "exi.moe/**",
+        hostname: "exi.moe",
       },
     ],
   },
   experimental: {
     serverActions: {
-      bodySizeLimit: "2mb",
+      bodySizeLimit: "100kb",
       allowedOrigins: ["exi.moe", "*.exi.moe"],
     },
   },
