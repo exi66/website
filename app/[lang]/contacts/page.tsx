@@ -5,10 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm, SubmitHandler, FieldError } from "react-hook-form";
 import { sendToDiscordHook } from "../actions";
 import { toast } from "sonner";
-import { Inputs } from "@/lib/types";
+import { ContactForm } from "@/lib/types";
+import { CONTACT_MAX_LENGTH, EMAIL_PATTERN } from "@/lib/contact";
+
+const invalidFieldClassName =
+  "aria-[invalid='true']:!bg-destructive/20 aria-[invalid='true']:!border-destructive";
 
 export default function ContactsIndexPage() {
   const dict = useDictionary();
@@ -18,21 +22,39 @@ export default function ContactsIndexPage() {
     handleSubmit,
     watch,
     reset,
-    formState: { errors },
-  } = useForm<Inputs>();
+    formState: { errors, isSubmitting },
+  } = useForm<ContactForm>();
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    sendToDiscordHook(data).then((response) => {
-      const isError = response !== null && !response.success;
-      toast(isError ? dict.contacts.error : dict.contacts.success, {
-        description: isError ? response.error : dict.contacts.success_desc,
-        position: "top-center",
-      });
+  const { email, name, text } = watch();
+
+  const onSubmit: SubmitHandler<ContactForm> = async (data) => {
+    const toastOptions = { position: "top-center" } as const;
+    try {
+      const response = await sendToDiscordHook(data);
       if (response.success) {
+        toast(dict.contacts.success, {
+          ...toastOptions,
+          description: dict.contacts.success_desc,
+        });
         reset();
+      } else {
+        toast(dict.contacts.error, {
+          ...toastOptions,
+          description: dict.contacts.errors[response.error],
+        });
       }
-    });
+    } catch {
+      toast(dict.contacts.error, {
+        ...toastOptions,
+        description: dict.contacts.errors.server,
+      });
+    }
   };
+
+  const maxLength = (max: number) => ({
+    value: max,
+    message: dict.contacts.errors.too_long.replace("{max}", String(max)),
+  });
 
   return (
     <div className="w-full mx-auto flex flex-col gap-1 sm:min-h-[85.5vh] min-h-[85vh] pt-2">
@@ -45,6 +67,7 @@ export default function ContactsIndexPage() {
           <form
             className="flex flex-col gap-4"
             onSubmit={handleSubmit(onSubmit)}
+            noValidate
           >
             <div className="flex flex-row flex-wrap gap-4 w-full">
               <div className="space-y-2 lg:w-auto w-full lg:flex-1">
@@ -52,27 +75,40 @@ export default function ContactsIndexPage() {
                 <Input
                   id="email"
                   type="email"
+                  autoComplete="email"
                   placeholder="example@email.com"
-                  className="aria-[invalid='true']:!bg-destructive/20 aria-[invalid='true']:!border-destructive"
+                  className={invalidFieldClassName}
                   {...register("email", {
-                    required: true,
-                    maxLength: 320,
-                    pattern:
-                      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i,
+                    required: dict.contacts.errors.required,
+                    maxLength: maxLength(CONTACT_MAX_LENGTH.email),
+                    pattern: {
+                      value: EMAIL_PATTERN,
+                      message: dict.contacts.errors.email_invalid,
+                    },
                   })}
                   aria-invalid={errors.email ? "true" : "false"}
+                  aria-describedby={errors.email ? "email-error" : undefined}
                 />
+                <FieldErrorMessage id="email-error" error={errors.email} />
               </div>
               <div className="space-y-2 lg:w-auto w-full lg:flex-1">
                 <Label htmlFor="name">{dict.contacts.name_label}</Label>
                 <Input
                   id="name"
                   type="text"
+                  autoComplete="name"
                   placeholder="X Æ A-12"
-                  className="aria-[invalid='true']:!bg-destructive/20 aria-[invalid='true']:!border-destructive"
-                  {...register("name", { required: true, maxLength: 100 })}
+                  className={invalidFieldClassName}
+                  {...register("name", {
+                    required: dict.contacts.errors.required,
+                    maxLength: maxLength(CONTACT_MAX_LENGTH.name),
+                    validate: (value) =>
+                      value.trim().length > 0 || dict.contacts.errors.required,
+                  })}
                   aria-invalid={errors.name ? "true" : "false"}
+                  aria-describedby={errors.name ? "name-error" : undefined}
                 />
+                <FieldErrorMessage id="name-error" error={errors.name} />
               </div>
             </div>
             <div className="space-y-2 flex-1 relative">
@@ -80,25 +116,42 @@ export default function ContactsIndexPage() {
               <Textarea
                 id="text"
                 placeholder={dict.contacts.text_placeholder}
-                className="aria-[invalid='true']:!bg-destructive/20 aria-[invalid='true']:!border-destructive"
-                {...register("text", { required: true, maxLength: 500 })}
+                className={invalidFieldClassName}
+                {...register("text", {
+                  required: dict.contacts.errors.required,
+                  maxLength: maxLength(CONTACT_MAX_LENGTH.text),
+                  validate: (value) =>
+                    value.trim().length > 0 || dict.contacts.errors.required,
+                })}
                 aria-invalid={errors.text ? "true" : "false"}
-              ></Textarea>
+                aria-describedby={errors.text ? "text-error" : undefined}
+              />
+              <FieldErrorMessage id="text-error" error={errors.text} />
             </div>
-            <Button type="submit">{dict.contacts.submit}</Button>
+            <input
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              {...register("website")}
+            />
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting ? dict.contacts.sending : dict.contacts.submit}
+            </Button>
           </form>
         </div>
-        <div className="p-6 text-muted-foreground flex items-center justify-center flex-grow max-w-1/3">
+        <div className="p-6 text-muted-foreground flex items-center justify-center w-full lg:w-1/3 overflow-x-auto">
           <pre className="whitespace-pre font-code">
             POST /some-api HTTP/1.1{"\r\n"}
             {JSON.stringify(
               {
-                email: watch("email") || null,
-                name: watch("name") || null,
-                message: watch("text")
-                  ? watch("text").length > 5
-                    ? watch("text").slice(0, 5) + "..."
-                    : watch("text")
+                email: email || null,
+                name: name || null,
+                message: text
+                  ? text.length > 5
+                    ? text.slice(0, 5) + "..."
+                    : text
                   : null,
               },
               null,
@@ -108,5 +161,14 @@ export default function ContactsIndexPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function FieldErrorMessage({ id, error }: { id: string; error?: FieldError }) {
+  if (!error?.message) return null;
+  return (
+    <p id={id} className="text-sm text-destructive">
+      {error.message}
+    </p>
   );
 }
