@@ -4,7 +4,7 @@
     "description": "My personal website introducing me as a web developer"
   },
   "home": {
-    "main_header": "Hi, my name Egor",
+    "main_header": "Hi, my name is Egor",
     "sub_header": "I'm a",
     "work_position": "Full-Stack Developer",
     "about_website": "This is a simple personal website. Here you will find my resume with a brief description of skills and experience, a small blog with notes on recent projects, interesting tasks and technologies that I am interested in, and a contact form. The website is based on",
@@ -49,15 +49,17 @@
     "introduction": "Introduction",
     "work-experience": "Work experience",
     "projects": "Projects",
-    "website": "website",
+    "modding-platform": "Modding platform",
+    "mcgl-mcp": "mcgl-mcp",
+    "tcp-rtt": "tcp-rtt",
     "shiel-bot": "shiel-bot",
     "bdo-sieges": "bdo-sieges",
-    "tcp-rtt": "tcp-rtt",
-    "mcgl-timeline": "mcgl-timeline",
-    "mcgl-arts": "mcgl-arts",
-    "mcgl-slimes": "mcgl-slimes",
     "mcgl-data": "mcgl-data",
-    "mcgl-correct-evasion-calculator": "mcgl-correct-evasion-calculator"
+    "mcgl-correct-evasion-calculator": "mcgl-correct-evasion-calculator",
+    "mcgl-itpe-ahk": "mcgl-itpe-ahk",
+    "mcgl-slimes": "mcgl-slimes",
+    "visits-counter": "visits-counter",
+    "website": "website"
   },
   "blog": {
     "title": "The most recent blog entries",

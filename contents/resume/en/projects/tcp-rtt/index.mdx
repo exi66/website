@@ -1,26 +1,28 @@
 ---
 title: tcp-rtt
-description: Real latency to a game server measured from TCP traffic.
+description: Measures the real latency to a game server from its own TCP traffic.
 ---
 
-## Resources
+**Stack:** C#, .NET 10, Windows Forms, SharpPcap, xUnit
 
-- **[Source](https://github.com/exi66/tcp-rtt)**
+**Links:** [source](https://github.com/exi66/tcp-rtt) · [releases](https://github.com/exi66/tcp-rtt/releases)
 
-## About
+## Problem
 
-An application for monitoring latency (**RTT**) to a game server. It measures the real latency of the game traffic by intercepting TCP packets on a network interface, without separate ping requests to the server.
+A regular ping (ICMP) takes a different path and is handled differently by the server than game data, so it often shows a different latency from what you get in the game. I needed to measure the game connection itself, without sending separate requests to the server.
 
-## Features
+## Solution
 
-- **Traffic interception** — captures TCP packets on a selected network interface.
-- **RTT calculation** — records send times and expected ACK numbers, then computes the latency the moment the server responds.
-- **Real-time graph** — a live graph that visualizes the latency at a glance.
-- **Threshold filter** — drops packets whose time is below a configurable value in ms. This removes packets that never leave the network card, so they don't skew the real latency.
+The app captures TCP packets on a network interface and matches sent segments with ACKs from the server. The time difference is the RTT, shown on a live graph.
 
-## Tech stack
+What it takes to get honest numbers:
 
-- **.NET 10 / C# / Windows Forms** — the UI
-- **SharpPcap** (Npcap) — packet interception
-- **PacketDotNet** — IP/TCP parsing
-- **ScottPlot** — the real-time latency graph
+- **Retransmissions are not measured (Karn's algorithm).** It's unknown which copy the ACK belongs to, so such a sample would skew the result.
+- **One ACK often confirms several segments.** Only the newest one counts, otherwise older segments would overstate the latency.
+- **TCP sequence numbers wrap around at 2³².** Comparisons are done modulo 2³² (RFC 1982), so measurement doesn't break at the wraparound.
+- **Time comes from Npcap capture timestamps**, not from when the packet is processed, so UI thread load doesn't affect the result.
+- **Capture and UI run on separate threads**, and the connection state is thread-safe.
+
+## Quality
+
+The measurement logic is separated from the UI and packet capture and covered by 27 unit tests. On a tag, GitHub Actions runs the tests, builds a single-file `.exe` for x64 and x86 and publishes a release.

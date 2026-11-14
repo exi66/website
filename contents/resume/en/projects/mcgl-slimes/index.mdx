@@ -1,26 +1,23 @@
 ---
 title: mcgl-slimes
-description: A slime-chunk layer for the Minecraft Galaxy web map.
+description: A userscript that shows slime chunks on the game's web map.
 ---
 
-## Resources
+**Stack:** JavaScript, Tampermonkey, esbuild
 
-- **[Source](https://github.com/exi66/mcgl-slimes)**
+**Links:** [source](https://github.com/exi66/mcgl-slimes) · [install](https://github.com/exi66/mcgl-slimes/releases/latest/download/index.user.js)
 
-## About
+## Problem
 
-A **Tampermonkey** userscript that displays slime chunks on the map of the **[Minecraft Galaxy](https://minecraft-galaxy.ru/ru/)** gaming project.
+Slimes spawn only in certain chunks of the world, which are derived from the world seed. The game's web map doesn't show this, and external services don't know the seeds of the game's worlds.
 
-To reproduce the original slime-chunk algorithm, it uses **WebAssembly** that reimplements Java's pseudorandom generator, the one the game uses to determine slime chunks.
+## Solution
 
-## Features
+The userscript adds a slime chunk layer to the map. Seeds of the main worlds are built in, and you can enter your own seed. The layer follows map panning and zoom and draws only the visible area.
 
-- **Slime-chunk layer** — toggled on and off with a «Slimes» button on the map.
-- **Manual seed input** — a field to enter the world seed by hand.
-- **Known seeds** — world seeds are stored right inside the script.
+- **Porting the algorithm from Java to JavaScript.** The algorithm relies on `java.util.Random` and 32-bit integer overflow, so in JS it is reproduced with `BigInt` and `Math.imul`.
+- **Updates without user action.** Built with esbuild, released on a tag in GitHub Actions, and Tampermonkey updates the script itself.
 
-## Tech stack
+## Quality
 
-- **Tampermonkey** — the userscript environment
-- **JavaScript**
-- **WebAssembly** (D, ldc2) — slime-chunk computation
+Results are checked against a Java reference that runs the same code as the game. 9 tests, CI on every PR.

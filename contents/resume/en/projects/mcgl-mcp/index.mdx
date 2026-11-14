@@ -1,0 +1,25 @@
+---
+title: mcgl-mcp
+description: An MCP server that lets AI assistants read a game forum.
+---
+
+**Stack:** TypeScript, Node.js, MCP SDK, cheerio, zod, Express, Vitest, Docker
+
+**Links:** [source](https://github.com/exi66/mcgl-mcp) · [npm](https://www.npmjs.com/package/mcgl-mcp)
+
+## Problem
+
+The game forum has no API, and AI assistants (Claude, Cursor and others) can't read it on their own. I wanted to ask an assistant "what's new on the forum" or "summarize this topic" and get an answer based on current data.
+
+## Solution
+
+An MCP server with seven tools: sections, latest topics, topics in a section, posts in a topic, a single post, player search and a player's topics. It installs with one `npx` command and gets about 600 downloads a month on npm.
+
+- **Parsing forum HTML** with cheerio into typed objects; tool parameters are validated with zod schemas.
+- **Protecting the forum and itself.** Rate limiting, retries with backoff and a circuit breaker: when the forum is down, requests fail right away with a clear error and the time until the next attempt instead of waiting for timeouts.
+- **Login with a user account** that keeps the cookie session, as groundwork for acting on the user's behalf.
+- **Two transports:** stdio for local clients and HTTP for running on a server, with a Docker image.
+
+## Quality
+
+61 Vitest tests; parsers are tested against saved pages from the real forum, and a separate script refreshes those samples. CI runs checks on every push and PR. Publishing to npm happens on a tag through trusted publishing (OIDC), with no token stored in secrets.

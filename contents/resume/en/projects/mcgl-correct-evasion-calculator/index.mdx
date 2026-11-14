@@ -1,24 +1,24 @@
 ---
 title: mcgl-correct-evasion-calculator
-description: Evasion and armor-enhancement efficiency calculator for Minecraft Galaxy.
+description: A calculator that shows which armor upgrade actually gives more evasion.
 ---
 
-## Resources
+**Stack:** Vue 3, Chart.js, shadcn-vue, Tailwind, Vite
 
-- **[Source](https://github.com/exi66/mcgl-correct-evasion-calculator)**
-- **[Demo](https://exi66.github.io/mcgl-correct-evasion-calculator/)**
+**Links:** [source](https://github.com/exi66/mcgl-correct-evasion-calculator) · [demo](https://exi66.github.io/mcgl-correct-evasion-calculator/)
 
-## About
+## Problem
 
-A simple single-page app built with **Vue** for a correct evasion-stat calculation in the **[Minecraft Galaxy](https://minecraft-galaxy.ru/ru/)** gaming project. It lets you assemble your gear — armor, its enchantments and in-game buffs — as you have them in-game to see the real evasion gain and judge how effective the next enhancement will be.
+Evasion in the game grows non-linearly: past a certain value a soft cap kicks in, and every next upgrade gives less. The in-game stats don't show this, so it's easy to spend rare resources on an almost useless upgrade.
 
-## Features
+## Solution
 
-- **Gear builder** — a UI for armor, its enchantments and in-game buffs; parameters are set just like in the game.
-- **Real evasion gain** — shows the actual stat gain and how effective the next enhancement will be.
-- **Dependency graph** — plots the real evasion against the total evasion across all armor and marks the in-game soft cap, beyond which the real gain is tiny and further enhancement is pointless.
+The evasion formula with the soft cap lives in pure functions. Players put together their gear and buffs and immediately see the exact and the rounded (as in the game) evasion, and a graph shows how much the next upgrade with each resource will give.
 
-## Tech stack
+- Calculator state in a composable, saved to localStorage.
+- A Chart.js graph that marks the soft cap point.
+- Light and dark theme based on the system setting.
 
-- **Vue**
-- **shadcn/vue** — UI components
+## Quality
+
+The formula is covered by 14 tests. Lint, format checks and tests run on every PR, and deployment to GitHub Pages is automatic.

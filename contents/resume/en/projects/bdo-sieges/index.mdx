@@ -1,28 +1,25 @@
 ---
 title: bdo-sieges
-description: Visual siege planning for Black Desert Online.
+description: An interactive map for planning sieges in Black Desert Online.
 ---
 
-## Resources
+**Stack:** TypeScript, React, Next.js (static export), Leaflet, shadcn/ui
 
-- **[Source](https://github.com/exi66/bdo-sieges)**
-- **[Demo](https://exi66.github.io/bdo-sieges/)**
+**Links:** [source](https://github.com/exi66/bdo-sieges) · [demo](https://exi66.github.io/bdo-sieges/)
 
-## About
+## Problem
 
-An interactive map for planning sieges in **Black Desert Online**. It lets you place various objects on the game map to think through a battle before it even begins.
+Before a siege, a guild has to agree in advance where to place forts and structures and how squads should move. There was no ready tool for laying all of this out on the real map and sharing the plan with others.
 
-## Features
+## Solution
 
-- **Object placement** — drop elements onto the map to visualize the siege plan.
-- **Territory borders** — the real battle zones, pulled straight from the game.
-- **base64 export** — a finished layout can be exported as a single string and shared.
-- **Localization** — the interface is available in several languages.
-- **Panoramic viewer** — an experimental viewer similar to Google Street View.
+A Leaflet map with real nodes and territories from the game. You can place markers with a color, icon and label, draw shapes, measure distances and view 360° panoramas.
 
-## Tech stack
+- **Game coordinates.** Nodes, territories and panoramas are stored in game coordinates and converted to the map's coordinate system; the ruler shows distances in in-game meters.
+- **Sharing a plan as one string.** Markers are compressed with deflate (`CompressionStream`) and encoded as base64url. The new code format is much shorter than the old one, and old codes can still be imported. Markers are validated on import.
+- **No backend.** State is stored in localStorage, the site is built as static files and published to GitHub Pages.
+- Russian and English UI, light and dark theme.
 
-- **React**
-- **TypeScript**
-- **Leaflet** — the interactive map
-- **shadcn** — UI components
+## Quality
+
+CI checks types and lint, and deployment to GitHub Pages is automatic.

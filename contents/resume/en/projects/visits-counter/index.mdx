@@ -1,0 +1,24 @@
+---
+title: visits-counter
+description: A small service that serves a visit counter as an SVG.
+---
+
+**Stack:** Node.js, Express, SQLite, Knex, Docker
+
+**Links:** [source](https://github.com/exi66/visits-counter)
+
+## Problem
+
+I needed a visit counter for pages where analytics scripts can't be added, such as a forum post. An image is enough.
+
+## Solution
+
+Each `<img src=".../counter/name">` request increments the counter and returns an SVG with the number; color and size are set with parameters.
+
+- **Protection against inflation from other sites.** Only requests from allowed domains count (by `Referer`, including subdomains).
+- **Parameter validation:** color, width and height within allowed limits.
+- **Simple storage.** SQLite, with Knex migrations applied on startup. A Docker image with a volume for the database.
+
+## Quality
+
+Route tests, a linter and CI on every PR.

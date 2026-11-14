@@ -1,0 +1,26 @@
+---
+title: Game client modding platform
+description: Tooling for modding an obfuscated Java client of an online game, from deobfuscation to a mod loader and tests.
+---
+
+**Stack:** Java 8, Maven, Mixin, ASM, Javassist, Swing (FlatLaf), JUnit, GitHub Actions
+
+## Problem
+
+The game client has no modding API, its code is obfuscated, and class names change with every update. Any modification broke with each new version and had to be rewritten almost from scratch. I needed infrastructure that lets mods survive game updates.
+
+## Solution
+
+A Maven project with 12 modules and about 16k lines of my own Java code. The main parts:
+
+- **Deobfuscation pipeline.** Removes obfuscation and string encryption and gives every class and method a stable numbered name, similar to Fabric's intermediary. A map of human-readable names in Tiny v2 format sits on top.
+- **Carrying the name map across game versions.** On an update, matching classes are found automatically and the map is carried over from the previous release. Updating takes two Maven commands, and mod code stays the same.
+- **From Javassist to Mixin.** For a long time, changes to the client were made with Javassist. In 2026 I moved the platform to Mixin and a Maven monorepo, keeping all mod features.
+- **Mod loader.** Mods inject into the client bytecode with Mixin and are described by a manifest with dependencies between mods, similar to Fabric. An event API on top of the loader means simple mods don't need mixins.
+- **Mods built on the platform:** a window library with its own theme and components, drawing on in-game canvases, previews of buildings from `.schematic` files, and fixes for bugs in the game and LWJGL.
+- **Headless client.** Logs in and chats without a window or OpenGL.
+- **Test server.** A flat world with login without authentication, for testing mods locally.
+
+## Quality
+
+Tests run the real loader against the current game jar without a window or native libraries, so they run in CI. They check that every mixin applies, every target is modified and the bytecode passes the JVM verifier. A separate test makes sure mod windows don't hardcode colors and bypass the theme. On a tag, GitHub Actions builds the client and publishes a release.

@@ -1,0 +1,24 @@
+---
+title: mcgl-itpe-ahk
+description: Transfers any image onto in-game drawing canvases with generated macros.
+---
+
+**Stack:** Node.js, AutoHotkey v2
+
+**Links:** [source](https://github.com/exi66/mcgl-itpe-ahk) · [demo video](https://i.imgur.com/bFFxQDD.mp4)
+
+## Problem
+
+The game has 64×64 canvases with a limited palette, and you can only draw on them by hand, pixel by pixel. Transferring a ready image by hand, especially across several canvases, is close to impossible.
+
+## Solution
+
+A console tool reads a PNG, maps it to the game palette and generates AutoHotkey macros that draw the image canvas by canvas.
+
+- **Floyd–Steinberg dithering** to the game palette, to keep color transitions with few colors. Transparent pixels don't take part in dithering.
+- **Fewer clicks.** The canvas is first filled with the most common color of the tile, then the other colors are placed as dots.
+- **UI layout.** Element coordinates are recalculated for the regular and the extended palette, so the macro works with either window layout.
+
+## Quality
+
+The project has been around since 2021 and was recently rewritten for AutoHotkey v2. Quantization, the palette and macro generation are covered by 19 tests.

@@ -1,38 +1,33 @@
 ---
 title: shiel-bot
-description: Discord alerts for the Black Desert Online market and coupons.
+description: A Discord bot that sends notifications about the Black Desert Online marketplace and coupons.
 ---
 
-## Resources
+**Stack:** Node.js, discord.js (Sapphire), Express, SQLite, React, TypeScript, Vite, shadcn/ui
 
-- **[Source](https://github.com/exi66/shiel-bot)**
-- **[Demo](https://market.exi.moe/)**
+**Links:** [source](https://github.com/exi66/shiel-bot) · [web UI](https://shiel.bdo.exi.moe/)
 
-## About
+## Problem
 
-A Discord bot that monitors the in-game market and coupons in **Black Desert Online**. It removes the need to watch the registration queue by hand: the moment a tracked item is listed or new coupons appear, the bot sends a Discord notification.
+Rare items on the Black Desert Online marketplace first go into a registration queue and can only be bought at the moment they are listed. To not miss an item, you had to watch the queue manually. New in-game coupons are also easy to miss.
 
-## Features
+## Solution
 
-- **Queue monitoring** — tracks the market registration queue (every minute by default).
-- **Item notifications** — alerts you when an item from your subscriptions gets registered.
-- **Coupons** — alerts you when new in-game coupons are published.
-- **Web-based configuration** — manage subscriptions and notifications through a web interface.
+Every minute the bot polls the marketplace queue and the coupon list and sends a Discord direct message when an item from the user's subscriptions or a new coupon appears. Subscriptions are managed in a web UI: the `/settings` command gives a personal link with an expiry, so no separate sign-up is needed.
 
-### Commands
+The project is a pnpm monorepo with four packages:
 
-Everything is managed in direct messages with the bot through slash commands:
+- **bot**: the Discord bot and background polling jobs
+- **server**: the Express API that also serves the built frontend
+- **web**: the settings UI in React
+- **shared**: shared config, logger and database access
 
-- `/queue` — the current market queue
-- `/coupons` — available coupons
-- `/settings` — opens the settings web interface
+Details:
 
-## Tech stack
+- **No repeated notifications after a restart.** The first iteration only records the current state; notifications start from the second one.
+- **SQLite schema migrations** with the version stored in `PRAGMA user_version`, without external tools.
+- **Type checking for the JS packages** via TypeScript's `checkJs`, without rewriting them in TS.
 
-- **Sapphire.js** (built on **Discord.js**) — the bot framework
-- **Express** — the settings web service
-- **SQLite** — stores subscriptions and settings
-- **Vue** — the settings web interface
-- **shadcn/vue** — the web interface UI components
-- **Node.js**
-- **Docker** — deployment
+## Quality
+
+Parsers, the item catalog, validation and migrations are covered by tests (`node --test`). CI runs the linter, type checking and tests.
