@@ -10,31 +10,35 @@ I've worked on freelance exchanges and on small projects for friends. I mainly s
 
 ---
 
-### Senior Fullstack Web Developer
-[Bambit](https://bambit.ru/), November 2022 — present
+### Fullstack developer
+[Bambit](https://bambit.ru/), November 2022 — August 2026, latest title: Senior Fullstack Web Developer
 
-Mostly I developed REST API applications for the «Bitrix24» marketplace and custom business solutions for clients — from high-load automation systems to analytical reports. I also developed and maintained two internal Vue 3 starter templates that became the foundation for all the company's projects.
+I built apps for the Bitrix24 marketplace and custom solutions for clients: a Vue frontend that runs inside the Bitrix24 portal and a Laravel backend that talks to the portal through the REST API and webhooks. I left due to a layoff.
 
-**Responsibilities**
+**What I built**
 
-- Development of applications based on the «Bitrix24» REST API for the platform marketplace and for individual client business tasks
-- Support and improvement of existing applications of varying complexity — from high-load automation systems to compact KPI reporting tools
-- Development of additional modules for «1C-Bitrix: Site Management»
-- Code review and approval of other developers' changes as part of working with the internal template
-- Maintaining technical documentation
-- Working with the stack: Vue, jQuery, PHP (native), Laravel, NodeJS, MySQL, Redis
+- **More than 30 apps** for the marketplace and clients: reports on calls, chats and missed calls, call evaluation, time deals spend in each stage, business processes triggered by events, schedules and duplicates, bulk CRM data migrations and cleanup.
+- **Maintaining and extending other developers' apps** at the company, from small reports to high-load automation systems.
+- **A set of custom business process actions** for Bitrix24 in Laravel: chat bots and open lines, company lookup by tax ID, phone and email via DaData, and more. I developed it from 2023 on.
+- **Business process actions with an LLM:** a model response to a given prompt and processing of audio recordings right inside a business process.
+- **Two versions of the Vue 3 starter template** that the company's projects are built on. The second one moved to TypeScript, added a service layer instead of API calls from components, a background task queue, Sentry, and pulling template updates into existing projects through git. I maintained the template and reviewed other developers' changes to it.
+- **Development with AI.** For the last six months I used Claude Code every day. I added a `CLAUDE.md` describing the architecture and project rules to the starter: every project built on the template gets it with template updates, so the assistant writes code that follows the company's conventions from the start.
+- **The company's internal dashboard:** parsing marketplace payouts and calculating employee KPIs based on their part in projects, app usage analytics, app rankings in marketplace search and tracking competitors' apps.
+- **A partner dashboard** for the integrator program: partners see revenue per client portal in real time and get signals when they need to step in.
 
-**Achievements:**
+**Stack:** Vue 3, TypeScript, Pinia, Vite, PHP, Laravel, Node.js, MySQL, Redis, Bitrix24 REST API
 
-1.  Developed more than 30 applications for the platform marketplace and for individual client business tasks
-2.  Created and maintained two iterations of internal Vue 3 starter templates that became the standard foundation for all the company's projects
-3.  Accelerated development in general and reduced time-to-publish on the platform marketplace in particular by introducing templates
-4.  Independently determined the technology stack and set of dependencies for the starter
-5.  Developed a set of reusable components that accelerated the start of new projects
-6.  Built the company's internal dashboard from scratch, automating the work of non-technical employees:
-    - automatic parsing of payouts from the platform marketplace with subsequent calculation of each employee's KPI depending on their participation in projects
-    - analytics of application usage by the end consumer
-    - marketing tools for tracking application positions by key search queries on the marketplace
-    - analytics of competitors' applications with tracking of installation dynamics and the appearance of new releases
-7.  Implemented a separate partner dashboard for the integrator program: partners saw in real time from which client portals income was coming, in what amount, and received signals about the need to intervene to increase efficiency
-8.  Went from intern to Senior Fullstack Web Developer in 3 years
+---
+
+### My own apps for the Bitrix24 marketplace
+August 2026
+
+After the layoff I tried to launch on the same marketplace as an independent developer. The project didn't reach sales and is on hold now, but I built the first app and the infrastructure for it.
+
+- **An MCP server for Bitrix24**, the first app I planned to launch with. It lets ChatGPT, Claude and other AI agents work with a portal: 54 tools for CRM, tasks, business processes and users. Each portal user connects with their own OAuth token and permissions, and every request gets its own stateless server with that user's context. Deletes require explicit confirmation from the agent, and bulk actions run in batches. A UI inside the portal explains how to connect ChatGPT and Claude. The tools are checked with scenarios that an AI agent runs on a test portal.
+- **Servers.** Dokploy on a dev server builds the apps and deploys them to prod. SSH with keys only, ufw, fail2ban, journald log limits, and container logs shipped to S3 with Vector. Every setup step is documented in the repository.
+- **Install service.** A single entry point for installing several apps through OAuth. Only this service stores and refreshes the portals' admin tokens; apps request them when needed and never store tokens themselves.
+- **Market research.** A parser of marketplace pages into PostgreSQL, with views and functions for app and partner install growth and for finding new fast-growing apps.
+- **User support.** A public issue tracker on GitHub Issues with templates and a shared task board.
+
+**Stack:** TypeScript, Node.js, MCP SDK, zod, Knex, PostgreSQL, Vue 3, Docker, Dokploy, Vector
