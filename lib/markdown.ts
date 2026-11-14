@@ -188,7 +188,9 @@ export async function getAllBlogStaticPaths(lang: Locale) {
   try {
     const blogFolder = path.join(process.cwd(), `/contents/blogs/${lang}`);
     const res = await fs.readdir(blogFolder);
-    return res.map((file) => file.split(".")[0]);
+    return res
+      .filter((file) => file.endsWith(".mdx"))
+      .map((file) => file.split(".")[0]);
   } catch (err) {
     console.log(err);
   }
