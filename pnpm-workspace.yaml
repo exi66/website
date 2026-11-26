@@ -1,14 +1,7 @@
-packages:
-  - "packages/*"
-  - "apps/*"
 allowBuilds:
   sharp: true
   unrs-resolver: true
 overrides:
-  brace-expansion@>=4.0.0 <5.0.12: '>=5.0.12'
-  minimatch@>=7.0.0 <11.0.1: ^11.0.1
-  js-yaml@>=3.0.0 <3.15.2: 3.15.2
-  postcss-selector-parser@<7.1.6: '>=7.1.6'
-  postcss@<8.5.18: ^8.5.18
-  sharp@<0.35.5: '>=0.35.5'
-  source-map-js@>=1.0.0 <1.2.2: '>=1.2.2'
+  # minimatch < 11.0.1: DoS via globparts amplification (GHSA, pulled in by shadcn -> ts-morph). Drop when ts-morph updates.
+  minimatch@>=10.0.0 <11.0.1: ^11.0.1
+  postcss-selector-parser@<6.1.5: '>=6.1.5'

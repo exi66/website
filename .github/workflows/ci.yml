@@ -1,3 +1,5 @@
+# Checks: audit, lint, formatting, types, tests, build.
+# Runs on pushes and pull requests to main. Deploy is not done here: Dokploy builds the app on a push to main.
 name: CI
 
 on:
@@ -26,17 +28,15 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Audit
-        run: pnpm audit
+      - run: pnpm audit
 
-      - name: Lint
-        run: pnpm lint
+      - run: pnpm lint
 
-      # next-env.d.ts is gitignored, typegen creates it along with route types
-      - name: Typecheck
-        run: |
-          pnpm exec next typegen
-          pnpm exec tsc --noEmit
+      - run: pnpm format:check
 
-      - name: Build
-        run: pnpm build
+      # next-env.d.ts is gitignored: typegen creates it along with the route types
+      - run: pnpm typecheck
+
+      - run: pnpm test
+
+      - run: pnpm build

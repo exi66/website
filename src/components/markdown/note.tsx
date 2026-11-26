@@ -1,0 +1,22 @@
+import { cn } from '@/lib/utils';
+import { PropsWithChildren } from 'react';
+
+type NoteProps = PropsWithChildren & {
+  title?: string;
+  type?: 'note' | 'danger' | 'warning' | 'success';
+};
+
+export default function Note({ children, title = 'Note', type = 'note' }: NoteProps) {
+  const noteClassNames = cn({
+    'bg-card text-card-foreground': type == 'note',
+    'border-destructive': type === 'danger',
+    'border-orange-200 dark:border-orange-900': type === 'warning',
+    'border-green-200 dark:border-green-900': type === 'success',
+  });
+
+  return (
+    <div className={cn('mt-5 mb-7 rounded-md border px-5 pb-0.5 text-sm tracking-wide', noteClassNames)}>
+      <p className="-mb-2.5 font-bold">{title}:</p> {children}
+    </div>
+  );
+}

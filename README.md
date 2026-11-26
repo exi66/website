@@ -1,42 +1,33 @@
 # website
 
-My personal portfolio site. This version is written in Next.js, based on [aria-docs](https://github.com/nisabmohd/Aria-Docs).
+Личный сайт-портфолио exi.moe: резюме и проекты (MDX), блог, форма обратной связи. Next.js 16, Tailwind 4, shadcn с
+общей темой [starter](https://github.com/exi66/starter). Основа — [aria-docs](https://github.com/nisabmohd/Aria-Docs).
 
-## Deploy
+## Запуск
 
-```plaintext
-pnpm run build
-
-pnpm run start
+```bash
+pnpm install
+cp .env.example .env   # DISCORD_HOOK — вебхук для формы обратной связи
+pnpm dev
 ```
 
-## Key Features
+## Команды
 
-All of these features from aria-docs are just as accessible, as the site uses the same base.
+```
+pnpm dev          # dev-сервер
+pnpm build        # сборка
+pnpm start        # запуск собранного
+pnpm test         # тесты
+pnpm lint         # oxlint
+pnpm format       # prettier
+pnpm typecheck    # tsc
+```
 
-| **Feature**                     | **Description**                                       |
-| ------------------------------- | ----------------------------------------------------- |
-| MDX Support                     | Write interactive documentation with MDX.             |
-| Nested Pages                    | Organize content in a nested, hierarchical structure. |
-| Blog Section                    | Include a dedicated blog section.                     |
-| Table of Contents               | Auto-generated TOC for easy navigation.               |
-| Pagination                      | Split content across multiple pages.                  |
-| Syntax Highlighting             | Highlight code for better readability.                |
-| Code Line Highlighting & Titles | Highlight specific lines with descriptive titles.     |
-| Interactive Code Blocks         | Language-specific and interactive code display.       |
-| Custom Components               | Embed custom, reusable components in your docs.       |
-| Light & Dark Mode               | Toggle between light and dark themes.                 |
-| Search Functionality            | Quickly find content with a built-in search.          |
-| Code Switcher                   | Switch between code languages or variations.          |
-| Code Copy                       | Copy code blocks with a single click.                 |
-| TOC Observer Highlight          | Highlight active sections in the TOC as you scroll.   |
-| Static Site Generation          | Generate a static, high-performance site.             |
-| SEO-Optimized                   | Structured for optimal search engine indexing.        |
-| Internationalisation            | Added support for i18n for multiple languages.        |
+## Деплой
 
-It also has its own functionality.
+Сайт собирает Dokploy (Nixpacks) при пуше в `main`. GitHub Actions только проверяет код (`ci.yml`).
 
-| **Feature**       | **Description**                                                                                |
-| ----------------- | ---------------------------------------------------------------------------------------------- |
-| Contact form      | A feedback form that implements server actions with sending input data to the discord webhook. |
-| Classic home page | Classic front page with hero section, links and quick access buttons.                          |
+## Контент
+
+Резюме — `contents/resume/<язык>/<страница>/index.mdx`, дерево страниц — `src/lib/routes-config.ts`. Записи блога —
+`contents/blogs/<язык>/<slug>.mdx`.

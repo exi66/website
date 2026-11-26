@@ -3,7 +3,7 @@ title: mcgl-correct-evasion-calculator
 description: A calculator that shows which armor upgrade actually gives more evasion.
 ---
 
-**Stack:** Vue 3, Chart.js, shadcn-vue, Tailwind, Vite
+**Stack:** React 19, TypeScript, Chart.js, shadcn/ui, Tailwind 4, Vite
 
 **Links:** [source](https://github.com/exi66/mcgl-correct-evasion-calculator) · [demo](https://exi66.github.io/mcgl-correct-evasion-calculator/)
 
@@ -15,10 +15,12 @@ Evasion in the game grows non-linearly: past a certain value a soft cap kicks in
 
 The evasion formula with the soft cap lives in pure functions. Players put together their gear and buffs and immediately see the exact and the rounded (as in the game) evasion, and a graph shows how much the next upgrade with each resource will give.
 
-- Calculator state in a composable, saved to localStorage.
+- Calculator state in a hook, saved to localStorage and validated with a zod schema; settings saved by the old Vue version are migrated on first launch.
 - A Chart.js graph that marks the soft cap point.
-- Light and dark theme based on the system setting.
+- Light and dark theme shared with my other projects.
+
+The project was rewritten from Vue onto a [template for static projects](https://github.com/exi66/starter): the shared theme, translations, settings, linter and CI come from it, while the formula and its tests stayed the same.
 
 ## Quality
 
-The formula is covered by 14 tests. Lint, format checks and tests run on every PR, and deployment to GitHub Pages is automatic.
+The formula and settings handling are covered by 38 tests. Lint (oxlint), format and type checks and tests run on every PR, and deployment to GitHub Pages runs on a version tag after CI passes.

@@ -19,3 +19,10 @@ The data is brought into a single PostgreSQL schema, served through PostgREST an
 - **Search.** Full-text search in Russian (`tsvector` with Russian morphology) and substring search on `pg_trgm` trigram indexes, both backed by GIN indexes.
 - **API without a custom backend.** PostgREST exposes a separate `api` schema through a role with read-only permissions and a limit on rows per response.
 - **UI.** A query string with field filters (`user:`, `author:` and others) and infinite scrolling of results.
+- **Shareable searches.** The query and the tab are kept in the page address, so a result can be shared by link.
+
+The interface is built on a [template for static projects](https://github.com/exi66/starter): the shared theme, translations and schema-validated settings, the linter and CI come from it.
+
+## Quality
+
+Search query parsing, settings handling and translation completeness are covered by 16 tests. Lint (oxlint), format and type checks and tests run on every PR, and deployment to GitHub Pages runs on a version tag after CI passes.
