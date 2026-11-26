@@ -14,6 +14,13 @@ export async function generateMetadata(params: LangProps): Promise<Metadata> {
     title: dict.metadata.title,
     metadataBase: new URL('https://me.exi.moe/'),
     description: dict.metadata.description,
+    // Link previews (forum, Discord, Telegram, VK): the same 1200x630 image as in the starter, resolved against metadataBase.
+    openGraph: {
+      type: 'website',
+      siteName: 'exi.moe',
+      images: [{ url: '/og.png', width: 1200, height: 630 }],
+    },
+    twitter: { card: 'summary_large_image', images: ['/og.png'] },
   };
 }
 
