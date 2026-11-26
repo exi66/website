@@ -39,4 +39,4 @@ plus `pnpm audit`). `typecheck` runs `next typegen` first (`next-env.d.ts` and r
   remove them and use an older version. `allowBuilds` there is needed for `sharp` (next/image).
 - Dependency updates: Renovate (`renovate.json` extends `github>exi66/starter`).
 - Commit only when asked. CI (`.github/workflows/ci.yml`) runs on pushes/PRs to `main`. Package manager: pnpm 12
-  (pinned in `package.json` and `nixpacks.toml`, keep them equal; Nixpacks installs it with `npm i -g` because its Corepack cannot unpack pnpm 12).
+  (pinned in `package.json` and `nixpacks.toml`, keep them equal; Nixpacks installs it with `npm i -g --prefix /usr/local` (its Corepack cannot unpack pnpm 12, and the default npm global bin dir is not on PATH)).
