@@ -23,11 +23,11 @@ export default function SubLink({ title, href, items, noLink, level }: EachRoute
   }
 
   const titleOrLink = !noLink ? (
-    <LocalizedLink activeClassName="text-primary dark:font-medium font-semibold" href={href}>
+    <LocalizedLink activeClassName="text-foreground dark:font-medium font-semibold" href={href}>
       {label}
     </LocalizedLink>
   ) : (
-    <h4 className="font-medium text-primary sm:text-sm">{label}</h4>
+    <h4 className="font-medium text-foreground sm:text-sm">{label}</h4>
   );
 
   if (!items) {

@@ -72,7 +72,7 @@ export default function Search({ dict }: { dict: Dictionary }) {
         </DialogHeader>
         {filteredResults.length == 0 && searchedInput && (
           <p className="mx-auto mt-2 text-sm text-muted-foreground">
-            {dict.navbar.search.no_results_found} <span className="text-primary">{`"${searchedInput}"`}</span>
+            {dict.navbar.search.no_results_found} <span className="text-foreground">{`"${searchedInput}"`}</span>
           </p>
         )}
         <ScrollArea className="max-h-[400px] overflow-y-auto">

@@ -55,7 +55,7 @@ export default function TocObserver({ data }: Props) {
               'pl-0': level == 2,
               'pl-4': level == 3,
               'pl-8': level == 4,
-              'font-semibold text-primary dark:font-medium': activeId == href.slice(1),
+              'font-semibold text-foreground dark:font-medium': activeId == href.slice(1),
             })}
           >
             {text}

@@ -49,7 +49,7 @@ export default async function Home({ params }: LangProps) {
     <div className="mx-auto max-w-4xl">
       <div className="flex min-h-[85vh] flex-col items-start justify-center space-y-6 px-2 py-12 sm:min-h-[85.5vh] sm:py-8">
         <div className="flex flex-row">
-          <TechBox />
+          {/* <TechBox /> */}
           <div className="flex flex-col">
             <h1 className="mb-4 text-4xl font-bold">
               {dict.home.main_header}{' '}
@@ -80,18 +80,18 @@ export default async function Home({ params }: LangProps) {
               href="https://github.com/nisabmohd/Aria-Docs"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-primary underline underline-offset-4"
+              className="text-foreground underline underline-offset-4"
             >
               aria-docs
             </a>
           </p>
         </div>
 
-        <div className="mt-6 grid w-full gap-4 md:grid-cols-3">
+        <div className="grid w-full gap-4 md:grid-cols-3">
           {sections.map(({ href, Icon, title, description }) => (
             <LocalizedLink
               key={href}
-              className="flex h-48 flex-col justify-between rounded-lg border bg-accent/50 p-4 transition-all hover:scale-[1.02]"
+              className="flex h-48 flex-col justify-between rounded-lg border bg-card p-4 text-card-foreground transition-all hover:scale-[1.02]"
               href={href}
             >
               <Icon size={32} />

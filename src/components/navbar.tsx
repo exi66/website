@@ -74,7 +74,7 @@ export function NavMenu({ dict }: { dict: Dictionary }) {
         <LocalizedLink
           key={item.title + item.href}
           className="flex items-center gap-1 text-muted-foreground"
-          activeClassName="text-primary dark:font-medium font-semibold"
+          activeClassName="text-foreground dark:font-medium font-semibold"
           href={item.href}
           absolute={item.absolute}
         >
