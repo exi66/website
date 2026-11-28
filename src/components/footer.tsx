@@ -30,6 +30,8 @@ export function Footer({ dict }: { dict: Dictionary }) {
   );
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export function FooterButtons() {
-  return <>&copy; {new Date().getFullYear()}</>;
+  return <>&copy; {CURRENT_YEAR}</>;
 }

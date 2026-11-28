@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { cn } from '@/lib/utils';
 import { Textarea } from '@/components/ui/textarea';
-import { useForm, SubmitHandler, FieldError } from 'react-hook-form';
+import { useForm, useWatch, SubmitHandler, FieldError } from 'react-hook-form';
 import { sendToDiscordHook } from '../actions';
 import { toast } from 'sonner';
 import { ContactForm } from '@/lib/types';
@@ -20,12 +20,15 @@ export default function ContactsIndexPage() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     reset,
     formState: { errors, isSubmitting },
   } = useForm<ContactForm>();
 
-  const { email, name, text } = watch();
+  const [email, name, text] = useWatch({
+    control,
+    name: ['email', 'name', 'text'],
+  });
 
   const onSubmit: SubmitHandler<ContactForm> = async (data) => {
     const toastOptions = { position: 'top-center' } as const;
@@ -128,7 +131,7 @@ export default function ContactsIndexPage() {
               tabIndex={-1}
               autoComplete="off"
               aria-hidden="true"
-              className="absolute -left-[9999px] h-0 w-0 opacity-0"
+              className="absolute left-[-9999px] h-0 w-0 opacity-0"
               {...register('website')}
             />
             <Button type="submit" disabled={isSubmitting}>
@@ -136,7 +139,7 @@ export default function ContactsIndexPage() {
             </Button>
           </form>
         </div>
-        <div className="flex flex-grow items-center justify-center p-6 text-muted-foreground">
+        <div className="flex grow items-center justify-center p-6 text-muted-foreground">
           <pre className="font-mono whitespace-pre">
             POST /some-api HTTP/1.1{'\r\n'}
             {JSON.stringify(
