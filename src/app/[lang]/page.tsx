@@ -3,7 +3,7 @@ import { buttonVariants } from '@/components/ui/button';
 import { getDictionary, LangProps } from '@/lib/dictionaries';
 import { page_routes } from '@/lib/routes-config';
 import { Pen, User, ExternalLink, MessageCircleReply } from 'lucide-react';
-import { TechBox } from '@/components/box3d';
+//import { TechBox } from '@/components/box3d';
 import type { Metadata } from 'next';
 
 const socialLinks = [
