@@ -60,7 +60,7 @@ export default function ContactsIndexPage() {
   });
 
   return (
-    <div className="mx-auto flex w-full flex-col gap-1 pt-10">
+    <div className="mx-auto flex w-full flex-col gap-1 pt-10 pb-7 sm:pb-10">
       <div className="mb-7 flex flex-col gap-2">
         <h1 className="text-3xl font-extrabold">{dict.contacts.title}</h1>
         <p className="text-muted-foreground">{dict.contacts.sub_title}</p>
