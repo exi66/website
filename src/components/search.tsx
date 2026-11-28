@@ -59,27 +59,30 @@ export default function Search({ dict }: { dict: Dictionary }) {
         </span>
         <kbd className="ml-auto hidden bg-muted px-1.5 text-[10px] sm:inline">Ctrl K</kbd>
       </DialogTrigger>
-      <DialogContent showCloseButton={false} className="top-[45%] max-w-[650px] p-0 sm:top-[38%]">
-        <DialogHeader>
+      <DialogContent showCloseButton={false} className="top-[45%] max-w-162.5 gap-0 p-0 sm:top-[38%]">
+        <DialogHeader className="gap-0">
           <DialogTitle className="sr-only">{dict.navbar.search.search_documentation}</DialogTitle>
-          <input
-            value={searchedInput}
-            onChange={(e) => setSearchedInput(e.target.value)}
-            placeholder={dict.navbar.search.type_something}
-            autoFocus
-            className="h-14 border-b bg-transparent px-6 text-[14px] outline-none"
-          />
+          <div className="border-b border-border px-6">
+            <input
+              value={searchedInput}
+              onChange={(e) => setSearchedInput(e.target.value)}
+              placeholder={dict.navbar.search.type_something}
+              autoFocus
+              className="h-14 w-full border-0 bg-transparent p-0 outline-none"
+            />
+          </div>
         </DialogHeader>
         {filteredResults.length == 0 && searchedInput && (
           <p className="mx-auto mt-2 text-sm text-muted-foreground">
             {dict.navbar.search.no_results_found} <span className="text-foreground">{`"${searchedInput}"`}</span>
           </p>
         )}
-        <ScrollArea className="max-h-[400px] overflow-y-auto">
+        <ScrollArea className="max-h-100 overflow-y-auto">
           <div className="flex flex-col items-start overflow-y-auto px-1 pb-4 sm:px-2">
             {filteredResults.map((item) => {
               const level = (item.href.split('/').slice(1).length - 1) as keyof typeof paddingMap;
               const paddingClass = paddingMap[level];
+              const Icon = item.icon ?? FileIcon;
 
               return (
                 <LocalizedLink
@@ -88,7 +91,8 @@ export default function Search({ dict }: { dict: Dictionary }) {
                   href={`/resume${item.href}`}
                 >
                   <div className={cn('flex h-full w-fit items-center gap-1.5 px-2 py-3', level > 1 && 'border-l pl-4')}>
-                    <FileIcon className="mr-1 size-4" /> {dict.leftbar[item.title as keyof typeof dict.leftbar]}
+                    <Icon className="mr-1 size-4" />
+                    {dict.leftbar[item.title as keyof typeof dict.leftbar]}
                   </div>
                 </LocalizedLink>
               );

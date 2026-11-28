@@ -39,9 +39,11 @@ export default async function RootLayout({
       <body>
         <ClientDictionary dict={dict}>
           <ThemeProvider>
-            <Navbar dict={dict} />
-            <main className="mx-auto h-auto w-[90vw] scroll-smooth sm:container">{children}</main>
-            <Footer dict={dict} />
+            <div className="flex min-h-screen flex-col">
+              <Navbar dict={dict} />
+              <main className="mx-auto flex w-[90vw] flex-1 flex-col scroll-smooth sm:container">{children}</main>
+              <Footer dict={dict} />
+            </div>
           </ThemeProvider>
         </ClientDictionary>
       </body>

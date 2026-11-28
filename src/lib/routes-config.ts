@@ -1,8 +1,24 @@
+import {
+  BellRing,
+  Bot,
+  Calculator,
+  ChartNoAxesColumnIncreasing,
+  Database,
+  Globe,
+  Image,
+  Map,
+  MapPin,
+  Network,
+  Puzzle,
+  type LucideIcon,
+} from 'lucide-react';
+
 // for page navigation & to sort on leftbar
 
 export type EachRoute = {
   title: string;
   href: string;
+  icon?: LucideIcon;
   noLink?: boolean; // noLink will create a route segment (section) but cannot be navigated
   items?: EachRoute[];
 };
@@ -26,17 +42,17 @@ export const ROUTES: EachRoute[] = [
     href: '/projects',
     noLink: false,
     items: [
-      { title: 'modding-platform', href: '/modding-platform' },
-      { title: 'mcgl-mcp', href: '/mcgl-mcp' },
-      { title: 'tcp-rtt', href: '/tcp-rtt' },
-      { title: 'shiel-bot', href: '/shiel-bot' },
-      { title: 'bdo-sieges', href: '/bdo-sieges' },
-      { title: 'mcgl-data', href: '/mcgl-data' },
-      { title: 'mcgl-correct-evasion-calculator', href: '/mcgl-correct-evasion-calculator' },
-      { title: 'mcgl-itpe-ahk', href: '/mcgl-itpe-ahk' },
-      { title: 'mcgl-slimes', href: '/mcgl-slimes' },
-      { title: 'visits-counter', href: '/visits-counter' },
-      { title: 'website', href: '/website' },
+      { title: 'modding-platform', href: '/modding-platform', icon: Puzzle },
+      { title: 'mcgl-mcp', href: '/mcgl-mcp', icon: Bot },
+      { title: 'tcp-rtt', href: '/tcp-rtt', icon: Network },
+      { title: 'shiel-bot', href: '/shiel-bot', icon: BellRing },
+      { title: 'bdo-sieges', href: '/bdo-sieges', icon: Map },
+      { title: 'mcgl-data', href: '/mcgl-data', icon: Database },
+      { title: 'mcgl-correct-evasion-calculator', href: '/mcgl-correct-evasion-calculator', icon: Calculator },
+      { title: 'mcgl-itpe-ahk', href: '/mcgl-itpe-ahk', icon: Image },
+      { title: 'mcgl-slimes', href: '/mcgl-slimes', icon: MapPin },
+      { title: 'visits-counter', href: '/visits-counter', icon: ChartNoAxesColumnIncreasing },
+      { title: 'website', href: '/website', icon: Globe },
     ],
   },
 ];

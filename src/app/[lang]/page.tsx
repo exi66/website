@@ -46,60 +46,66 @@ export default async function Home({ params }: LangProps) {
   ];
 
   return (
-    <div className="mx-auto max-w-4xl">
-      <div className="flex min-h-[85vh] flex-col items-start justify-center space-y-6 px-2 py-12 sm:min-h-[85.5vh] sm:py-8">
-        <div className="flex flex-row">
-          {/* <TechBox /> */}
-          <div className="flex flex-col">
-            <h1 className="mb-4 text-4xl font-bold">
-              {dict.home.main_header}{' '}
-              <span className="block text-2xl">
-                {dict.home.sub_header}{' '}
-                <span className="inline-block text-brand-gradient">{dict.home.work_position}</span>
-              </span>
-            </h1>
-            <div className="flex flex-row space-x-4">
-              {socialLinks.map(({ title, href }) => (
-                <a
-                  key={href}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={buttonVariants({ className: 'text-base' })}
-                >
-                  {title} <ExternalLink size={16} className="ml-1" />
-                </a>
-              ))}
+    <div className="relative isolate flex flex-1 flex-col">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 left-1/2 -z-10 w-screen -translate-x-1/2 bg-[linear-gradient(to_right,var(--border)_1px,transparent_1px),linear-gradient(to_bottom,var(--border)_1px,transparent_1px)] mask-[radial-gradient(ellipse_70%_60%_at_50%_0%,black,transparent)] bg-size-[64px_64px]"
+      />
+      <div className="mx-auto my-auto w-full max-w-4xl">
+        <div className="flex flex-col items-start space-y-6 px-2 py-12 sm:py-8">
+          <div className="flex flex-row">
+            {/* <TechBox /> */}
+            <div className="flex flex-col">
+              <h1 className="mb-4 text-4xl font-bold">
+                {dict.home.main_header}{' '}
+                <span className="block text-2xl">
+                  {dict.home.sub_header}{' '}
+                  <span className="inline-block text-brand-gradient">{dict.home.work_position}</span>
+                </span>
+              </h1>
+              <div className="flex flex-row space-x-4">
+                {socialLinks.map(({ title, href }) => (
+                  <a
+                    key={href}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonVariants({ className: 'text-base' })}
+                  >
+                    {title} <ExternalLink size={16} className="ml-1" />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-row items-center gap-5">
-          <p>
-            {dict.home.about_website}{' '}
-            <a
-              href="https://github.com/nisabmohd/Aria-Docs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-foreground underline underline-offset-4"
-            >
-              aria-docs
-            </a>
-          </p>
-        </div>
+          <div className="flex flex-row items-center gap-5">
+            <p>
+              {dict.home.about_website}{' '}
+              <a
+                href="https://github.com/nisabmohd/Aria-Docs"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline underline-offset-4"
+              >
+                aria-docs
+              </a>
+            </p>
+          </div>
 
-        <div className="grid w-full gap-4 md:grid-cols-3">
-          {sections.map(({ href, Icon, title, description }) => (
-            <LocalizedLink
-              key={href}
-              className="flex h-48 flex-col justify-between rounded-lg border bg-card p-4 text-card-foreground transition-all hover:scale-[1.02]"
-              href={href}
-            >
-              <Icon size={32} />
-              <span>
-                {title} <span className="block text-sm text-muted-foreground">{description}</span>
-              </span>
-            </LocalizedLink>
-          ))}
+          <div className="grid w-full gap-4 md:grid-cols-3">
+            {sections.map(({ href, Icon, title, description }) => (
+              <LocalizedLink
+                key={href}
+                className="flex h-48 flex-col justify-between rounded-lg border bg-card p-4 text-card-foreground transition-all hover:scale-[1.02]"
+                href={href}
+              >
+                <Icon size={32} />
+                <span>
+                  {title} <span className="block text-sm text-muted-foreground">{description}</span>
+                </span>
+              </LocalizedLink>
+            ))}
+          </div>
         </div>
       </div>
     </div>

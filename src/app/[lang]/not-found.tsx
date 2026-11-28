@@ -8,7 +8,7 @@ export default function NotFound() {
   const dict = useDictionary();
 
   return (
-    <div className="flex min-h-[87vh] flex-col items-center gap-4 px-2 py-36 sm:py-28">
+    <div className="my-auto flex flex-col items-center gap-4 px-2">
       <div className="flex w-fit flex-col items-center justify-center gap-2 text-center">
         <h2 className="pr-1 text-7xl font-bold">{dict.not_found['404']}</h2>
         <p className="text-md font-medium text-muted-foreground">

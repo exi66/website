@@ -23,7 +23,7 @@ export default async function BlogIndexPage({ params }: LangProps) {
     (a, b) => stringToDate(b.date).getTime() - stringToDate(a.date).getTime(),
   );
   return (
-    <div className="mx-auto flex min-h-[88vh] w-full flex-col gap-1 pt-2 sm:min-h-[91vh]">
+    <div className="mx-auto flex w-full flex-col gap-1 pt-10">
       <div className="mb-7 flex flex-col gap-2">
         <h1 className="text-3xl font-extrabold">{dict.blog.title}</h1>
         <p className="text-muted-foreground">{dict.blog.sub_title}</p>

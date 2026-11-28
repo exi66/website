@@ -47,7 +47,7 @@ export default async function BlogPage(props: PageProps & LangProps) {
 
   if (!res) notFound();
   return (
-    <div className="sm:[95%] md:[75%] mx-auto lg:w-[60%]">
+    <div className="sm:[95%] md:[75%] mx-auto pt-10 pb-7 sm:pb-10 lg:w-[60%]">
       <LocalizedLink
         className={buttonVariants({
           variant: 'link',
